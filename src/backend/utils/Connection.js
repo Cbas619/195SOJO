@@ -8,7 +8,7 @@ async function connection() {
     .connect(
         process.env.DB_CONNECT
     )
-    .then(() => console.log("Connection to DB"))
+    .then(() => console.log("Connection to DB succesful"))
     .catch((err) => {
       console.log(err);
     });
