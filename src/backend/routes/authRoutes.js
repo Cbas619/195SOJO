@@ -26,6 +26,7 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
+    try {
         if (!user) {
             return res.status(400).send("Email already exists.");
         }
@@ -36,11 +37,20 @@ router.post("/login", async (req, res) => {
     const token = jwt.sign({_id: user._id}, process.env.TOKEN, {
         expiresIn: "60m",
     })
-    try {
-        return res.header("auth-token", token).status(200).send(token);
+    res.cookie('jwt', token, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000, //1 day
+    })
+
+    return res.status(200).json({ User })
     } catch (err) {
-        return res.status(400).send(err)
+        return res.status(500).json(err);
     }
+})
+
+router.post("/logout", (req, res) => {
+    res.cookie('jwt', '', {maxAge: 0});
+    res.status(200).json('Logged Out')
 })
 
 module.exports = router;
