@@ -20,4 +20,4 @@ app.use("/api/product", productRoute);
 app.listen(port, async () => {
     console.log(`Listening at http://localhost:${port}`)
     await connection();
-})
+});
