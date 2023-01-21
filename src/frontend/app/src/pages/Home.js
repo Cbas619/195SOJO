@@ -1,12 +1,12 @@
 import { HomeInfo } from "../components/Home/HomeInfo";
-import { HomeNav } from "../components/Home/HomeNav";
+import { MainNav } from "../components/Main/MainNav";
 import { HomeIcons } from "../components/Home/HomeIcons";
 
 
 export function Home() {
   return (
     <>
-    <HomeNav/> 
+    <MainNav/> 
     <HomeInfo/>
     <HomeIcons/>
     </>       

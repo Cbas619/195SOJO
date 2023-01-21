@@ -1,5 +1,6 @@
 
 $primary: #FC0FC0;
+$primary1: #fdb2e8;
 $secondary: #FFFFFF;
 $success: yellow;
 $warning: green;
@@ -34,8 +35,7 @@ body {
   }
   
   .logo {
-    font-size: 40px;
-    color: $primary;
+    width: 120px;
   }
   
   .loginNav {
@@ -47,5 +47,61 @@ body {
     font-size: 20px;
     color: $primary;
   }
+
+  .headerCategories {
+    background: "yellow";
+  }
+
+  .mainNavLinks {
+    font-size: 20px;
+    color: $primary;
+  }
+
+  .div-1 {
+    background: linear-gradient($primary1, $secondary);
+    height: 700px
+  }
+
+  .mainCategoryNav {
+    overflow: hidden;
+    background-color: #FFE9F9;
+    margin-bottom: 20px;
+  }
+  
+
+  .mainCategoryNav a {
+    float: left;
+    color: #333;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px 5vw;
+    font-size: 17px;
+  }
+
+  .mainCategoryImg {
+    margin: 5px;
+    width: 25px;
+  }
+
+  .mainCategoryHeader {
+    margin-left: 40px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 40px;
+  }
+  .mainCategory{
+    text-decoration: none;
+    color: #000;
+    display: inline;
+    font-size: 32px;
+  }
+
+  .mainItem {
+    
+    margin-left: 40px;
+    
+  }
+
+  
 
 @import "~bootstrap/scss/bootstrap";

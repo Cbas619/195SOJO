@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import '../../App.scss'
 
-export function HomeNav() {
+export function MainNav() {
   return (
     <Navbar bg="secondary" expand="lg">
       <Container>
@@ -14,11 +14,15 @@ export function HomeNav() {
           </Nav>
           <Nav>
             <Nav.Link>
-              <div className='loginNav'>Login</div>
+                <div className='mainNavLinks'>Sell</div>
             </Nav.Link>
             <Nav.Link>
-            <div className='signUpNav'>Sign Up</div>
+                <div className='mainNavLinks'>Inbox</div>
             </Nav.Link>
+            <Nav.Link>
+                <div className='mainNavLinks'>Account</div>
+            </Nav.Link>
+            
           </Nav>
         </Navbar.Collapse>
       </Container>
