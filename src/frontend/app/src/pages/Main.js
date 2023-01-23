@@ -7,20 +7,19 @@ import { MainItemCards } from "../components/Main/MainItemCards";
 export function Main() {
   return (
     <>
-    <div className="div-1">
+    <div className="background-1">
       <MainNav/> 
       <MainCategories/>
       
       <div>
-        <MainHeaders categoryHeader="Books for the brain | "/>
+        <MainHeaders categoryHeader="Books for the brain | " categoryLink="/books"/>
         <div className="mainItem">
           <MainItemCards itemName="Math book" itemPrice="12"/>
         </div>
-
       </div>
 
       <div>
-        <MainHeaders categoryHeader="Work with Supplies | "/>
+        <MainHeaders categoryHeader="Work with Supplies | " categoryLink="/officesupplies"/>
         <div className="mainItem">
           <MainItemCards itemName="Pencils" itemPrice="2"/>
         </div>
