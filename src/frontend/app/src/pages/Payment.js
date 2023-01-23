@@ -8,4 +8,5 @@ export function Payment() {
     <h1>Payment</h1>
     </>       
   );
+
 }
