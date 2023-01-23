@@ -22,7 +22,11 @@ body {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
   }
-  
+
+  a:link {
+    text-decoration: none;
+  }
+
   .welcome {
     text-align: center;
     background: linear-gradient($primary, $secondary);
@@ -57,7 +61,7 @@ body {
     color: $primary;
   }
 
-  .div-1 {
+  .background-1 {
     background: linear-gradient($primary1, $secondary);
     height: 700px
   }
@@ -89,6 +93,7 @@ body {
     margin-bottom: 20px;
     font-size: 40px;
   }
+
   .mainCategory{
     text-decoration: none;
     color: #000;
