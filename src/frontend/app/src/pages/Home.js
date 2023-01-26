@@ -11,5 +11,4 @@ export function Home() {
     <HomeIcons/>
     </>       
   );
-
 }
