@@ -1,3 +1,4 @@
+
 $primary: #FC0FC0;
 $primary1: #fdb2e8;
 $secondary: #FFFFFF;
@@ -29,12 +30,18 @@ body {
   .welcome {
     text-align: center;
     background: linear-gradient($primary, $secondary);
-    padding: 200px;
+    padding: 145px;
+    margin-bottom: 20px;
     color:$secondary;
   }
   
   .homeRow {
     text-align: center;
+  }
+
+  .homeImg {
+    width: 35%;
+    margin-bottom: 8%;
   }
   
   .logo {
@@ -105,5 +112,7 @@ body {
     margin-left: 40px;
     
   }
+
+  
 
 @import "~bootstrap/scss/bootstrap";
