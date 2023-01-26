@@ -14,14 +14,14 @@ export function Main() {
       <div>
         <MainHeaders categoryHeader="Books for the brain | " categoryLink="/books"/>
         <div className="mainItem">
-          <MainItemCards itemName="Math book" itemPrice="12"/>
+          <MainItemCards itemName="Math book" itemPrice="12" itemImage="/images/placeholder.png"/>
         </div>
       </div>
 
       <div>
-        <MainHeaders categoryHeader="Work with Supplies | " categoryLink="/officesupplies"/>
+        <MainHeaders categoryHeader="Work with Supplies | " categoryLink="/officesupplies" />
         <div className="mainItem">
-          <MainItemCards itemName="Pencils" itemPrice="2"/>
+          <MainItemCards itemName="Pencils" itemPrice="2" itemImage="/images/placeholder.png"/>
         </div>
         
       </div>
@@ -32,5 +32,4 @@ export function Main() {
     
     </>       
   );
-
 }
