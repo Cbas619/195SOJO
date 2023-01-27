@@ -75,7 +75,6 @@ body {
   .mainCategoryNav {
     overflow: hidden;
     background-color: #FFE9F9;
-    margin-bottom: 20px;
   }
   
 
@@ -94,21 +93,20 @@ body {
   }
 
   .mainCategoryHeader {
-    margin-left: 40px;
-    margin-top: 30px;
-    margin-bottom: 20px;
+    padding-left: 40px;
+    padding-top: 30px;
+    padding-bottom: 20px;
     font-size: 40px;
   }
 
-  .mainCategory{
+  .mainCategoryLink{
     text-decoration: none;
     color: #000;
     display: inline;
     font-size: 32px;
   }
 
-  .mainItem {
-    
+  .mainItemCard {
     margin-left: 40px;
     
   }
