@@ -110,6 +110,33 @@ body {
     margin-left: 40px;
     
   }
+  
+  .sellHeader {
+    text-align: center;
+    padding-top: 1%;
+  }
+
+  .sellContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+  }
+
+  .background-2 {
+    background: linear-gradient($primary1, $secondary);
+    height: 700px;
+    
+
+  }
+
+  .sellBackground {
+    border-radius: 10px 10px;
+    margin-top: 5px;
+    padding-bottom: 70%;
+    padding-right: 60%;
+    background-color: #FFFFFF
+  }
 
   
 

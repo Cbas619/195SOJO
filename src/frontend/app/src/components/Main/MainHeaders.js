@@ -5,7 +5,7 @@ export function MainHeaders(props) {
     return(
         <>
         <div className='mainCategoryHeader'>
-        {props.categoryHeader} <a className='mainCategory'><Link to={props.categoryLink}>See All</Link></a>
+        {props.categoryHeader} <Link to={props.categoryLink}><a className='mainCategoryLink'>See All</a></Link>
 
         </div>
         

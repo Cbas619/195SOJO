@@ -8,14 +8,14 @@ export function MainNav() {
   return (
     <Navbar bg="secondary" expand="lg">
       <Container>
-        <Navbar.Brand href="#home"><Link to ="/main"><img className="logo" src="/images/logo.png"/></Link></Navbar.Brand>
+        <Navbar.Brand><Link to ="/main"><img className="logo" src="/images/logo.png"/></Link></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
           </Nav>
           <Nav>
             <Nav.Link>
-                <div className='mainNavLinks'>Sell</div>
+                <Link to ="/sell"><div className='mainNavLinks'>Sell</div></Link>
             </Nav.Link>
             <Nav.Link>
                 <div className='mainNavLinks'>Inbox</div>

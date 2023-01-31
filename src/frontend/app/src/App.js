@@ -7,6 +7,7 @@ import { Login } from './pages/Login';
 import { Signup } from './pages/Signup';
 import { Payment } from './pages/Payment';
 import { Main } from './pages/Main';
+import { Sell } from './pages/Sell';
 
 import { Books } from './pages/categories/Books'
 import { Clothing } from './pages/categories/Clothing';
@@ -32,6 +33,7 @@ function App() {
     <Route path="/entertainment" element={<Entertainment/>}/>
     <Route path="/general" element={<General/>}/>
     <Route path="/officesupplies" element={<OfficeSupplies/>}/>
+    <Route path="/sell" element={<Sell/>}/>
     </Routes>      
   );
 }
