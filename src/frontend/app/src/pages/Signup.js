@@ -1,11 +1,13 @@
 import { HomeNav } from "../components/Home/HomeNav";
+import { SignupForm } from "../components/Signup/SignupForm";
+
 
 
 export function Signup() {
   return (
     <>
     <HomeNav/> 
-    <h1>Signup</h1>
+    <SignupForm/>
     </>       
   );
 }
