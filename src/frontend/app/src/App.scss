@@ -58,17 +58,6 @@ body {
     color: $primary;
   }
 
-  .container {
-    margin: 0;
-    position: absolute;
-    top: 20%;
-    // -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    left: 50%;
-    // -ms-transform: translateX(-50%);
-    transform: translateX(-50%);
-    }
-
   .headerCategories {
     background: "yellow";
   }
@@ -124,19 +113,20 @@ body {
   
   .sellHeader {
     text-align: center;
+    font-size: 40px;
     padding-top: 1%;
   }
 
   .sellContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     
+    margin-left: 240px;
+    margin-right: 240px;
+    display: block;
   }
 
   .background-2 {
     background: linear-gradient($primary1, $secondary);
-    height: 700px;
+    height: 900px;
     
 
   }
@@ -144,11 +134,82 @@ body {
   .sellBackground {
     border-radius: 10px 10px;
     margin-top: 5px;
-    padding-bottom: 70%;
-    padding-right: 60%;
-    background-color: #FFFFFF
+    padding-bottom: 60%;
+    padding-right: 50%;
+    
+    background-color: #FFFFFF;
   }
 
+  .sellSubmit {
+    background-color: $primary1;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-left: 40px;
+  }
+
+  .sellFormContainer {
+    padding: 25px 20px 0px 30px;
+    margin-left: 10px;
+  }
+
+  .sellFormHeader {
+    padding-bottom: 5px;
+    font-size: 25px;
+    
+  }
   
+  input.sellItemForm {
+    padding-left: 10px;
+    width: 250px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    border-color: #b2b9d1;
+    border-style: solid;
+    border-width: 1px;
+    outline: none;
+    font-size: 20px;
+    box-shadow:2px 2px 3px rgba(0,0,0,0.06);
+  }
+
+  textarea.sellDescriptionForm {
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    border-color: #b2b9d1;
+    border-style: solid;
+    border-width: 1px;
+    outline: none;
+    font-size: 20px;
+    box-shadow:2px 2px 3px rgba(0,0,0,0.06);
+    
+  }
+
+  input.sellPriceForm {
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 80px;
+    border-radius: 5px;
+    border-color: #b2b9d1;
+    border-style: solid;
+    border-width: 1px;
+    outline: none;
+    font-size: 20px;
+    box-shadow:2px 2px 3px rgba(0,0,0,0.06);
+  }
+  
+  .categoryPageHeader {
+      padding-left: 40px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      font-size: 40px;
+      text-align: center;
+  }
 
 @import "~bootstrap/scss/bootstrap";
