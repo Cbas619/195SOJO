@@ -1,6 +1,7 @@
 import { MainNav } from "../components/Main/MainNav";
 import { MainCategories } from "../components/Main/MainCategories";
-import Form from 'react-bootstrap/Form';
+
+import { SellForm } from "../components/Sell/SellForm";
 
 export function Sell() {
     return (
@@ -8,20 +9,12 @@ export function Sell() {
         <MainNav />
         <MainCategories/>
         <div className="background-2">
-            <h2 className="sellHeader">Sell Now!</h2>
+            <p className="sellHeader">List an item on the shop</p>
             <div className="sellContainer">
                 <div className="sellBackground">
-                                <h3>Item Name</h3>
-                                <h3>Photos</h3>
-                                <h3>Description of item</h3>
-                                <h3>Condition</h3>
-                                
-
-                                <h3>List Item</h3>
-                            </div>
+                    <SellForm/>
+                </div>
             </div>
-            
-            
         </div>
         </>
     );
