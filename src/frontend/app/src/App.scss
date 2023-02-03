@@ -141,7 +141,7 @@ body {
   }
 
   .sellSubmit {
-    background-color: $primary1;
+    background-color: #f937be;
     border: none;
     color: white;
     text-align: center;
@@ -165,6 +165,20 @@ body {
   input.sellItemForm {
     padding-left: 10px;
     width: 250px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    border-color: #b2b9d1;
+    border-style: solid;
+    border-width: 1px;
+    outline: none;
+    font-size: 20px;
+    box-shadow:2px 2px 3px rgba(0,0,0,0.06);
+  }
+
+  input.sellConditionForm {
+    padding-left: 10px;
+    width: 150px;
     padding-top: 5px;
     padding-bottom: 5px;
     border-radius: 5px;
