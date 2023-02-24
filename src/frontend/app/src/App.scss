@@ -1,6 +1,6 @@
 
 $primary: #FC0FC0;
-$primary1: #FDBEEA;
+$primary1: #fcc7ed;
 $secondary: #FFFFFF;
 $success: yellow;
 $warning: green;
@@ -58,19 +58,28 @@ body {
     color: $primary;
   }
 
-  .container {
-    margin: 0;
-    position: absolute;
-    top: 20%;
-    // -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    left: 50%;
-    // -ms-transform: translateX(-50%);
-    transform: translateX(-50%);
-    }
-
   .headerCategories {
     background: "yellow";
+  }
+
+  .mainFeaturedSection {
+    margin-left: 50px;
+    margin-top: 30px;
+  }
+
+  #mainPageHeader {
+    
+    font-size: 50px;
+    font-weight: 420;
+  }
+
+  .mainLine-1 {
+    
+    margin-bottom: 15px;
+    height: 2px;
+    width: 95%;
+    background: black;
+    opacity: 0.15;
   }
 
   .mainNavLinks {
@@ -79,8 +88,9 @@ body {
   }
 
   .background-1 {
+    //background: #fcc7ed;
     background: linear-gradient($primary1, $secondary);
-    height: 700px
+    height: 900px
   }
 
   .mainCategoryNav {
@@ -104,9 +114,8 @@ body {
   }
 
   .mainCategoryHeader {
-    padding-left: 40px;
-    padding-top: 30px;
-    padding-bottom: 20px;
+    
+    padding-bottom: 15px;
     font-size: 40px;
   }
 
@@ -118,8 +127,30 @@ body {
   }
 
   .mainItemCard {
-    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 10px;
     
+  }
+
+  .mainItemCardContainer {
+  display: flex;
+  align-items: flex-start;
+  overflow: hidden;
+  flex-wrap: wrap;
+  }
+
+  .mainFeaturedCategoryContainer {
+    padding-bottom: 20px;
+  }
+
+  .mainMessagesSection {
+    padding-top: 20px;
+    padding-left: 50px;
+  }
+
+  #mainMessagesHeader {
+    font-size: 50px;
+    font-weight: 375;
   }
   
   .sellHeader {
@@ -235,6 +266,24 @@ body {
       padding-bottom: 20px;
       font-size: 40px;
       text-align: center;
+  }
+
+  .categorySection {
+    padding-top: 20px;
+    padding-left: 40px;
+  }
+
+  .categoryItemCard {
+    margin-right: 40px;
+    margin-bottom: 10px;
+    
+  }
+
+  .categoryItemCardContainer {
+  display: flex;
+  align-items: flex-start;
+  overflow: hidden;
+  flex-wrap: wrap;
   }
 
 @import "~bootstrap/scss/bootstrap";
