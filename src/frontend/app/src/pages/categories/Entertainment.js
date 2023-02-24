@@ -8,13 +8,16 @@ export function Entertainment() {
     <MainNav/> 
     <MainCategories/>
     <div className="background-1">
-      <p className="categoryPageHeader">Entertainment</p>
-    <div>
-        
-        <div className="mainItemCard">
-          <MainItemCards itemName="Board Game" itemPrice="20" itemImage="/images/placeholder.png"/>
-        </div>
-        
+      <div className="categoryPageHeader">Entertainment</div>
+      <div className="categorySection">
+        <div className="categoryItemCardContainer">
+          <div className="categoryItemCard">
+          <MainItemCards itemName="Math book" itemPrice="12" itemImage="/images/placeholder.png"/>
+          </div>
+          <div className="mainItemCard">
+          <MainItemCards itemName="Math book" itemPrice="12" itemImage="/images/placeholder.png"/>
+          </div>
+        </div>        
       </div>
 
     </div>

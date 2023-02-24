@@ -8,13 +8,16 @@ export function Clothing() {
     <MainNav/> 
     <MainCategories/>
     <div className="background-1">
-      <p className="categoryPageHeader">Clothing</p>
-    <div>
-        
-        <div className="mainItemCard">
-          <MainItemCards itemName="Gucci Shirt" itemPrice="99" itemImage="/images/placeholder.png"/>
-        </div>
-        
+      <div className="categoryPageHeader">Clothing</div>
+      <div className="categorySection">
+        <div className="categoryItemCardContainer">
+          <div className="categoryItemCard">
+          <MainItemCards itemName="Math book" itemPrice="12" itemImage="/images/placeholder.png"/>
+          </div>
+          <div className="mainItemCard">
+          <MainItemCards itemName="Math book" itemPrice="12" itemImage="/images/placeholder.png"/>
+          </div>
+        </div>        
       </div>
 
     </div>
