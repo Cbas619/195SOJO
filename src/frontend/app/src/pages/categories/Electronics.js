@@ -8,13 +8,16 @@ export function Electronics() {
     <MainNav/> 
     <MainCategories/>
     <div className="background-1">
-      <p className="categoryPageHeader">Electronics</p>
-    <div>
-        
-        <div className="mainItemCard">
-          <MainItemCards itemName="MacBook Air" itemPrice="300" itemImage="/images/placeholder.png"/>
-        </div>
-        
+      <div className="categoryPageHeader">Electronics</div>
+      <div className="categorySection">
+        <div className="categoryItemCardContainer">
+          <div className="categoryItemCard">
+          <MainItemCards itemName="Math book" itemPrice="12" itemImage="/images/placeholder.png"/>
+          </div>
+          <div className="mainItemCard">
+          <MainItemCards itemName="Math book" itemPrice="12" itemImage="/images/placeholder.png"/>
+          </div>
+        </div>        
       </div>
 
     </div>

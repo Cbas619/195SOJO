@@ -18,7 +18,7 @@ export function MainNav() {
                 <Link to ="/sell"><div className='mainNavLinks'>Sell</div></Link>
             </Nav.Link>
             <Nav.Link>
-                <div className='mainNavLinks'>Inbox</div>
+                <div className='mainNavLinks'>Messages</div>
             </Nav.Link>
             <Nav.Link>
                 <div className='mainNavLinks'>Account</div>
