@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 export function SellForm() {
 
@@ -15,6 +16,7 @@ export function SellForm() {
   const [description, setDescription] = useState("");
   const [rating, setRating] = useState("");
   const [price, setPrice] = useState("");
+  const [category, setCategory] = useState("");
   const navigate = useNavigate();
 
   const productInsert = async (e) => {
@@ -26,6 +28,7 @@ export function SellForm() {
 		description:description,
 		rating: rating,
 		price: price,
+    category: category
     }).then((response, err) => {
       console.log(response);
       navigate('/main');
@@ -60,9 +63,32 @@ export function SellForm() {
         <Form.Control type="ItemPrice" placeholder="Enter Price" onChange={(e) => {setPrice(e.target.value)}}/>
       </Form.Group>
 
-	  <Form.Group className="mb-3" controlId="formImage">
+      <Form.Group className="mb-3" controlId="formCategory">
+        <Form.Label>Category</Form.Label>
+        <Form.Control type="ItemCategory" placeholder="Enter Category" onChange={(e) => {setCategory(e.target.value)}}/>
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formImage">
         <Form.Label>Image</Form.Label>
-        <Form.Control type="ItemImage" placeholder="Image" onChange={(e) => {setImage(e.target.value)}}/>
+        <Form.Control type="ItemImage" placeholder="Enter Iamge" onChange={(e) => {setImage(e.target.value)}}/>
+      </Form.Group>
+
+	  <Form.Group className="mb-3" controlId="formImage">
+        <Form.Label>Category</Form.Label>
+        <Dropdown>
+      <Dropdown.Toggle variant="primary" id="dropdown-basic">
+        Select Category
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+        <Dropdown.Item>Books</Dropdown.Item>
+        <Dropdown.Item>Supplies</Dropdown.Item>
+        <Dropdown.Item>Electronics</Dropdown.Item>
+        <Dropdown.Item>Clothing</Dropdown.Item>
+        <Dropdown.Item>Entertainment</Dropdown.Item>
+        <Dropdown.Item>General</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
       </Form.Group>
 	  <Button variant="primary" type="submit" onClick={productInsert}>
         Submit

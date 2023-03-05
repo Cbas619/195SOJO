@@ -53,6 +53,7 @@ export function Main() {
         <div className="mainLine-1"></div>
         <div className="mainItemCardContainer">
         {state.map((item, i) => (
+          // state[i].price === 400 &&
             <div className="mainItemCard">
             <MainItemCards itemName={state[i].productName} itemPrice={state[i].price} itemImage={state[i].image}/>
             </div>
@@ -66,40 +67,24 @@ export function Main() {
         <div className="mainFeaturedCategoryContainer">
           <MainHeaders categoryHeader="Books for the brain | " linkHeader="See all books" categoryLink="/books"/>
           <div className="mainItemCardContainer">
+          {state.map((item, i) => (
+          state[i].category === 'books' &&
             <div className="mainItemCard">
-            <MainItemCards itemName="Math book" itemPrice="12" itemImage="/images/placeholder.png"/>
+            <MainItemCards itemName={state[i].productName} itemPrice={state[i].price} itemImage={state[i].image}/>
             </div>
-            <div className="mainItemCard">
-            <MainItemCards itemName="Math book" itemPrice="12" itemImage="/images/placeholder.png"/>
-            </div>
-            <div className="mainItemCard">
-            <MainItemCards itemName="Math book" itemPrice="12" itemImage="/images/placeholder.png"/>
-            </div>
-            <div className="mainItemCard">
-            <MainItemCards itemName="Math book" itemPrice="12" itemImage="/images/placeholder.png"/>
-            </div>
-            <div className="mainItemCard">
-            <MainItemCards itemName="Math book" itemPrice="12" itemImage="/images/placeholder.png"/>
-            </div>
+        ))}
           </div>
         </div>
 
         <div className="mainFeaturedCategoryContainer">
           <MainHeaders categoryHeader="Work with Supplies | " linkHeader="See all school supplies" categoryLink="/officesupplies" />
           <div className="mainItemCardContainer">
+          {state.map((item, i) => (
+          state[i].category === 'supplies' &&
             <div className="mainItemCard">
-            <MainItemCards itemName="Pencils" itemPrice="2" itemImage="/images/placeholder.png"/>
+            <MainItemCards itemName={state[i].productName} itemPrice={state[i].price} itemImage={state[i].image}/>
             </div>
-            <div className="mainItemCard">
-            <MainItemCards itemName="Pencils" itemPrice="2" itemImage="/images/placeholder.png"/>
-            </div>
-            <div className="mainItemCard">
-            <MainItemCards itemName="Pencils" itemPrice="2" itemImage="/images/placeholder.png"/>
-            </div>
-            <div className="mainItemCard">
-            <MainItemCards itemName="Pencils" itemPrice="2" itemImage="/images/placeholder.png"/>
-            </div>
-            
+        ))}
           </div>
           
         </div>

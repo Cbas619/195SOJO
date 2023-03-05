@@ -7,7 +7,8 @@ router.post('/insert', async (req, res) => {
         image: req.body.image,
         description: req.body.description,
         rating: req.body.rating,
-        price: req.body.price
+        price: req.body.price,
+        category: req.body.category
     });
     try {
         const savedProduct = await newProduct.save()
