@@ -1,92 +1,75 @@
 import "../../App.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button';
 
 export function SellForm() {
 
-	const [inputs, setInputs] = useState({});
+  const [productName, setProductName] = useState("");
+  const [image, setImage] = useState("");
+  const [description, setDescription] = useState("");
+  const [rating, setRating] = useState("");
+  const [price, setPrice] = useState("");
+  const navigate = useNavigate();
 
-	const handleChange = (event) => {
-		const name = event.target.name;
-		const value = event.target.value;
-		setInputs(values => ({...values, [name]: value}))
-	}
-
-	const handleSubmit = (event) => {
-		event.preventDefault();
-		console.log(inputs);
-		
-	}
+  const productInsert = async (e) => {
+    e.preventDefault(); 
+    try {
+        axios.post("http://localhost:4000/api/product/insert", {
+		productName: productName,
+		image: image,
+		description:description,
+		rating: rating,
+		price: price,
+    }).then((response, err) => {
+      console.log(response);
+      navigate('/main');
+      
+    })} catch (error){
+      console.log(JSON.stringify(error));
+    }
+  };
 
 	return (
-		<>
-		<form onSubmit={handleSubmit}>
-			<div className="sellFormContainer">
-				<label className="sellFormHeader">Item Name
-					<br></br>
-					<input 
-						type="text"
-						name="productName"
-						value={inputs.productName || ""}
-						onChange={handleChange}
-						className="sellItemForm"
-						placeholder="Title"
-					/>
-				</label>
-				<br></br>
-				
-			</div>
-			
-			<div className="sellFormContainer">
-				<label className="sellFormHeader">Description of Item
-					<br></br>
-					<textarea 
-						
-						name="description"
-						value={inputs.description || ""}
-						onChange={handleChange}
-						className="sellDescriptionForm"
-						cols={40}
-						rows={5}
-						
-					/>
-				</label>
+		
+	  <Row>
+      <Col>
+	  <Form className='sellFormContainer'>
+	  <Form.Group className="mb-3" controlId="formItemName">
+        <Form.Label>Item Name</Form.Label>
+        <Form.Control type="ItemName" placeholder="Enter Title" onChange={(e) => {setProductName(e.target.value)}}/>
+      </Form.Group>
 
-			</div>
-			
-			<div className="sellFormContainer">
-				<label className="sellFormHeader">Condition
-					<br></br>
-					<input 
-						type="text"
-						name="condition"
-						value={inputs.condition || ""}
-						onChange={handleChange}
-						className="sellConditionForm"
-					/>
-				</label>
-			</div>
-			
-			<div className="sellFormContainer">
-				<label className="sellFormHeader">Set the price
-					<br></br>
-					<input 
-						type="text"
-						name="price"
-						value={inputs.price || null}
-						onChange={handleChange}
-						className="sellPriceForm"
-						placeholder="$0"
-					/>
-				</label>
-			</div>
-			
-			<button type="submit" className="sellSubmit">Submit</button>
-			
-		</form>
+	  <Form.Group className="mb-3" controlId="formItemDescription">
+        <Form.Label>Description of Item</Form.Label>
+        <Form.Control type="ItemDescription" placeholder="Enter Item Description" onChange={(e) => {setDescription(e.target.value)}}/>
+      </Form.Group>
 
+	  <Form.Group className="mb-3" controlId="formRating">
+        <Form.Label>Condition</Form.Label>
+        <Form.Control type="ItemRating" placeholder="Enter Rating" onChange={(e) => {setRating(e.target.value)}}/>
+      </Form.Group>
 
-		</>
+	  <Form.Group className="mb-3" controlId="formPrice">
+        <Form.Label>Price</Form.Label>
+        <Form.Control type="ItemPrice" placeholder="Enter Price" onChange={(e) => {setPrice(e.target.value)}}/>
+      </Form.Group>
+
+	  <Form.Group className="mb-3" controlId="formImage">
+        <Form.Label>Image</Form.Label>
+        <Form.Control type="ItemImage" placeholder="Image" onChange={(e) => {setImage(e.target.value)}}/>
+      </Form.Group>
+	  <Button variant="primary" type="submit" onClick={productInsert}>
+        Submit
+      </Button>
+	  </Form>
+	  </Col>
+	  </Row>
+
 	);
 }

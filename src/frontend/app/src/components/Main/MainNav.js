@@ -23,7 +23,9 @@ export function MainNav() {
             <Nav.Link>
                 <div className='mainNavLinks'>Account</div>
             </Nav.Link>
-            
+            <Nav.Link>
+            <Link to ="/"><div className='mainNavLinks'>Log Out</div></Link>
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

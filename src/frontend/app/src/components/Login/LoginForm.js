@@ -15,10 +15,10 @@ export function LoginForm() {
   const login = async (e) => {
     e.preventDefault(); 
     try {
-      axios.post("http://localhost:4000/api/auth/login", {
+      await axios.post("http://localhost:4000/api/auth/login", {
       email: email,
       password: password,
-    }).then((response, err) => {
+    }, { withCredentials: true }).then((response, err) => {
       console.log(response);
       navigate('/main');
       
