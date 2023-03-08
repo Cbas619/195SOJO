@@ -13,9 +13,13 @@ app.use(cookieParser())
 const authRoute = require("./routes/authRoutes");
 const userRoute = require("./routes/userRoutes");
 const productRoute = require("./routes/productRoutes");
+const chatRoute = require("./routes/chatRoutes");
+const messageRoute = require("./routes/messageRoutes");
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
 app.use("/api/product", productRoute);
+app.use("/api/chat", chatRoute);
+app.use("/api/message", messageRoute);
 
 app.listen(port, async () => {
     console.log(`Listening at http://localhost:${port}`)
