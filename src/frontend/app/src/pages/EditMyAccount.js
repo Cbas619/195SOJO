@@ -1,104 +1,114 @@
-import { Form, Navbar } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { Container } from 'react-bootstrap';
-import { Nav } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
-
+import { MainNav } from "../components/Main/MainNav";
+import { useState,useEffect } from "react"
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import Cookies from 'js-cookie';
 
 
 export function EditMyAccount() {
-   
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+
+
+    const [user, setUser] = useState([])
+
+    useEffect(() => {
+    (async () => {
+      try {
+        const respo = await axios.get("http://localhost:4000/api/user/user", {
+          withCredentials: true,
+        });
+        setUser(respo.data);
+      } catch (error) {
+        console.log(error.respo);
+      }
+    })();
+  });
+
+    const edit = async (e) => {
+        e.preventDefault(); 
+        try {
+          await axios.put(`http://localhost:4000/api/user/change/${user._id}`, {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+        }, {headers: {
+            'authorization':`bearer ${Cookies.get('jwt')}`
+          }}).then((response, err) => {
+          console.log(response);
+          navigate('/main');          
+        })} catch (error){
+          console.log(JSON.stringify(error));
+        }
+      };
 
   return (
   <div>
-  <Navbar bg="dark" variant="dark">
-      <Container fluid>
-          <Nav className='logo_Sojo'>
-              <Navbar.Brand href="#home"><div className='logo'>SOJO</div></Navbar.Brand>
-          </Nav>
-          <Nav className="account_Nav">
-          <Nav.Link href="/main">Search</Nav.Link>
-          <Nav.Link href="account">My Account</Nav.Link>
-          <Nav.Link href="/login">Log Out</Nav.Link>
-          </Nav>
 
-
-      </Container>
-      </Navbar>
-
-
-  <Navbar>
-      <Container fluid>
-          <Nav className="back-button">
-               <Button href="/account">Back to my account</Button>
-          </Nav>
-      </Container> 
-  </Navbar>
-
-
+<MainNav/> 
   <Container className='edit_text'>
        <h3>Edit Your Account</h3>
        <h4>Your Info</h4>
-
-
   <Form>
-      <Row >
+  <Form.Group as={Row} className="mb-3" controlId="formHorizontalFirstName">
           <Col>
+          
               <Form.Label>First Name</Form.Label>
-              <Form.Control placeholder="First name" />
+              <Form.Control type="firstName" placeholder="First name" onChange={(e) => {setFirstName(e.target.value)}}/>
           </Col>
+          </Form.Group>
+          <Form.Group as={Row} className="mb-3" controlId="formHorizontalLastName">
           <Col>
               <Form.Label>Last Name</Form.Label>
-              <Form.Control placeholder="Last name" />
+              <Form.Control type="lastName" placeholder="Last name" onChange={(e) => {setLastName(e.target.value)}}/>
           </Col>
-      </Row>
-
-
-
+      </Form.Group>
 
       <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
           <Form.Label column sm={2}>
               Email
            </Form.Label>
           <Col sm={15}>
-          <Form.Control type="email" placeholder="Email" />
+          <Form.Control type="email" placeholder="Email" onChange={(e) => {setEmail(e.target.value)}}/>
           </Col>
       </Form.Group>
 
-
-
-
-      <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
+      {/* <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
           <Form.Label column sm={5}>
-              Current Password
+              Current Password (Does not work)
           </Form.Label>
           <Col sm={15}>
           <Form.Control type="password" placeholder="Password" />
           </Col>
-      </Form.Group>
-      <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
+      </Form.Group> */}
+      <Form.Group as={Row} className="mb-3" controlId="formHorizontalNewPassword">
           <Form.Label column sm={5}>
               New Password
           </Form.Label>
           <Col sm={15}>
-          <Form.Control type="password" placeholder="Password" />
+          <Form.Control type="password" placeholder="Password" onChange={(e) => {setPassword(e.target.value)}}/>
           </Col>
       </Form.Group>
-      <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
+      {/* <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
           <Form.Label column sm={5}>
-              Confirm New Password
+              Confirm New Password (Does not work)
           </Form.Label>
           <Col sm={15}>
           <Form.Control type="password" placeholder="Password" />
           </Col>
-      </Form.Group>
+      </Form.Group> */}
       <Form.Group as={Row} className="mb-3">
           <Col sm={{ span: 5, offset: 15 }}>
-              <Button type="submit">Save & updates</Button> 
-          </Col>
-          <Col sm={{ span: 5, offset: 15 }}>
-              <Button type="submit">Cancel</Button>
+              <Button type="submit" onClick={edit} >Save & updates</Button> 
           </Col>
        </Form.Group> 
   </Form>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from "react-router-dom";
 import { AiOutlineUser } from "react-icons/ai";
 import { MdEdit } from "react-icons/md";
-
+import { MainNav } from "../components/Main/MainNav";
 
 export function Account() {
 
@@ -13,6 +13,8 @@ export function Account() {
 
 
  return (
+  <>
+  <MainNav/> 
    <div className="container-fill d-flex flex-column gap-5">
      <h1>My Account</h1>
      <div className="d-flex gap-4 align-items-center">
@@ -43,5 +45,6 @@ export function Account() {
        </div>
      </div>
    </div>
+   </>
  );
 }

@@ -2,6 +2,7 @@ const router = require("express").Router();
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const verifyToken = require("../utils/verifyToken")
+const bcrypt = require("bcrypt");
 
 router.get('/user', async (req, res) => {
     const cookie = req.cookies['jwt'];
@@ -14,11 +15,14 @@ router.get('/user', async (req, res) => {
 })
 
 router.put('/change/:id', verifyToken, async (req, res) => {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
     try {
         const updateUsers = await User.findByIdAndUpdate(
             req.params.id,
             {
                 $set: req.body,
+                password: hashedPassword
             },
             {new: true},
         )

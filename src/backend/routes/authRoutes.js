@@ -38,11 +38,11 @@ router.post("/login", async (req, res) => {
         expiresIn: "60m",
     })
     res.cookie('jwt', token, {
-        httpOnly: true,
+        httpOnly: false,
         maxAge: 24 * 60 * 60 * 1000, //1 day
     })
 
-    return res.status(200).json({ User })
+    return res.status(200).json(user)
     } catch (err) {
         return res.status(500).json(err);
     }
