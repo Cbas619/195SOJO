@@ -53,7 +53,7 @@ export function Main() {
         <div className="mainLine-1"></div>
         <div className="mainItemCardContainer">
         {state.map((item, i) => (
-          // state[i].price === 400 &&
+          //state[i].purchased === false &&
             <div className="mainItemCard">
             <MainItemCards itemName={state[i].productName} itemPrice={state[i].price} itemImage={state[i].image}/>
             </div>
@@ -68,7 +68,7 @@ export function Main() {
           <MainHeaders categoryHeader="Books for the brain | " linkHeader="See all books" categoryLink="/books"/>
           <div className="mainItemCardContainer">
           {state.map((item, i) => (
-          state[i].category === 'books' &&
+          state[i].category === 'books' && state[i].purchased === false &&
             <div className="mainItemCard">
             <MainItemCards itemName={state[i].productName} itemPrice={state[i].price} itemImage={state[i].image}/>
             </div>
@@ -80,7 +80,7 @@ export function Main() {
           <MainHeaders categoryHeader="Work with Supplies | " linkHeader="See all school supplies" categoryLink="/officesupplies" />
           <div className="mainItemCardContainer">
           {state.map((item, i) => (
-          state[i].category === 'supplies' &&
+          state[i].category === 'supplies' && state[i].purchased === false &&
             <div className="mainItemCard">
             <MainItemCards itemName={state[i].productName} itemPrice={state[i].price} itemImage={state[i].image}/>
             </div>

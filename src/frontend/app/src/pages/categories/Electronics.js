@@ -32,7 +32,7 @@ export function Electronics() {
       <div className="categorySection">
         <div className="categoryItemCardContainer">
         {state.map((item, i) => (
-           state[i].category === 'electronics' &&
+           state[i].category === 'electronics' && state[i].purchased === false &&
             <div className="mainItemCard">
             <MainItemCards itemName={state[i].productName} itemPrice={state[i].price} itemImage={state[i].image}/>
             </div>

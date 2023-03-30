@@ -4,9 +4,9 @@ import { Col } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { MainNav } from "../components/Main/MainNav";
-import { useState,useEffect } from "react"
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import { useState,useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Cookies from 'js-cookie';
 
 
@@ -53,7 +53,6 @@ export function EditMyAccount() {
 
   return (
   <div>
-
 <MainNav/> 
   <Container className='edit_text'>
        <h3>Edit Your Account</h3>
