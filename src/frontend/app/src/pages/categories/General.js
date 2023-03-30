@@ -1,3 +1,4 @@
+
 import { MainNav } from "../../components/Main/MainNav";
 import { MainCategories } from "../../components/Main/MainCategories";
 import { MainItemCards } from "../../components/Main/MainItemCards";
@@ -40,4 +41,5 @@ export function General() {
     </div>
     </>       
   );
+
 }

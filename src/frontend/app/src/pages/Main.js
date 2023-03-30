@@ -1,3 +1,4 @@
+
 import { MainNav } from "../components/Main/MainNav";
 import { MainHeaders } from "../components/Main/MainHeaders"
 import { MainCategories } from "../components/Main/MainCategories";
@@ -98,4 +99,5 @@ export function Main() {
     
     </>       
   );
+
 }

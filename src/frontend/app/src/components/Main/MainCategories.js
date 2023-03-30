@@ -1,3 +1,4 @@
+
 import '../../App.scss'
 import { MainCategoryIcon } from './MainCategoryIcon'
 

@@ -1,3 +1,4 @@
+
 import Card from 'react-bootstrap/Card';
 
 
@@ -15,4 +16,5 @@ export function MainItemCards(props) {
     </Card>
   );
 }
+
 
