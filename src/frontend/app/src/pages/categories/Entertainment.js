@@ -30,7 +30,7 @@ export function Entertainment() {
       <div className="categorySection">
         <div className="categoryItemCardContainer">
         {state.map((item, i) => (
-           state[i].category === 'entertainment' &&
+           state[i].category === 'entertainment' && state[i].purchased === false &&
             <div className="mainItemCard">
             <MainItemCards itemName={state[i].productName} itemPrice={state[i].price} itemImage={state[i].image}/>
             </div>
