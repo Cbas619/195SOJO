@@ -3,6 +3,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import '../../App.scss'
 import { Link } from 'react-router-dom';
+import './SearchBar';
+import { SearchBar } from './SearchBar';
 
 export function MainNav() {
   return (
@@ -13,6 +15,7 @@ export function MainNav() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
           </Nav>
+          <SearchBar />
           <Nav>
             <Nav.Link>
                 <Link to ="/sell"><div className='mainNavLinks'>Sell</div></Link>
