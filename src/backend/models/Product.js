@@ -20,13 +20,17 @@ const productSchema = new mongoose.Schema({
     max: 1024,
   },
   rating: {
-    type: Number,
+    type: String,
     required: true,
   },
   price: {
     type: Number,
     required: true,
   },
+  category: {
+    type: String,
+    required: true
+  }
 });
 
 module.exports = mongoose.model("Product", productSchema);

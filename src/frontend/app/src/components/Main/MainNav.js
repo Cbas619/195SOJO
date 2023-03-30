@@ -4,21 +4,27 @@ import Navbar from 'react-bootstrap/Navbar';
 import '../../App.scss'
 import { Link } from 'react-router-dom';
 
-export function HomeNav() {
+export function MainNav() {
   return (
     <Navbar bg="secondary" expand="lg">
       <Container>
-        <Navbar.Brand><Link to="/"><img className="logo" src="/images/logo.png"/></Link></Navbar.Brand>
+        <Navbar.Brand><Link to ="/main"><img className="logo" src="/images/logo.png"/></Link></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
           </Nav>
           <Nav>
             <Nav.Link>
-              <Link to="/login"><div className='loginNav'>Login</div></Link>
+                <Link to ="/sell"><div className='mainNavLinks'>Sell</div></Link>
             </Nav.Link>
             <Nav.Link>
-            <Link to="/signup"><div className='signUpNav'>Sign Up</div></Link>
+                <div className='mainNavLinks'>Messages</div>
+            </Nav.Link>
+            <Nav.Link>
+                <div className='mainNavLinks'>Account</div>
+            </Nav.Link>
+            <Nav.Link>
+            <Link to ="/"><div className='mainNavLinks'>Log Out</div></Link>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

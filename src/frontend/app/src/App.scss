@@ -1,5 +1,6 @@
 
 $primary: #FC0FC0;
+$primary1: #fcc7ed;
 $secondary: #FFFFFF;
 $success: yellow;
 $warning: green;
@@ -21,21 +22,30 @@ body {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
   }
-  
+
+  a:link {
+    text-decoration: none;
+  }
+
   .welcome {
     text-align: center;
     background: linear-gradient($primary, $secondary);
-    padding: 200px;
+    padding: 145px;
+    margin-bottom: 20px;
     color:$secondary;
   }
   
   .homeRow {
     text-align: center;
   }
+
+  .homeImg {
+    width: 35%;
+    margin-bottom: 8%;
+  }
   
   .logo {
-    font-size: 40px;
-    color: $primary;
+    width: 120px;
   }
   
   .loginNav {
@@ -46,6 +56,234 @@ body {
   .signUpNav {
     font-size: 20px;
     color: $primary;
+  }
+
+  .headerCategories {
+    background: "yellow";
+  }
+
+  .mainFeaturedSection {
+    margin-left: 50px;
+    margin-top: 30px;
+  }
+
+  #mainPageHeader {
+    
+    font-size: 50px;
+    font-weight: 420;
+  }
+
+  .mainLine-1 {
+    
+    margin-bottom: 15px;
+    height: 2px;
+    width: 95%;
+    background: black;
+    opacity: 0.15;
+  }
+
+  .mainNavLinks {
+    font-size: 20px;
+    color: $primary;
+  }
+
+  .background-1 {
+    //background: #fcc7ed;
+    background: linear-gradient($primary1, $secondary);
+    height: 900px
+  }
+
+  .mainCategoryNav {
+    overflow: hidden;
+    background-color: #FFE9F9;
+  }
+  
+
+  .mainCategoryNav a {
+    float: left;
+    color: #333;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px 5vw;
+    font-size: 17px;
+  }
+
+  .mainCategoryImg {
+    margin: 5px;
+    width: 25px;
+  }
+
+  .mainCategoryHeader {
+    
+    padding-bottom: 15px;
+    font-size: 40px;
+  }
+
+  .mainCategoryLink{
+    text-decoration: none;
+    color: #000;
+    display: inline;
+    font-size: 32px;
+  }
+
+  .mainItemCard {
+    margin-right: 40px;
+    margin-bottom: 10px;
+    
+  }
+
+  .mainItemCardContainer {
+  display: flex;
+  align-items: flex-start;
+  overflow: hidden;
+  flex-wrap: wrap;
+  }
+
+  .mainFeaturedCategoryContainer {
+    padding-bottom: 20px;
+  }
+
+  .mainMessagesSection {
+    padding-top: 20px;
+    padding-left: 50px;
+  }
+
+  #mainMessagesHeader {
+    font-size: 50px;
+    font-weight: 375;
+  }
+  
+  .sellHeader {
+    text-align: center;
+    font-size: 40px;
+    padding-top: 1%;
+  }
+
+  .sellContainer {
+    
+    margin-left: 240px;
+    margin-right: 240px;
+    display: block;
+  }
+
+  .background-2 {
+    background: linear-gradient($primary1, $secondary);
+    height: 900px;
+    
+
+  }
+
+  .sellBackground {
+    border-radius: 10px 10px;
+    margin-top: 5px;
+    padding-bottom: 60%;
+    padding-right: 50%;
+    
+    background-color: #FFFFFF;
+  }
+
+  .sellSubmit {
+    background-color: #f937be;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-left: 40px;
+  }
+
+  .sellFormContainer {
+    padding: 25px 20px 0px 30px;
+    margin-left: 10px;
+  }
+
+  .sellFormHeader {
+    padding-bottom: 5px;
+    font-size: 25px;
+    
+  }
+  
+  input.sellItemForm {
+    padding-left: 10px;
+    width: 250px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    border-color: #b2b9d1;
+    border-style: solid;
+    border-width: 1px;
+    outline: none;
+    font-size: 20px;
+    box-shadow:2px 2px 3px rgba(0,0,0,0.06);
+  }
+
+  input.sellConditionForm {
+    padding-left: 10px;
+    width: 150px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    border-color: #b2b9d1;
+    border-style: solid;
+    border-width: 1px;
+    outline: none;
+    font-size: 20px;
+    box-shadow:2px 2px 3px rgba(0,0,0,0.06);
+  }
+
+  textarea.sellDescriptionForm {
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    border-color: #b2b9d1;
+    border-style: solid;
+    border-width: 1px;
+    outline: none;
+    font-size: 20px;
+    box-shadow:2px 2px 3px rgba(0,0,0,0.06);
+    
+  }
+
+  input.sellPriceForm {
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 80px;
+    border-radius: 5px;
+    border-color: #b2b9d1;
+    border-style: solid;
+    border-width: 1px;
+    outline: none;
+    font-size: 20px;
+    box-shadow:2px 2px 3px rgba(0,0,0,0.06);
+  }
+  
+  .categoryPageHeader {
+      padding-left: 40px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      font-size: 40px;
+      text-align: center;
+  }
+
+  .categorySection {
+    padding-top: 20px;
+    padding-left: 40px;
+  }
+
+  .categoryItemCard {
+    margin-right: 40px;
+    margin-bottom: 10px;
+    
+  }
+
+  .categoryItemCardContainer {
+  display: flex;
+  align-items: flex-start;
+  overflow: hidden;
+  flex-wrap: wrap;
   }
 
 @import "~bootstrap/scss/bootstrap";

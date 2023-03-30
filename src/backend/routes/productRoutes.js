@@ -7,7 +7,8 @@ router.post('/insert', async (req, res) => {
         image: req.body.image,
         description: req.body.description,
         rating: req.body.rating,
-        price: req.body.price
+        price: req.body.price,
+        category: req.body.category
     });
     try {
         const savedProduct = await newProduct.save()
@@ -23,6 +24,30 @@ router.get('/find/:id', async (req, res) => {
         res.status(200).json(productID)
     } catch (err) {
         res.status(500).json(err)
+    }
+})
+
+router.get('/all', async (req, res) => {
+    const qNew = req.query.new
+    const qCategory = req.query.category
+    try {
+      let products
+
+      if (qNew) {
+        products = await Product.find().sort({ createdAt: -1 }).limit(1)
+      } else if (qCategory) {
+        products = await Product.find({
+          categories: {
+            $in: [qCategory],
+          },
+        })
+      } else {
+        products = await Product.find()
+      }
+
+      res.status(200).json(products)
+    } catch (err) {
+      res.status(500).json(err)
     }
 })
 

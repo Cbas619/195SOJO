@@ -7,6 +7,14 @@ import { Login } from './pages/Login';
 import { Signup } from './pages/Signup';
 import { Payment } from './pages/Payment';
 import { Main } from './pages/Main';
+import { Sell } from './pages/Sell';
+
+import { Books } from './pages/categories/Books'
+import { Clothing } from './pages/categories/Clothing';
+import { Electronics } from './pages/categories/Electronics';
+import { Entertainment } from './pages/categories/Entertainment';
+import { General } from './pages/categories/General';
+import { OfficeSupplies } from './pages/categories/OfficeSupplies';
 
 
 function App() {
@@ -19,6 +27,13 @@ function App() {
     <Route path="/signup" element={<Signup/>}/>
     <Route path="/payment" element={<Payment/>}/>
     <Route path="/main" element={<Main/>}/>
+    <Route path="/books" element={<Books/>}/>
+    <Route path="/clothing" element={<Clothing/>}/>
+    <Route path="/electronics" element={<Electronics/>}/>
+    <Route path="/entertainment" element={<Entertainment/>}/>
+    <Route path="/general" element={<General/>}/>
+    <Route path="/officesupplies" element={<OfficeSupplies/>}/>
+    <Route path="/sell" element={<Sell/>}/>
     </Routes>      
   );
 }
