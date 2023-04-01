@@ -89,6 +89,7 @@ return (
         <option>MaryLand</option>
         <option>Hawaii</option>
       </Form.Select>
+      <Form.Control placeholder='state' onChange={(e) => {setState(e.target.value)}}/>
     </Form.Group>
 
     <Form.Group as={Col} controlId="formZip">

@@ -3,10 +3,15 @@ import { MainCategories } from "../../components/Main/MainCategories";
 import { MainItemCards } from "../../components/Main/MainItemCards";
 import  {useState} from 'react';
 import { useEffect } from 'react';
+import Button from 'react-bootstrap/Button';
+import { useNavigate } from "react-router-dom";
+
 
 export function Clothing() {
 
   const [state, setState] = useState([])
+  const navigate = useNavigate();
+  const [cart, setCart] = useState("");
 
   useEffect(() => {
     getData();
@@ -23,6 +28,12 @@ export function Clothing() {
   }
   console.log(state)
 
+//Add to Cart handle submit
+  const handleSubmit =(e) => {
+    e.preventDefault();
+    navigate('/payment');
+    
+  }
 
   return (
     <>
@@ -38,10 +49,11 @@ export function Clothing() {
             <MainItemCards itemName={state[i].productName} itemPrice={state[i].price} itemImage={state[i].image}/>
             </div>
         ))}
-        </div>        
+        </div>     
+      <Button onClick={handleSubmit} onChange={(e) => {setCart(e.target.value)}}>Add to Cart</Button>   
       </div>
-
     </div>
+
     </>       
   );
 }
