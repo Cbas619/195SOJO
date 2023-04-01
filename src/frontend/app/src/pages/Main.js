@@ -9,7 +9,17 @@ import  {useState} from 'react';
 import { useEffect } from 'react';
 //import { Logout } from "../utils/Logout";
 
+import {useDispatch, useSelector } from 'react-redux'
+import { getProducts } from "../actions/productActions";
+import { Col } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
+
 export function Main() {
+
+  const dispatch = useDispatch();
+
+  const {loading, products, error} = useSelector(state => state.products)
+
   const navigate = useNavigate();
   const Logout = async (e) => {
     e.preventDefault(); 
@@ -25,22 +35,11 @@ export function Main() {
   };
 
 
-  const [state, setState] = useState([])
-
   useEffect(() => {
-    getData();
-  }, [])
+    dispatch(getProducts())
+  }, [dispatch])
 
-  const getData = async () => {
-    try {
-      fetch("http://localhost:4000/api/product/all")
-     .then(response => response.json())
-     .then(res => setState(res))
-    } catch (err) {
-      alert(err.message)
-    }
-  }
-  console.log(state)
+  //const keyword = match.params.keyword
 
   return (
     <>
@@ -51,14 +50,15 @@ export function Main() {
       <div className="mainMessagesSection">
         <div id="mainMessagesHeader">Your messages</div>
         <div className="mainLine-1"></div>
-        <div className="mainItemCardContainer">
-        {state.map((item, i) => (
-          //state[i].purchased === false &&
+        <Row>
+          {products && products.map(products => (
+          <Col key={products._id} sm={6} md={4} lg={2}>
             <div className="mainItemCard">
-            <MainItemCards itemName={state[i].productName} itemPrice={state[i].price} itemImage={state[i].image}/>
+              <MainItemCards product={products}/>
             </div>
+          </Col>
         ))}
-          </div>
+        </Row>
       </div>
 
       <div className="mainFeaturedSection">
@@ -66,27 +66,30 @@ export function Main() {
         <div className="mainLine-1"></div>
         <div className="mainFeaturedCategoryContainer">
           <MainHeaders categoryHeader="Books for the brain | " linkHeader="See all books" categoryLink="/books"/>
-          <div className="mainItemCardContainer">
-          {state.map((item, i) => (
-          state[i].category === 'books' && state[i].purchased === false &&
+          <Row>
+          {products && products.map(products => (
+          products.category === 'books' && products.purchased === false &&
+          <Col key={products._id} sm={6} md={4} lg={2}>
             <div className="mainItemCard">
-            <MainItemCards itemName={state[i].productName} itemPrice={state[i].price} itemImage={state[i].image}/>
+              <MainItemCards product={products}/>
             </div>
+          </Col>
         ))}
-          </div>
+          </Row>
         </div>
 
         <div className="mainFeaturedCategoryContainer">
           <MainHeaders categoryHeader="Work with Supplies | " linkHeader="See all school supplies" categoryLink="/officesupplies" />
-          <div className="mainItemCardContainer">
-          {state.map((item, i) => (
-          state[i].category === 'supplies' && state[i].purchased === false &&
+          <Row>
+          {products && products.map(products => (
+          products.category === 'supplies' && products.purchased === false &&
+          <Col key={products._id} sm={6} md={4} lg={2}>
             <div className="mainItemCard">
-            <MainItemCards itemName={state[i].productName} itemPrice={state[i].price} itemImage={state[i].image}/>
+              <MainItemCards product={products}/>
             </div>
+          </Col>
         ))}
-          </div>
-          
+         </Row>
         </div>
       </div>
       
