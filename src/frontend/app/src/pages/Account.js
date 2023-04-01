@@ -19,7 +19,7 @@ export function Account() {
      <h1>My Account</h1>
      <div className="d-flex gap-4 align-items-center">
        <AiOutlineUser style={{ fontSize: "13ch" }} />
-       <h5>Hi, SOJO!</h5>
+       <h5>Hi, {firstName}!</h5>
      </div>
 
 

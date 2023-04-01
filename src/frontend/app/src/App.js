@@ -16,6 +16,7 @@ import { Electronics } from './pages/categories/Electronics';
 import { Entertainment } from './pages/categories/Entertainment';
 import { General } from './pages/categories/General';
 import { OfficeSupplies } from './pages/categories/OfficeSupplies';
+import { PaymentConfirmation } from './pages/PaymentConfirmation';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
     <Route path="/officesupplies" element={<OfficeSupplies/>}/>
     <Route path="/sell" element={<Sell/>}/>
     <Route path="/chat" element={<Chat/>}/>
+    <Route path="/paymentconfirmation" element={<PaymentConfirmation/>}/>
     </Routes>      
   );
 }

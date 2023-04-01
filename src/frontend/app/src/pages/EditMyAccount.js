@@ -20,8 +20,7 @@ export function EditMyAccount() {
 
     const [user, setUser] = useState([])
 
-    useEffect(() => {
-    (async () => {
+    useEffect(() => {( async () => {
       try {
         const respo = await axios.get("http://localhost:4000/api/user/user", {
           withCredentials: true,
