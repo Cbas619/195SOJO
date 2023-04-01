@@ -39,7 +39,7 @@ export function Main() {
     dispatch(getProducts())
   }, [dispatch])
 
-  //const keyword = match.params.keyword
+
 
   return (
     <>
