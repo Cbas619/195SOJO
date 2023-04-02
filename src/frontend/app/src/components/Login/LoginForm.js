@@ -6,23 +6,35 @@ import Col from 'react-bootstrap/Col'
 import axios from 'axios'
 import { useState } from "react"
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { useSignIn } from 'react-auth-kit';
+import { LoginAPI } from '../../api/AuthRequests';
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch
+  const signIn = useSignIn()
 
   const login = async (e) => {
     e.preventDefault(); 
     try {
-      await axios.post("http://localhost:4000/api/auth/login", {
+      const res = await axios.post("http://localhost:4000/api/auth/login", {
       email: email,
-      password: password,
-    }, { withCredentials: true }).then((response, err) => {
-      console.log(response);
-      navigate('/main');
-      
-    })} catch (error){
+      password: password
+    // }, { withCredentials: true }).then((response, err) => {
+    //   console.log(response);
+    //   navigate('/main');
+      })
+      console.log(res)
+      signIn({
+        token: res.data,
+        expiresIn: 3600,
+        tokenType: "Bearer",
+        authState: {email: email}})
+        navigate('/main');
+    } catch (error){
       console.log(JSON.stringify(error));
     }
   };

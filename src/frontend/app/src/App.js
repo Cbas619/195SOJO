@@ -17,29 +17,55 @@ import { Entertainment } from './pages/categories/Entertainment';
 import { General } from './pages/categories/General';
 import { OfficeSupplies } from './pages/categories/OfficeSupplies';
 import { PaymentConfirmation } from './pages/PaymentConfirmation';
+import { RequireAuth } from 'react-auth-kit';
 
 
 function App() {
   return (
     <Routes>
     <Route path="/" element={<Home/>}/>
-    <Route path="/account" element={<Account/>}/>
-    <Route path="/edit" element={<EditMyAccount/>}/>
-    <Route path="/item" element={<Item/>}/>
+    <Route path="/account" element={
+    <RequireAuth loginPath='/login'><Account/>
+    </RequireAuth>}/>
+    <Route path="/edit" element={
+    <RequireAuth loginPath='/login'><EditMyAccount/>
+    </RequireAuth>}/>
+    <Route path="/item" element={
+    <RequireAuth loginPath='/login'><Item/>
+    </RequireAuth>}/>
     <Route path="/login" element={<Login/>}/>
     <Route path="/signup" element={<Signup/>}/>
-    <Route path="/payment" element={<Payment/>}/>
-    <Route path="/main" element={<Main/>}/>
-    <Route path="/books" element={<Books/>}/>
-    <Route path="/clothing" element={<Clothing/>}/>
-    <Route path="/electronics" element={<Electronics/>}/>
-    <Route path="/entertainment" element={<Entertainment/>}/>
-    <Route path="/general" element={<General/>}/>
-    <Route path="/officesupplies" element={<OfficeSupplies/>}/>
-    <Route path="/sell" element={<Sell/>}/>
-    <Route path="/chat" element={<Chat/>}/>
-    <Route path="/paymentconfirmation" element={<PaymentConfirmation/>}/>
-    </Routes>      
+    <Route path="/payment" element={
+    <RequireAuth loginPath='/login'><Payment/>
+    </RequireAuth>}/>
+    <Route path="/main" element={
+    <RequireAuth loginPath='/login'><Main/>
+    </RequireAuth>}/>
+    <Route path="/books" element={
+    <RequireAuth loginPath='/login'><Books/>
+    </RequireAuth>}/>
+    <Route path="/clothing" element={
+    <RequireAuth loginPath='/login'><Clothing/>
+    </RequireAuth>}/>
+    <Route path="/electronics" element={
+    <RequireAuth loginPath='/login'><Electronics/>
+    </RequireAuth>}/>
+    <Route path="/entertainment" element={
+    <RequireAuth loginPath='/login'><Entertainment/>
+    </RequireAuth>}/>
+    <Route path="/general" element={
+    <RequireAuth loginPath='/login'><General/>
+    </RequireAuth>}/>
+    <Route path="/officesupplies" element={
+    <RequireAuth loginPath='/login'><OfficeSupplies/>
+    </RequireAuth>}/>
+    <Route path="/sell" element={
+    <RequireAuth loginPath='/login'><Sell/>
+    </RequireAuth>}/>
+    <Route path="/chat" element={
+    <RequireAuth loginPath='/login'><Chat/>
+    </RequireAuth>}/>
+    </Routes>     
   );
 }
 

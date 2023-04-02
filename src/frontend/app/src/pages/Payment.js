@@ -5,7 +5,8 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { Container } from 'react-bootstrap';
 import { MainNav } from "../components/Main/MainNav";
-import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 export function Payment() {
@@ -28,6 +29,29 @@ export function Payment() {
     navigate('/paymentcomfirmation');
   }
   
+
+  // const payment = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     axios
+  //       .post("http://localhost:4000/api/address/insert", {
+  //         firstName: firstName,
+  //         lastName: lastName,
+  //         email: email,
+  //         addressLine: addressLine,
+  //         city: city,
+  //         state: state,
+  //         postalCode: postalCode,
+  //       })
+  //       .then((response, err) => {
+  //         console.log(response);
+  //         navigate("/main");
+  //       });
+  //   } catch (error) {
+  //     console.log(JSON.stringify(error));
+  //   }
+  // };
+
 return (
   <div>
   <MainNav/> 
@@ -35,7 +59,6 @@ return (
   <Container className="py-4 bg-danger">
     <h4>Checkout / Cart</h4>
   </Container>
-   
   <br></br>
   <Container>
     <h5><strong>Shipping Info</strong></h5>
@@ -98,7 +121,9 @@ return (
     </Form.Group>
   </Row>
 
-
+  <Button className='form-group-t' variant="primary" type="submit" onClick={handleSubmit}>
+    Submit
+  </Button>
 </Form>
 </Container>
 <br></br>
