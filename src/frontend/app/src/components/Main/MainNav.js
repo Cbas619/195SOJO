@@ -3,8 +3,10 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import '../../App.scss'
 import { Link } from 'react-router-dom';
+import { useSignOut } from 'react-auth-kit'
 
 export function MainNav() {
+  const signOut = useSignOut()
   return (
     <Navbar bg="secondary" expand="lg">
       <Container>
@@ -24,7 +26,7 @@ export function MainNav() {
             <Link to ="/account"><div className='mainNavLinks'>Account</div></Link>
             </Nav.Link>
             <Nav.Link>
-            <Link to ="/"><div className='mainNavLinks'>Log Out</div></Link>
+            <Link to ="/"><button onClick={() => signOut()}>Sign Out</button></Link>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

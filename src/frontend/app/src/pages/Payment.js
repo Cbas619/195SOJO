@@ -5,17 +5,43 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { Container } from 'react-bootstrap';
 import { MainNav } from "../components/Main/MainNav";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 export function Payment() {
-  const [firstname, setFirstName] = useState("");
-  const [lastname, setLastName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [address, setAddress] = useState("");
+  const [addressLine, setAddressLine] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
-  const [zip, setZip] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const navigate = useNavigate();
   
+
+  const payment = async (e) => {
+    e.preventDefault();
+    try {
+      axios
+        .post("http://localhost:4000/api/address/insert", {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          addressLine: addressLine,
+          city: city,
+          state: state,
+          postalCode: postalCode,
+        })
+        .then((response, err) => {
+          console.log(response);
+          navigate("/main");
+        });
+    } catch (error) {
+      console.log(JSON.stringify(error));
+    }
+  };
+
 return (
   <div>
   <MainNav/> 
@@ -34,34 +60,46 @@ return (
   <Col className="mb-3">
     <Form.Group as={Col} controlId="formFirstName">
       <Form.Label>First Name</Form.Label>
-      <Form.Control type="firstname" placeholder="First Name" />
+      <Form.Control type="firstname" placeholder="First Name" onChange={(e) => {
+                setFirstName(e.target.value);
+              }}/>
     </Form.Group> <br></br>
 
     <Form.Group as={Col} controlId="formLastName">
       <Form.Label>Last Name</Form.Label>
-      <Form.Control type="password" placeholder="Last Name" />
+      <Form.Control type="password" placeholder="Last Name" onChange={(e) => {
+                setLastName(e.target.value);
+              }}/>
     </Form.Group>
   </Col>
 
   <Form.Group className="mb-3" controlId="formGridAddress1">
     <Form.Label>Email</Form.Label>
-    <Form.Control placeholder="Email Address" />
+    <Form.Control placeholder="Email Address" 
+    onChange={(e) => {
+      setEmail(e.target.value);
+    }}/>
   </Form.Group>
 
   <Form.Group className="mb-3" controlId="formGridAddress2">
     <Form.Label>Address</Form.Label>
-    <Form.Control placeholder="1234 Main St, #82" />
+    <Form.Control placeholder="1234 Main St, #82"
+    onChange={(e) => {
+      setAddressLine(e.target.value);}} />
   </Form.Group>
 
   <Row className="mb-3">
     <Form.Group as={Col} controlId="formCity">
       <Form.Label>City</Form.Label>
-      <Form.Control placeholder='City'/>
+      <Form.Control placeholder='City'
+       onChange={(e) => {
+        setCity(e.target.value);
+      }}/>
   </Form.Group>
 
   <Form.Group as={Col} controlId="formState">
       <Form.Label>State</Form.Label>
-      <Form.Select defaultValue="Choose...">
+      {/* <Form.Select defaultValue="Choose...">
         <option>Alabama</option>
         <option>Alaska</option>
         <option>Arizona</option>
@@ -76,16 +114,25 @@ return (
         <option>Michigan</option>
         <option>MaryLand</option>
         <option>Hawaii</option>
-      </Form.Select>
+      </Form.Select> */}
+      <Form.Control placeholder='State'
+      onChange={(e) => {
+        setState(e.target.value);
+      }}/>
     </Form.Group>
 
     <Form.Group as={Col} controlId="formZip">
       <Form.Label>Zip</Form.Label>
-      <Form.Control placeholder='Zip Code'/>
+      <Form.Control placeholder='Zip Code'
+      onChange={(e) => {
+        setPostalCode(e.target.value);
+      }}/>
     </Form.Group>
   </Row>
 
-
+  <Button className='form-group-t' variant="primary" type="submit" onClick={payment}>
+    Submit
+  </Button>
 </Form>
 </Container>
 <br></br>
@@ -125,9 +172,9 @@ return (
 
 
 
-  <Button className='form-group-t' variant="primary" type="submit">
+  {/* <Button className='form-group-t' variant="primary" type="submit">
     Submit
-  </Button>
+  </Button> */}
 </Container>
 </div>
 
