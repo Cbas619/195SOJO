@@ -41,7 +41,7 @@ const login = async (req, res) => {
         maxAge: 24 * 60 * 60 * 1000, //1 day
     })
 
-    return res.status(200).json(user)
+    return res.status(200).json(token)
     } catch (err) {
         return res.status(500).json(err);
     }

@@ -91,9 +91,6 @@ export function Main() {
       </div>
       
       <br></br>
-      <Button variant="primary" type="submit" onClick={Logout}>
-        Logout
-      </Button>
     </div>
     
     </>       
