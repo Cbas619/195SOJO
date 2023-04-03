@@ -29,7 +29,7 @@ function App() {
     <Route path="/edit" element={
     <RequireAuth loginPath='/login'><EditMyAccount/>
     </RequireAuth>}/>
-    <Route path="/item" element={
+    <Route path="/item/:_id" element={
     <RequireAuth loginPath='/login'><Item/>
     </RequireAuth>}/>
     <Route path="/login" element={<Login/>}/>
