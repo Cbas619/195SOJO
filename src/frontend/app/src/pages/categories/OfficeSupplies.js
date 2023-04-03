@@ -3,24 +3,20 @@ import { MainCategories } from "../../components/Main/MainCategories";
 import { MainItemCards } from "../../components/Main/MainItemCards";
 import  {useState} from 'react';
 import { useEffect } from 'react';
-
+import {useDispatch, useSelector } from 'react-redux'
+import { getProducts } from "../../actions/productActions";
+import { Col } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 export function OfficeSupplies() {
-  const [state, setState] = useState([])
+  const dispatch = useDispatch();
+
+  const {loading, products, error} = useSelector(state => state.products)
 
   useEffect(() => {
-    getData();
-  }, [])
+    dispatch(getProducts())
+  }, [dispatch])
 
-  const getData = async () => {
-    try {
-      fetch("http://localhost:4000/api/product/all")
-     .then(response => response.json())
-     .then(res => setState(res))
-    } catch (err) {
-      alert(err.message)
-    }
-  }
-  console.log(state)
+
   return (
     <>
     <MainNav/> 
@@ -28,14 +24,16 @@ export function OfficeSupplies() {
     <div className="background-1">
       <div className="categoryPageHeader">Office Supplies</div>
       <div className="categorySection">
-        <div className="categoryItemCardContainer">
-        {state.map((item, i) => (
-           state[i].category === 'supplies' && state[i].purchased === false &&
+        <Row>
+        {products && products.map(products => (
+          products.category === 'supplies' && products.purchased === false &&
+          <Col key={products._id} sm={6} md={4} lg={2}>
             <div className="mainItemCard">
-            <MainItemCards itemName={state[i].productName} itemPrice={state[i].price} itemImage={state[i].image}/>
+              <MainItemCards product={products}/>
             </div>
+          </Col>
         ))}
-        </div>        
+        </Row>     
       </div>
 
     </div>

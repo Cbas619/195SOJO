@@ -1,14 +1,25 @@
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom'
 
+const styles = {
+  cardImage: {
+  objectFit: 'cover',
+  width: '14.9vw',
+  height: '30vh'
+  }
+}
 
 export function MainItemCards(props) {
+  const{ product } = props;
   return (
     <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={props.itemImage} />
+    <Link to={`/item/${product._id}`}>
+      <Card.Img variant="top" src={product.image} style={styles.cardImage}/>
+    </Link>
       <Card.Body>
-        <Card.Title>{props.itemName}</Card.Title>
+          <Card.Title>{product.productName}</Card.Title>
         <Card.Text>
-          ${props.itemPrice}
+            ${product.price}
         </Card.Text>
       </Card.Body>
       

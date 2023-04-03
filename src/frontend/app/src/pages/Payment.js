@@ -29,7 +29,6 @@ export function Payment() {
     navigate('/paymentcomfirmation');
   }
   
-
   // const payment = async (e) => {
   //   e.preventDefault();
   //   try {
@@ -59,6 +58,7 @@ return (
   <Container className="py-4 bg-danger">
     <h4>Checkout / Cart</h4>
   </Container>
+
   <br></br>
   <Container>
     <h5><strong>Shipping Info</strong></h5>
@@ -70,6 +70,7 @@ return (
     <Form.Group as={Col} controlId="formFirstName">
       <Form.Label>First Name</Form.Label>
       <Form.Control type="firstname" placeholder="First Name" onChange={(e) => {setFirstName(e.target.value)}}/>
+
     </Form.Group> <br></br>
 
     <Form.Group as={Col} controlId="formLastName">

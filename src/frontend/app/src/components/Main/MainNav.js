@@ -4,6 +4,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import '../../App.scss'
 import { Link } from 'react-router-dom';
 import { useSignOut } from 'react-auth-kit'
+import './SearchBar';
+import { SearchBar } from './SearchBar';
 
 export function MainNav() {
   const signOut = useSignOut()
@@ -15,6 +17,7 @@ export function MainNav() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
           </Nav>
+          <SearchBar />
           <Nav>
             <Nav.Link>
                 <Link to ="/sell"><div className='mainNavLinks'>Sell</div></Link>

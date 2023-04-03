@@ -5,7 +5,10 @@ import  {useState} from 'react';
 import { useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
-
+import {useDispatch, useSelector } from 'react-redux'
+import { getProducts } from "../../actions/productActions";
+import { Col } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 
 export function Clothing() {
 
@@ -13,20 +16,13 @@ export function Clothing() {
   const navigate = useNavigate();
   const [cart, setCart] = useState("");
 
-  useEffect(() => {
-    getData();
-  }, [])
+  const dispatch = useDispatch();
 
-  const getData = async () => {
-    try {
-      fetch("http://localhost:4000/api/product/all")
-     .then(response => response.json())
-     .then(res => setState(res))
-    } catch (err) {
-      alert(err.message)
-    }
-  }
-  console.log(state)
+  const {loading, products, error} = useSelector(state => state.products)
+
+  useEffect(() => {
+    dispatch(getProducts())
+  }, [dispatch])
 
 //Add to Cart handle submit
   const handleSubmit =(e) => {
@@ -42,15 +38,19 @@ export function Clothing() {
     <div className="background-1">
       <div className="categoryPageHeader">Clothing</div>
       <div className="categorySection">
-        <div className="categoryItemCardContainer">
-        {state.map((item, i) => (
-           state[i].category === 'clothing' && state[i].purchased === false &&
+      <Row>
+        {products && products.map(products => (
+          products.category === 'clothing' && products.purchased === false &&
+          <Col key={products._id} sm={6} md={4} lg={2}>
             <div className="mainItemCard">
-            <MainItemCards itemName={state[i].productName} itemPrice={state[i].price} itemImage={state[i].image}/>
+              <MainItemCards product={products}/>
             </div>
+          </Col>
         ))}
-        </div>     
-      <Button onClick={handleSubmit} onChange={(e) => {setCart(e.target.value)}}>Add to Cart</Button>   
+        <div>
+          <Button onClick={handleSubmit} onChange={(e) => {setCart(e.target.value)}}>Add to Cart</Button>
+        </div> 
+        </Row>      
       </div>
     </div>
 
