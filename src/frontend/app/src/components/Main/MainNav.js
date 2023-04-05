@@ -29,7 +29,7 @@ export function MainNav() {
             <Link to ="/account"><div className='mainNavLinks'>Account</div></Link>
             </Nav.Link>
             <Nav.Link>
-            <Link to ="/"><button onClick={() => signOut()}>Sign Out</button></Link>
+            <Link to ="/"><div className='mainNavLinks' onClick={() => signOut()}>Sign Out</div></Link>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

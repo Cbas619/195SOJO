@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const currentUser = async (req, res) => {
-    const cookie = req.cookies['jwt'];
+    const cookie = req.cookies["_auth"];
     const claims = jwt.verify(cookie, process.env.TOKEN)
     if(!claims) {
         return res.status(401).json("Not Authorized");
