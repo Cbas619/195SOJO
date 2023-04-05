@@ -16,6 +16,7 @@ import { Electronics } from './pages/categories/Electronics';
 import { Entertainment } from './pages/categories/Entertainment';
 import { General } from './pages/categories/General';
 import { OfficeSupplies } from './pages/categories/OfficeSupplies';
+import { PaymentConfirmation } from './pages/PaymentConfirmation';
 import { RequireAuth } from 'react-auth-kit';
 
 
@@ -63,6 +64,12 @@ function App() {
     </RequireAuth>}/>
     <Route path="/chat" element={
     <RequireAuth loginPath='/login'><Chat/>
+    </RequireAuth>}/>
+    <Route path="/edit" element={
+    <RequireAuth loginPath='/login'><EditMyAccount/>
+    </RequireAuth>}/>
+    <Route path="/paymentconfirmation" element={
+    <RequireAuth loginPath='/login'><PaymentConfirmation/>
     </RequireAuth>}/>
     </Routes>     
   );

@@ -86,7 +86,7 @@ export function SellForm() {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formCategory">
+          {/* <Form.Group className="mb-3" controlId="formCategory">
             <Form.Label>Category</Form.Label>
             <Form.Control
               type="ItemCategory"
@@ -95,7 +95,7 @@ export function SellForm() {
                 setCategory(e.target.value);
               }}
             />
-          </Form.Group>
+          </Form.Group> */}
 
           <Form.Group className="mb-3" controlId="formImage">
             <Form.Label>Image</Form.Label>
@@ -108,22 +108,19 @@ export function SellForm() {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formImage">
+          <Form.Group className="mb-3" controlId="formCategory">
             <Form.Label>Category</Form.Label>
-            <Dropdown>
-              <Dropdown.Toggle variant="primary" id="dropdown-basic">
-                Select Category
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                <Dropdown.Item>Books</Dropdown.Item>
-                <Dropdown.Item>Supplies</Dropdown.Item>
-                <Dropdown.Item>Electronics</Dropdown.Item>
-                <Dropdown.Item>Clothing</Dropdown.Item>
-                <Dropdown.Item>Entertainment</Dropdown.Item>
-                <Dropdown.Item>General</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
+            <Form.Select aria-label="Default select example" onChange={(e) => {
+                setCategory(e.target.value);
+              }}>
+            <option>Open this select menu</option>
+            <option value="books">Books</option>
+            <option value="supplies">Supplies</option>
+            <option value="electronics">Electronics</option>
+            <option value="clothing">Clothing</option>
+            <option value="entertainment">Entertainment</option>
+            <option value=" ">General</option>
+            </Form.Select>
           </Form.Group>
           <Button variant="primary" type="submit" onClick={productInsert}>
             Submit
