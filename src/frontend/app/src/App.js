@@ -17,6 +17,7 @@ import { Entertainment } from './pages/categories/Entertainment';
 import { General } from './pages/categories/General';
 import { OfficeSupplies } from './pages/categories/OfficeSupplies';
 import { RequireAuth } from 'react-auth-kit';
+import { OrdersPage } from './pages/OrdersPage';
 
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
     <Route path="/edit" element={
     <RequireAuth loginPath='/login'><EditMyAccount/>
     </RequireAuth>}/>
-    <Route path="/item" element={
+    <Route path="/item/:_id" element={
     <RequireAuth loginPath='/login'><Item/>
     </RequireAuth>}/>
     <Route path="/login" element={<Login/>}/>
@@ -63,6 +64,9 @@ function App() {
     </RequireAuth>}/>
     <Route path="/chat" element={
     <RequireAuth loginPath='/login'><Chat/>
+    </RequireAuth>}/>
+    <Route path="/orders" element={
+    <RequireAuth loginPath='/login'><OrdersPage/>
     </RequireAuth>}/>
     </Routes>     
   );
