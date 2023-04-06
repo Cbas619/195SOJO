@@ -11,7 +11,18 @@ import { getOrders } from "../actions/orderActions";
 import { useEffect } from 'react';
 import  {useState} from 'react';
 import './styleSheets/OrdersPage.scss'
+import Container from 'react-bootstrap/Container'
 
+const styles = {
+    background: {
+    backgroundColor: 'white',
+    //width: '14.9vw',
+    height: '100vh',
+    paddingLeft: '90px',
+    paddingTop: '30px',
+    borderRadius: '10px'
+    }
+  }
 
 export function OrdersPage() {
 
@@ -19,6 +30,7 @@ export function OrdersPage() {
     //const {userInfo} = state;
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    
 
     const {loading, error, orders} = useSelector(state => state.orders)
     useEffect(()=> {
@@ -31,7 +43,8 @@ export function OrdersPage() {
         <MainCategories/>
         <div className="background-1">
             <div className="ordersPageContainer">
-                <div className="ordersPageHeader">Order History</div>
+                <Container style={styles.background}>
+                    <div className="ordersPageHeader">Order History</div>
                 <div className="orderLine-1"></div>
                 <table>
                     <thead>
@@ -55,9 +68,8 @@ export function OrdersPage() {
                         
                     </tbody>
                 </table>
-                
-                
-                
+                </Container>
+
             </div>
         </div>
         </>
