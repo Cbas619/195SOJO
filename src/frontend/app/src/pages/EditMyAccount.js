@@ -41,7 +41,7 @@ export function EditMyAccount() {
           email: email,
           password: password,
         }, {headers: {
-            'authorization':`bearer ${Cookies.get('jwt')}`
+            'authorization':`bearer ${Cookies.get('_auth')}`
           }}).then((response, err) => {
           console.log(response);
           navigate('/main');          
@@ -49,7 +49,6 @@ export function EditMyAccount() {
           console.log(JSON.stringify(error));
         }
       };
-
   return (
   <div>
 <MainNav/> 

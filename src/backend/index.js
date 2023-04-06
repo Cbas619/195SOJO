@@ -17,6 +17,7 @@ const chatRoute = require("./routes/chatRoutes");
 const messageRoute = require("./routes/messageRoutes");
 const addressRoute = require("./routes/addressRoutes");
 const ordersRoute = require("./routes/orderRoutes");
+const paymentRoute = require("./routes/paymentRoutes");
 
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
@@ -25,6 +26,7 @@ app.use("/api/chat", chatRoute);
 app.use("/api/message", messageRoute);
 app.use("/api/address", addressRoute);
 app.use("/api/orders", ordersRoute);
+app.use("/api/payment", paymentRoute);
 
 app.listen(port, async () => {
     console.log(`Listening at http://localhost:${port}`)
