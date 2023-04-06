@@ -68,6 +68,7 @@ function App() {
     </RequireAuth>}/>
     <Route path="/orders" element={
     <RequireAuth loginPath='/login'><OrdersPage/>
+    </RequireAuth>}/>
     <Route path="/edit" element={
     <RequireAuth loginPath='/login'><EditMyAccount/>
     </RequireAuth>}/>
