@@ -48,4 +48,5 @@ const deleteUser = async (req, res) => {
     }
 };
 
+
 module.exports = { currentUser, selectUser, editUser, deleteUser};

@@ -3,12 +3,15 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const register = async (req, res) => {
+    //Check if email is already exists
     const emailExists = await User.findOne({ email: req.body.email });
         if (emailExists) {
             return res.status(400).send("Email already exists.");
         }
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+    //Declare a variable user to hold the info. that register
     const user = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -33,6 +36,7 @@ const login = async (req, res) => {
     if (!validPassword) {
         return res.status(400).send("Wrong email or password");
     }
+    
     const token = jwt.sign({_id: user._id}, process.env.TOKEN, {
         expiresIn: "60m",
     })
@@ -55,4 +59,20 @@ const logout = async (req, res) => {
     res.status(200).json('Logged Out')
 };
 
-module.exports = {login, logout, register}
+//Account API
+const profile = async (req, res) => {
+    const user = await User.findOne({ id:req.user.id });
+        try {
+            res.json({ 
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email
+            });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: "Server error"});
+    }
+};
+
+
+module.exports = {login, logout, register, profile}

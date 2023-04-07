@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+//dotenv to connect the .env key database
 const dotenv = require("dotenv");
 mongoose.set('strictQuery', false);
 dotenv.config();

@@ -4,22 +4,27 @@ import { Col } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { MainNav } from "../components/Main/MainNav";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
 
 export function EditMyAccount() {
+
+    const [state, setState] = useState("");
+    const [showError, setShowError] = useState(false);
+    const [passwordError, setPasswordError] = useState('');
+
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-
     const [user, setUser] = useState([])
-
+    
+    /*
     useEffect(() => {( async () => {
       try {
         const respo = await axios.get("http://localhost:4000/api/user/user", {
@@ -32,6 +37,11 @@ export function EditMyAccount() {
     })();
   });
 
+  */
+    const onChange = async (data) => {
+      const { firstName, lastName, email, password } = data;
+      const putData = { firstName, lastName, email, password };
+    }
     const edit = async (e) => {
         e.preventDefault(); 
         try {
@@ -41,14 +51,44 @@ export function EditMyAccount() {
           email: email,
           password: password,
         }, {headers: {
+            'Content-Type': 'application/json',
             'authorization':`bearer ${Cookies.get('jwt')}`
           }}).then((response, err) => {
-          console.log(response);
+          console.log("Successfully updated account!");
           navigate('/main');          
         })} catch (error){
           console.log(JSON.stringify(error));
         }
       };
+
+      //handle submit
+      const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const data = new FormData(e.target.value);
+        const newPassword = data.get('newPassword');
+        
+        if (newPassword === password) {
+          setShowError(true);
+          setPasswordError("Password already exists!")
+        }
+        else {
+          setShowError('');
+        }
+
+        if (newPassword !== password) {
+          if (newPassword === '') {
+            const editData = {
+              firstName: data.get('firstName'),
+              lastName: data.get('lastName'),
+              email: email,
+              password: data.get('password')
+            };
+            setShowError(false);
+            onChange(editData);
+          }
+        }
+      }
 
   return (
   <div>
@@ -56,12 +96,13 @@ export function EditMyAccount() {
   <Container className='edit_text'>
        <h3>Edit Your Account</h3>
        <h4>Your Info</h4>
-  <Form>
+  <Form onSubmit={handleSubmit}>
   <Form.Group as={Row} className="mb-3" controlId="formHorizontalFirstName">
           <Col>
           
               <Form.Label>First Name</Form.Label>
-              <Form.Control type="firstName" placeholder="First name" onChange={(e) => {setFirstName(e.target.value)}}/>
+              <Form.Control 
+                type="firstName" placeholder="First name" onChange={(e) => {setFirstName(e.target.value)}}/>
           </Col>
           </Form.Group>
           <Form.Group as={Row} className="mb-3" controlId="formHorizontalLastName">
