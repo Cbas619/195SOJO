@@ -64,7 +64,7 @@ export function SellForm() {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formRating">
+          {/* <Form.Group className="mb-3" controlId="formRating">
             <Form.Label>Condition</Form.Label>
             <Form.Control
               type="ItemRating"
@@ -73,7 +73,21 @@ export function SellForm() {
                 setRating(e.target.value);
               }}
             />
+
+            </Form.Group> */}
+          <Form.Group className="mb-3" controlId="formRating">
+            <Form.Label>Rating</Form.Label>
+            <Form.Select aria-label="Default select example" onChange={(e) => {
+                setRating(e.target.value);
+              }}>
+            <option>Enter Rating</option>
+            <option value="new">New</option>
+            <option value="used">Used</option>
+            </Form.Select>
           </Form.Group>
+
+
+          
 
           <Form.Group className="mb-3" controlId="formPrice">
             <Form.Label>Price</Form.Label>
@@ -101,7 +115,7 @@ export function SellForm() {
             <Form.Label>Image</Form.Label>
             <Form.Control
               type="ItemImage"
-              placeholder="Enter Iamge"
+              placeholder="Enter Image"
               onChange={(e) => {
                 setImage(e.target.value);
               }}
