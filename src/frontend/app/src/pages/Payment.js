@@ -59,7 +59,7 @@ return (
   <div>
   <MainNav/> 
   <br></br>
-  <Container className="py-4 bg-danger">
+  <Container >
     <h4>Checkout / Cart</h4>
   </Container>
   <br></br>
@@ -127,7 +127,7 @@ return (
 
 
 <Container className='cardInfo'>
-  <h5><strong>Shipping Info</strong></h5>
+  <h5><strong>Card Info</strong></h5>
 </Container>
 
   <Form.Group className="mb-3" controlId="formGridAddress1">

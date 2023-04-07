@@ -32,7 +32,7 @@ const getSpecificItem = async (req, res) => {
 };
 
 
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 10;
 const searchItem = async (req, res) => {
     try {
         const {query} = req;

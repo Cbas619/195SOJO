@@ -24,12 +24,6 @@ export function Clothing() {
     dispatch(getProducts())
   }, [dispatch])
 
-//Add to Cart handle submit
-  const handleSubmit =(e) => {
-    e.preventDefault();
-    navigate('/payment');
-    
-  }
 
   return (
     <>
@@ -48,7 +42,6 @@ export function Clothing() {
           </Col>
         ))}
         <div>
-          <Button onClick={handleSubmit} onChange={(e) => {setCart(e.target.value)}}>Add to Cart</Button>
         </div> 
         </Row>      
       </div>
