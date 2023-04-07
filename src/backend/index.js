@@ -19,6 +19,7 @@ const chatRoute = require("./routes/chatRoutes");
 const messageRoute = require("./routes/messageRoutes");
 const addressRoute = require("./routes/addressRoutes");
 const ordersRoute = require("./routes/orderRoutes");
+const paymentRoute = require("./routes/paymentRoutes");
 
 //API
 // api/accountRoutes/
@@ -33,6 +34,7 @@ app.use("/api/chat", chatRoute);
 app.use("/api/message", messageRoute);
 app.use("/api/address", addressRoute);
 app.use("/api/orders", ordersRoute);
+app.use("/api/payment", paymentRoute);
 
 //API Profile Page
 

@@ -9,15 +9,15 @@ export function HomeIcons() {
       <Row className='homeRow'>
         <Col>
         <img className='homeImg' src="/images/buy-icon.png" />
-        <h3>Buy low-cost items for student needs</h3>
+        <h3>Buy items from students</h3>
         </Col>
         <Col>
         <img className='homeImg' src="/images/sell-icon.png" />
-        <h3>Get rid of your old items, and get your cash</h3>
+        <h3>Sell items you don't need</h3>
         </Col>
         <Col>
         <img className='homeImg' src="/images/auction-icon.png" />
-        <h3>Auction for a quick sell</h3>
+        <h3>Auction for a quick buy or sell</h3>
         </Col>
       </Row>
     </Container>

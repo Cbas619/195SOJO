@@ -16,7 +16,10 @@ import { Electronics } from './pages/categories/Electronics';
 import { Entertainment } from './pages/categories/Entertainment';
 import { General } from './pages/categories/General';
 import { OfficeSupplies } from './pages/categories/OfficeSupplies';
+import { PaymentConfirmation } from './pages/PaymentConfirmation';
 import { RequireAuth } from 'react-auth-kit';
+import { OrdersPage } from './pages/OrdersPage';
+import SearchScreen from './pages/SearchScreen';
 
 
 function App() {
@@ -58,11 +61,21 @@ function App() {
     <Route path="/officesupplies" element={
     <RequireAuth loginPath='/login'><OfficeSupplies/>
     </RequireAuth>}/>
+    <Route path="/search" element={<SearchScreen/>}/>
     <Route path="/sell" element={
     <RequireAuth loginPath='/login'><Sell/>
     </RequireAuth>}/>
     <Route path="/chat" element={
     <RequireAuth loginPath='/login'><Chat/>
+    </RequireAuth>}/>
+    <Route path="/orders" element={
+    <RequireAuth loginPath='/login'><OrdersPage/>
+    </RequireAuth>}/>
+    <Route path="/edit" element={
+    <RequireAuth loginPath='/login'><EditMyAccount/>
+    </RequireAuth>}/>
+    <Route path="/paymentconfirmation" element={
+    <RequireAuth loginPath='/login'><PaymentConfirmation/>
     </RequireAuth>}/>
     </Routes>     
   );

@@ -1,5 +1,6 @@
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom'
+import '../../App.scss'
 
 const styles = {
   cardImage: {
@@ -12,7 +13,7 @@ const styles = {
 export function MainItemCards(props) {
   const{ product } = props;
   return (
-    <Card style={{ width: '18rem' }}>
+    <Card style={{ width: '15vw' }}>
     <Link to={`/item/${product._id}`}>
       <Card.Img variant="top" src={product.image} style={styles.cardImage}/>
     </Link>

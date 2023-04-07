@@ -59,20 +59,7 @@ const logout = async (req, res) => {
     res.status(200).json('Logged Out')
 };
 
-//Account API
-const profile = async (req, res) => {
-    const user = await User.findOne({ id:req.user.id });
-        try {
-            res.json({ 
-                firstName: user.firstName,
-                lastName: user.lastName,
-                email: user.email
-            });
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: "Server error"});
-    }
-};
 
 
-module.exports = {login, logout, register, profile}
+
+module.exports = {login, logout, register}

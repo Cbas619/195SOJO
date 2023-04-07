@@ -23,49 +23,52 @@ export function Payment() {
   const [nameOnCard, setName] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit=(e) => {
-    e.preventDefault();
-    console.log(firstName, lastName, email, address, city, state, zip, cardNumber, expireDate, cvvNumber, nameOnCard);
-    navigate('/paymentcomfirmation');
-  }
-  
-  // const payment = async (e) => {
+  // const handleSubmit=(e) => {
   //   e.preventDefault();
-  //   try {
-  //     axios
-  //       .post("http://localhost:4000/api/address/insert", {
-  //         firstName: firstName,
-  //         lastName: lastName,
-  //         email: email,
-  //         addressLine: addressLine,
-  //         city: city,
-  //         state: state,
-  //         postalCode: postalCode,
-  //       })
-  //       .then((response, err) => {
-  //         console.log(response);
-  //         navigate("/main");
-  //       });
-  //   } catch (error) {
-  //     console.log(JSON.stringify(error));
-  //   }
-  // };
+  //   console.log(firstName, lastName, email, address, city, state, zip, cardNumber, expireDate, cvvNumber, nameOnCard);
+  //   navigate('/paymentcomfirmation');
+  // }
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      axios
+        .post("http://localhost:4000/api/payment/insert", {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          address: address,
+          city: city,
+          state: state,
+          zip: zip,
+          cardNumber: cardNumber,
+          expireDate: expireDate,
+          cvvNumber: cvvNumber,
+          nameOnCard: nameOnCard
+        })
+        .then((response, err) => {
+          console.log(response);
+          navigate('/paymentconfirmation');
+        });
+    } catch (error) {
+      console.log(JSON.stringify(error));
+    }
+  };
 
 return (
   <div>
   <MainNav/> 
   <br></br>
-  <Container className="py-4 bg-danger">
+  <Container >
     <h4>Checkout / Cart</h4>
   </Container>
-
   <br></br>
   <Container>
     <h5><strong>Shipping Info</strong></h5>
   </Container>
 
   <Container className="form">
-  <Form onSubmit={handleSubmit}>
+  <Form>
   <Col className="mb-3">
     <Form.Group as={Col} controlId="formFirstName">
       <Form.Label>First Name</Form.Label>
@@ -97,23 +100,21 @@ return (
 
   <Form.Group as={Col} controlId="formState">
       <Form.Label>State</Form.Label>
-      <Form.Select defaultValue="Choose...">
-        <option>Alabama</option>
-        <option>Alaska</option>
-        <option>Arizona</option>
-        <option>Kentucky</option>
-        <option>California</option>
-        <option>Texas</option>
-        <option>Colorado</option>
-        <option>Florida</option>
-        <option>Texas</option>
-        <option>New Jersey</option>
-        <option>Utah</option>
-        <option>Michigan</option>
-        <option>MaryLand</option>
-        <option>Hawaii</option>
+      <Form.Select defaultValue="Choose..." onChange={(e) => {setState(e.target.value)}}>
+        <option value="Alabama">Alabama</option>
+        <option value="Alaska">Alaska</option>
+        <option value="Arizona">Arizona</option>
+        <option value="Kentucky">Kentucky</option>
+        <option value="California">California</option>
+        <option value="Texas">Texas</option>
+        <option value="Colorado">Colorado</option>
+        <option value="Florida">Florida</option>
+        <option value="New Jersey">New Jersey</option>
+        <option value="Utah">Utah</option>
+        <option value="Michigan">Michigan</option>
+        <option value="MaryLand">MaryLand</option>
+        <option value="Hawaii">Hawaii</option>
       </Form.Select>
-      <Form.Control placeholder='state' onChange={(e) => {setState(e.target.value)}}/>
     </Form.Group>
 
     <Form.Group as={Col} controlId="formZip">
@@ -122,20 +123,13 @@ return (
     </Form.Group>
   </Row>
 
-  <Button className='form-group-t' variant="primary" type="submit" onClick={handleSubmit}>
-    Submit
-  </Button>
-</Form>
-</Container>
 <br></br>
 
 
 <Container className='cardInfo'>
-  <h5><strong>Shipping Info</strong></h5>
+  <h5><strong>Card Info</strong></h5>
 </Container>
 
-<Form onSubmit={handleSubmit}>
-<Container className='cardNumber'>
   <Form.Group className="mb-3" controlId="formGridAddress1">
     <Form.Label>Card Number</Form.Label>
     <Form.Control placeholder="123456789" onChange={(e) => {setCard(e.target.value)}}/>
@@ -164,11 +158,11 @@ return (
     </Form.Group>
   </Row>
 
-  <Button className='form-group-t' variant="primary" type="submit" onSubmit={handleSubmit}>
+  <Button className='form-group-t' variant="primary" type="submit" onClick={handleSubmit}>
     Submit
   </Button>
-</Container>
 </Form>
+</Container>
 </div>
 
   ); // end return

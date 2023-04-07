@@ -104,7 +104,7 @@ body {
     color: #333;
     text-align: center;
     text-decoration: none;
-    padding: 10px 5vw;
+    padding: 6px 5vw;
     font-size: 17px;
   }
 
@@ -270,7 +270,7 @@ body {
 
   .categorySection {
     padding-top: 20px;
-    padding-left: 40px;
+    padding-left: 10px;
   }
 
   .categoryItemCard {
@@ -285,5 +285,10 @@ body {
   overflow: hidden;
   flex-wrap: wrap;
   }
+
+
+
+  
+  
 
 @import "~bootstrap/scss/bootstrap";

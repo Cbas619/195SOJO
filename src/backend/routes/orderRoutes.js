@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const {addAddress, getAddress} = require("../controllers/addressController")
+const {addOrder, getOrder} = require("../controllers/orderController")
 
-router.post('/insert', addAddress);
-router.get('/find/:id', getAddress);
+router.post('/insert', addOrder);
+router.get('/find/:id', getOrder);
 
 module.exports = router;

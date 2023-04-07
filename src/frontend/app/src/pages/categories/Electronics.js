@@ -25,14 +25,6 @@ export function Electronics() {
   }, [dispatch])
 
 
-  //Add to cart handle submit
-  const handleSubmit =(e) => {
-    e.preventDefault();
-    navigate('/payment');
-    
-  }
-
-
   return (
     <>
     <MainNav/> 
@@ -50,7 +42,7 @@ export function Electronics() {
            </Col>
         ))}
         <div>
-          <Button onClick={handleSubmit} onChange={(e) => {setCart(e.target.value)}}>Add to Cart</Button>
+
         </div> 
         </Row>      
       </div>

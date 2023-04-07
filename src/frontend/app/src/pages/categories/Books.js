@@ -51,7 +51,6 @@ export function Books() {
             </Col>
         ))}
         <div>
-          <Button onClick={handleSubmit} onChange={(e) => {setCart(e.target.value)}}>Add to Cart</Button>
         </div> 
         </Row>        
       </div>

@@ -51,8 +51,12 @@ export function EditMyAccount() {
           email: email,
           password: password,
         }, {headers: {
+<<<<<<< HEAD
             'Content-Type': 'application/json',
             'authorization':`bearer ${Cookies.get('jwt')}`
+=======
+            'authorization':`bearer ${Cookies.get('_auth')}`
+>>>>>>> 2e661848a5dcd89e3fb14eb58debc62d9803fef6
           }}).then((response, err) => {
           console.log("Successfully updated account!");
           navigate('/main');          
@@ -60,6 +64,7 @@ export function EditMyAccount() {
           console.log(JSON.stringify(error));
         }
       };
+<<<<<<< HEAD
 
       //handle submit
       const handleSubmit = (e) => {
@@ -90,6 +95,8 @@ export function EditMyAccount() {
         }
       }
 
+=======
+>>>>>>> 2e661848a5dcd89e3fb14eb58debc62d9803fef6
   return (
   <div>
 <MainNav/> 
