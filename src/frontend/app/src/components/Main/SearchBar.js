@@ -1,9 +1,12 @@
 import { FaSearch } from "react-icons/fa";
 import './SearchBar.scss';
 import React, {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
 
 export function SearchBar() {
 
+    /*
     const [input, setInput] = useState("");
     
    // const fetchData = (value) => {
@@ -29,13 +32,22 @@ export function SearchBar() {
         setInput(value)
         getData(value)
     }
+    */
+
+    const navigate = useNavigate();
+    const [query, setQuery] = useState('');
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        navigate(query ? `/search/?query=${query}` : '/search');
+    };
 
     return (
         <>
-        <div className="input-wrapper">
-            <FaSearch id="search-icon" />
-            <input placeholder="Search for items" value={input} onChange={(e) => handleChange(e.target.value)}/>
-        </div>
+        <Form className="input-wrapper" onSubmit={submitHandler}>
+            <FaSearch id="search-icon" type="submit"/>
+            <input placeholder="Search for items" onChange={(e) => setQuery(e.target.value)}/>
+        </Form>
         
         </>
     );

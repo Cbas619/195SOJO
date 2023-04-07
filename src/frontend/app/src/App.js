@@ -19,6 +19,7 @@ import { OfficeSupplies } from './pages/categories/OfficeSupplies';
 import { PaymentConfirmation } from './pages/PaymentConfirmation';
 import { RequireAuth } from 'react-auth-kit';
 import { OrdersPage } from './pages/OrdersPage';
+import SearchScreen from './pages/SearchScreen';
 
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
     <Route path="/officesupplies" element={
     <RequireAuth loginPath='/login'><OfficeSupplies/>
     </RequireAuth>}/>
+    <Route path="/search" element={<SearchScreen/>}/>
     <Route path="/sell" element={
     <RequireAuth loginPath='/login'><Sell/>
     </RequireAuth>}/>
