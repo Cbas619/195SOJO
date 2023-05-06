@@ -41,8 +41,10 @@ router.delete('/:id', (req, res) => {
     .catch(err => res.status(404).json({ success: false }));
 });     
 
-//  @route PUT api/account/
+// @route PUT api/account/
 router.put('/', (req, res) => {
+
+    //check if the id is valid then update
     try {
         const update = Account.findByIdAndUpdate(
             req.params.id,

@@ -24,20 +24,7 @@ export function EditMyAccount() {
 
     const [user, setUser] = useState([])
     
-    /*
-    useEffect(() => {( async () => {
-      try {
-        const respo = await axios.get("http://localhost:4000/api/user/user", {
-          withCredentials: true,
-        });
-        setUser(respo.data);
-      } catch (error) {
-        console.log(error.respo);
-      }
-    })();
-  });
-
-  */
+    
     const onChange = async (data) => {
       const { firstName, lastName, email, password } = data;
       const putData = { firstName, lastName, email, password };
@@ -51,12 +38,7 @@ export function EditMyAccount() {
           email: email,
           password: password,
         }, {headers: {
-<<<<<<< HEAD
-            'Content-Type': 'application/json',
-            'authorization':`bearer ${Cookies.get('jwt')}`
-=======
             'authorization':`bearer ${Cookies.get('_auth')}`
->>>>>>> 2e661848a5dcd89e3fb14eb58debc62d9803fef6
           }}).then((response, err) => {
           console.log("Successfully updated account!");
           navigate('/main');          
@@ -64,7 +46,6 @@ export function EditMyAccount() {
           console.log(JSON.stringify(error));
         }
       };
-<<<<<<< HEAD
 
       //handle submit
       const handleSubmit = (e) => {
@@ -95,8 +76,6 @@ export function EditMyAccount() {
         }
       }
 
-=======
->>>>>>> 2e661848a5dcd89e3fb14eb58debc62d9803fef6
   return (
   <div>
 <MainNav/> 
@@ -128,14 +107,6 @@ export function EditMyAccount() {
           </Col>
       </Form.Group>
 
-      {/* <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
-          <Form.Label column sm={5}>
-              Current Password (Does not work)
-          </Form.Label>
-          <Col sm={15}>
-          <Form.Control type="password" placeholder="Password" />
-          </Col>
-      </Form.Group> */}
       <Form.Group as={Row} className="mb-3" controlId="formHorizontalNewPassword">
           <Form.Label column sm={5}>
               New Password
@@ -144,14 +115,7 @@ export function EditMyAccount() {
           <Form.Control type="password" placeholder="Password" onChange={(e) => {setPassword(e.target.value)}}/>
           </Col>
       </Form.Group>
-      {/* <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
-          <Form.Label column sm={5}>
-              Confirm New Password (Does not work)
-          </Form.Label>
-          <Col sm={15}>
-          <Form.Control type="password" placeholder="Password" />
-          </Col>
-      </Form.Group> */}
+      
       <Form.Group as={Row} className="mb-3">
           <Col sm={{ span: 5, offset: 15 }}>
               <Button type="submit" onClick={edit} >Save & updates</Button> 
