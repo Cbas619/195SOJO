@@ -15,7 +15,7 @@ import { Clothing } from './pages/categories/Clothing';
 import { Electronics } from './pages/categories/Electronics';
 import { Entertainment } from './pages/categories/Entertainment';
 import { General } from './pages/categories/General';
-import { OfficeSupplies } from './pages/categories/OfficeSupplies';
+import { SchoolSupplies } from './pages/categories/SchoolSupplies';
 import { PaymentConfirmation } from './pages/PaymentConfirmation';
 import { RequireAuth } from 'react-auth-kit';
 import { OrdersPage } from './pages/OrdersPage';
@@ -59,8 +59,8 @@ function App() {
     <Route path="/general" element={
     <RequireAuth loginPath='/login'><General/>
     </RequireAuth>}/>
-    <Route path="/officesupplies" element={
-    <RequireAuth loginPath='/login'><OfficeSupplies/>
+    <Route path="/schoolsupplies" element={
+    <RequireAuth loginPath='/login'><SchoolSupplies/>
     </RequireAuth>}/>
     <Route path="/search" element={<SearchScreen/>}/>
     <Route path="/sell" element={
