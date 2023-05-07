@@ -1,16 +1,21 @@
-const express = require("express")
-const app = express()
-const port = 4000
-const cors = require("cors")
-const cookieParser = require("cookie-parser")
-const {connection} = require("./utils/Connection")
-const bodyParser = require('body-parser');
+const express = require("express");
+const app = express();
+const port = 4000;
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const { connection } = require("./utils/Connection");
+const bodyParser = require("body-parser");
 
 app.use(bodyParser.json());
-app.use(express.json())
-app.use(cors())
-app.use(express.urlencoded({extended: true}))
-app.use(cookieParser())
+app.use(express.json());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 const authRoute = require("./routes/authRoutes");
 const userRoute = require("./routes/userRoutes");
@@ -36,10 +41,7 @@ app.use("/api/address", addressRoute);
 app.use("/api/orders", ordersRoute);
 app.use("/api/payment", paymentRoute);
 
-//API Profile Page
-
-
 app.listen(port, async () => {
-    console.log(`Listening at http://localhost:${port}`)
-    await connection();
+  console.log(`Listening at http://localhost:${port}`);
+  await connection();
 });

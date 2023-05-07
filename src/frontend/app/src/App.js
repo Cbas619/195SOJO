@@ -26,6 +26,7 @@ function App() {
   return (
     <Routes>
     <Route path="/" element={<Home/>}/>
+    
     <Route path="/account" element={
     <RequireAuth loginPath='/login'><Account/>
     </RequireAuth>}/>

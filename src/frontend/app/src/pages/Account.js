@@ -1,90 +1,81 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineUser } from "react-icons/ai";
 import { MdEdit } from "react-icons/md";
 import { MainNav } from "../components/Main/MainNav";
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import axios from "axios";
-
+import { useLocation } from "react-router-dom";
 
 export function Account() {
-  const [account, setAccount] = useState();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  
+  const [id, setId] = useState("");
 
-  //User API
-  //useEffect hook is called when the component mount for the first time
-  //as indicated empty array []
-  //Axios.get function makes an HTTP request to the specified endpoint "api/user"
-  //If the request is successfull, the response.data is set to the setUserData
-  // If it is fails, console log the error 
+  //connect to backend
+  useEffect(() => {
+    (async () => {
+      try {
+        const respo = await axios.get("http://localhost:4000/api/user", {
+          withCredentials: true,
+        });
+        console.log("res", respo);
 
-  //const [userData, setUserData] = useState("");
+        setFirstName(respo.data.firstName);
+        setLastName(respo.data.lastName);
+        setEmail(respo.data.email);
+        setId(respo.data._id);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
 
-  useEffect(() => {( async () => {
-    try {
-      const respo = await axios.post("http://localhost:4000/api/user", {
-        withCredentials: true,
-      });
-      const [ firstName, lastName, email] = respo.data;
-      //setUserData(respo.data);
-      setFirstName(firstName);
-      setLastName(lastName);
-      setEmail(email);
-      
-    } catch (error) {
-      console.log(error.respo);
-    }
-  })();
-},);
-
-
+  //navigate to edit page
   const navigate = useNavigate();
   const editClick = () => {
-    navigate('/edit', {
+    navigate("/edit", {
       state: {
-        firstName: account.firstName,
-        lastName: account.lastName,
-        email: account.email
-      }
+        id: id,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+      },
     });
-  }
-  
- return (
-  <>
-  <MainNav/> 
-    <div className="container-fill d-flex flex-column gap-5">
-      <h1>My Account</h1>
+  };
+
+  return (
+    <>
+      <MainNav />
+      <div className="container-fill d-flex flex-column gap-5">
+        <h1>My Account</h1>
         <div className="d-flex gap-4 align-items-center">
-        <AiOutlineUser style={{ fontSize: "13ch" }} />
-      <h5>Hi, {firstName}!</h5>
-    </div>
+          <AiOutlineUser style={{ fontSize: "13ch" }} />
+          <h5>Hi, {firstName}!</h5>
+        </div>
 
+        <div>
+          <div className="d-flex gap-3 align-items-baseline">
+            <h4>Contact Info</h4>
 
-     <div>
-       <div className="d-flex gap-3 align-items-baseline">
-         <h4>Contact Info</h4>
+            <button
+              className="d-flex align-items-center gap-2 fw-bold text-black"
+              style={{ background: "none", border: "none", cursor: "pointer" }}
+              onClick={editClick}
+            >
+              <MdEdit />
+              Edit
+            </button>
+          </div>
 
-
-         <Link
-           className="d-flex align-items-center gap-2 fw-bold text-black"
-           to="/edit" editClick={editClick}
-         >
-           <MdEdit  />
-           Edit
-         </Link>
-       </div>
-
-
-       <div className="d-flex flex-wrap gap-3 align-items-center">
-         <p style={{ flex: "1 1 30ch" }}>First Name: {firstName}</p>
-         <p style={{ flex: "1 1 30ch" }}>Last Name: {lastName}</p>
-         <p style={{ flex: "1 1 30ch" }}>Email: {email}</p>
-       </div>
-     </div>
-   </div>
-   </>
- );
+          <div className="d-flex flex-wrap gap-3 align-items-center">
+            <p style={{ flex: "1 1 30ch" }}>First Name: {firstName}</p>
+            <p style={{ flex: "1 1 30ch" }}>Last Name: {lastName}</p>
+            <p style={{ flex: "1 1 30ch" }}>Email: {email}</p>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
