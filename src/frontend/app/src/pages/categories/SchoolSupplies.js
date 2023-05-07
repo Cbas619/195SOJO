@@ -22,7 +22,7 @@ export function SchoolSupplies() {
     <MainNav/> 
     <MainCategories/>
     <div className="background-1">
-      <div className="categoryPageHeader">Office Supplies</div>
+      <div className="categoryPageHeader">School Supplies</div>
       <div className="categorySection">
         <Row>
         {products && products.map(products => (
