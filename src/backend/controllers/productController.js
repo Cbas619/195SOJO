@@ -12,6 +12,7 @@ const insertItem = async (req, res) => {
         rating: req.body.rating,
         price: req.body.price,
         category: req.body.category,
+        school: "",
         purchased: false
     });
     try {

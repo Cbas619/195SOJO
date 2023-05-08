@@ -25,6 +25,12 @@ const userSchema = new mongoose.Schema({
     min: 6,
     max: 1024,
   },
+  school: {
+    type: String,
+    required: true,
+    min: 2,
+    max: 1024,
+  },
   date: {
     type: Date,
     default: Date.now,
