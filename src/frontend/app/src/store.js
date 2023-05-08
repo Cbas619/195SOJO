@@ -6,11 +6,15 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import { productsReducer } from './reducers/productsReducers'
 import {ordersReducer} from './reducers/ordersReducer'
 import {getProductReducer} from './reducers/getProductReducer'
+import {getUserReducer} from './reducers/getUserReducer'
+import {usersReducers} from './reducers/usersReducers'
 
 const reducer = combineReducers({
     products: productsReducer,
     orders: ordersReducer,
-    product: getProductReducer
+    product: getProductReducer,
+    user: getUserReducer,
+    users: usersReducers
 })
 
 let initialState = {}
