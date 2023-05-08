@@ -7,6 +7,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
+import {useDispatch, useSelector } from 'react-redux'
+import { getUsers } from "../../actions/userActions"
+import { useEffect } from 'react';
 
 export function SellForm() {
   const [productName, setProductName] = useState("");
@@ -15,7 +18,10 @@ export function SellForm() {
   const [rating, setRating] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const dispatch = useDispatch();
+
+  const {loading, users, error} = useSelector(state => state.users)
 
   const productInsert = async (e) => {
     e.preventDefault();
@@ -37,7 +43,9 @@ export function SellForm() {
       console.log(JSON.stringify(error));
     }
   };
-
+  useEffect(() => {
+    dispatch(getUsers())
+  }, [dispatch])
   return (
     <Row>
       <Col>

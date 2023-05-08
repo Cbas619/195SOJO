@@ -5,8 +5,7 @@ export const getOrders = () => async (dispatch) => {
     try {
         
         dispatch({type: ALL_ORDERS_REQUEST })
-
-        const { data } = await axios.get('http://localhost:4000/api/orders/find/642e4234c668c0819f972908')
+        const { data } = await axios.get('http://localhost:4000/api/user/all')
 
         dispatch({
             type: ALL_ORDERS_SUCCESS,

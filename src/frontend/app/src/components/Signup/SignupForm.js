@@ -12,6 +12,7 @@ export function SignupForm() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [school, setSchool] = useState("");
   const navigate = useNavigate();
 
   const register = async (e) => {
@@ -23,6 +24,7 @@ export function SignupForm() {
           lastName: lastName,
           email: email,
           password: password,
+          school: school,
         })
         .then((response, err) => {
           console.log(response);
@@ -77,6 +79,17 @@ export function SignupForm() {
               placeholder="Password"
               onChange={(e) => {
                 setPassword(e.target.value);
+              }}
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>School</Form.Label>
+            <Form.Control
+              type="school"
+              placeholder="school"
+              onChange={(e) => {
+                setSchool(e.target.value);
               }}
             />
           </Form.Group>
