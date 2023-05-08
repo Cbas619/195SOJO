@@ -9,7 +9,7 @@ import { Signup } from './pages/Signup';
 import { Payment } from './pages/Payment';
 import { Main } from './pages/Main';
 import { Sell } from './pages/Sell';
-import { Chat } from './pages/Chat'
+import { ChatPage } from './pages/ChatPage'
 import { Books } from './pages/categories/Books'
 import { Clothing } from './pages/categories/Clothing';
 import { Electronics } from './pages/categories/Electronics';
@@ -67,7 +67,7 @@ function App() {
     <RequireAuth loginPath='/login'><Sell/>
     </RequireAuth>}/>
     <Route path="/chat" element={
-    <RequireAuth loginPath='/login'><Chat/>
+    <RequireAuth loginPath='/login'><ChatPage/>
     </RequireAuth>}/>
     <Route path="/orders" element={
     <RequireAuth loginPath='/login'><OrdersPage/>

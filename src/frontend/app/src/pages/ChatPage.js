@@ -3,10 +3,11 @@ import  {useState} from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { MainItemCards } from "../components/Main/MainItemCards";
+import { Chat } from "../components/Chat/Chat";
 
-export function Chat() {
+export function ChatPage() {
 
-    const [chats, setChats] = useState([]);
+/*     const [chats, setChats] = useState([]);
     const [user, setUser] = useState([])
 
 //     useEffect(() => {
@@ -48,16 +49,13 @@ export function Chat() {
         } catch (error) {
             console.log(error)
         }
-    }
+    } */
+
   return (
     <>
     <HomeNav/> 
-    <h1>Chat</h1>
-    {chats.map((item, i) => (
-            <div className="mainItemCard">
-            <MainItemCards itemName={chats[i].members[i]}/>
-            </div>
-        ))}
+    <Chat/>
+
     </>       
   );
 }
