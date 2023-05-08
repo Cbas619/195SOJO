@@ -21,6 +21,30 @@ const currentUser = async (req, res) => {
   }
 };
 
+const getAllUsers = async (req, res) => {
+    const qNew = req.query.new
+    const qCategory = req.query.category
+    try {
+      let users
+
+      if (qNew) {
+        users = await User.find().sort({ createdAt: -1 }).limit(1)
+      } else if (qCategory) {
+        users = await User.find({
+          categories: {
+            $in: [qCategory],
+          },
+        })
+      } else {
+        users = await User.find()
+      }
+
+      res.status(200).json(users)
+    } catch (err) {
+      res.status(500).json(err)
+    }
+};
+
 const selectUser = async (req, res) => {
   try {
     const userID = await User.findById(req.params.id);
@@ -60,4 +84,4 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { currentUser, selectUser, editUser, deleteUser };
+module.exports = { currentUser, selectUser, getAllUsers, editUser, deleteUser};
