@@ -1,4 +1,4 @@
-import { HomeNav } from "../components/Home/HomeNav";
+import { MainNav } from "../components/Main/MainNav";
 import  {useState} from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
@@ -53,8 +53,11 @@ export function ChatPage() {
 
   return (
     <>
-    <HomeNav/> 
-    <Chat/>
+    <MainNav/> 
+    <div className="background-1">
+      <Chat/>
+    </div>
+    
 
     </>       
   );
