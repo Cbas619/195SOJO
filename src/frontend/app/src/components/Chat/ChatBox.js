@@ -87,37 +87,36 @@ const ChatBox = ({chat, currentUser, setSendMessage, receiveMessage}) => {
         <>
         <div className='ChatBox-container'>
             {/*If chat exists then return this */}
-            {chat? (<>
-            <div className="chat-header">
-                <div className="follower">
-                    <div className="name" style={{fontSize: "2rem"}}>
-                        <span>{userData?.firstName} {userData?.lastName}</span>
+            {chat ? (
+            <>
+                <div className="chat-header">
+                    <div className="follower">
+                        <div className="name" style={{fontSize: "2rem"}}>
+                            <span>{userData?.firstName} {userData?.lastName}</span>
+                        </div>
                     </div>
+                    <hr style={{width: '85%', border: '0.1px solid #4f4f4f'}}/>
                 </div>
-                <hr style={{width: '85%', border: '0.1px solid #4f4f4f'}}/>
-            </div>
 
-            <div className="chat-body">
-                {messages.map((message) => (
-                    <>
-                    <div ref = {scroll} className= {message.senderId == currentUser ? "message own" : "message"}>
-                        <span>{message.text}</span>
-                        <span>{format(message.createdAt)}</span>
-                    </div>
-                    </>
-                ))}
-            </div>
-            
-            <div className="chat-sender">
-                <div>+</div>
-                <InputEmoji
-                value = {newMessage}
-                onChange = {handleChange}
-                />
-                <div className="send-button button" onClick={handleSend}>Send</div>
-            </div>        
-            
-
+                <div className="chat-body">
+                    {messages.map((message) => (
+                        <>
+                        <div ref = {scroll} className= {message.senderId == currentUser ? "message own" : "message"}>
+                            <span>{message.text}</span>
+                            <span>{format(message.createdAt)}</span>
+                        </div>
+                        </>
+                    ))}
+                </div>
+                
+                <div className="chat-sender">
+                    <div>+</div>
+                    <InputEmoji
+                    value = {newMessage}
+                    onChange = {handleChange}
+                    />
+                    <div className="send-button button" onClick={handleSend}>Send</div>
+                </div>        
             </>
             
             ) : (
