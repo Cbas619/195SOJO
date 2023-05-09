@@ -34,7 +34,8 @@ export function OrdersPage() {
 
     const {loading, error, orders} = useSelector(state => state.orders)
     useEffect(()=> {
-        dispatch(getOrders())
+        //we want to get all orders from the current user
+        dispatch(getOrders("642e4234c668c0819f972908"))
     },[dispatch]);
 
     return (
@@ -57,14 +58,17 @@ export function OrdersPage() {
                         </tr>
                     </thead>
                     <tbody>
-                    {(Array.isArray(orders) && orders.length > 0) && orders.map(orders =>(
+                    {orders ? ( (Array.isArray(orders) && orders.length > 0) && orders.map(orders =>(
                             <tr key={orders._id}>
                                 <td>{orders._id}</td>
                                 <td>{orders.date.substring(0,10)}</td>
                                 <td>{orders.buyerId}</td>
                                 <td>{orders.productId}</td>
                             </tr> 
-                        ))}
+                        )) ) : (
+                            <>
+                            </>
+                        )}
                         
                     </tbody>
                 </table>

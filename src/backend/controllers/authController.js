@@ -21,7 +21,7 @@ const register = async (req, res) => {
   try {
     const savedUser = await user.save();
     return res.status(200).send(savedUser);
-  } catch {
+  } catch (err) {
     return res.status(400).send(err);
   }
 };

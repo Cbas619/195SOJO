@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { ALL_USER_REQUEST, ALL_USER_SUCCESS, ALL_USER_FAIL, CLEAR_ERRORS } from '../constants/getUserConstants'
 
-export const getUser = ({userId}) => async (dispatch) => {
+export const getUser = (userId) => async (dispatch) => {
+
     try {
         
         dispatch({type: ALL_USER_REQUEST })

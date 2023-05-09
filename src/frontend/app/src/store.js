@@ -8,13 +8,18 @@ import {ordersReducer} from './reducers/ordersReducer'
 import {getProductReducer} from './reducers/getProductReducer'
 import {getUserReducer} from './reducers/getUserReducer'
 import {usersReducers} from './reducers/usersReducers'
+import{currentUserReducer} from './reducers/currentUserReducer'
+import { chatsReducer } from './reducers/chatsReducer';
+
 
 const reducer = combineReducers({
     products: productsReducer,
     orders: ordersReducer,
     product: getProductReducer,
     user: getUserReducer,
-    users: usersReducers
+    users: usersReducers,
+    currentUser: currentUserReducer,
+    chats: chatsReducer,
 })
 
 let initialState = {}

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { ALL_PRODUCT_REQUEST, ALL_PRODUCT_SUCCESS, ALL_PRODUCT_FAIL, CLEAR_ERRORS } from '../constants/getProductConstants'
 
-export const getProduct = ({productId}) => async (dispatch) => {
+export const getProduct = (productId) => async (dispatch) => {
     try {
         
         dispatch({type: ALL_PRODUCT_REQUEST })
