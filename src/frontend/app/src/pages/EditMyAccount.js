@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
+import {MainCategories} from '../components/Main/MainCategories'
 
 export function EditMyAccount() {
   const location = useLocation();
@@ -65,6 +66,7 @@ export function EditMyAccount() {
   return (
     <div>
       <MainNav />
+      <MainCategories />
       <Container className="edit_text">
         <h3>Edit Your Account</h3>
         <h4>Your Info</h4>

@@ -85,13 +85,13 @@ export function SignupForm() {
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>School</Form.Label>
-            <Form.Control
-              type="school"
-              placeholder="Enter School"
-              onChange={(e) => {
+            <Form.Select aria-label="Default select example" onChange={(e) => {
                 setSchool(e.target.value);
-              }}
-            />
+              }}>
+            <option>Enter Rating</option>
+            <option value="new">SJSU</option>
+            <option value="used">SJCC</option>
+            </Form.Select>
           </Form.Group>
           <Button variant="primary" type="submit" onClick={register}>
             Submit

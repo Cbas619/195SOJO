@@ -1,6 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import '../../App.scss'
 import { Link } from 'react-router-dom';
 import { useSignOut } from 'react-auth-kit'
@@ -22,12 +23,13 @@ export function MainNav() {
             <Nav.Link>
                 <Link to ="/sell"><div className='mainNavLinks'>Sell</div></Link>
             </Nav.Link>
-            {/* <Nav.Link>
-                <div className='mainNavLinks'>Messages</div>
-            </Nav.Link> */}
             <Nav.Link>
-            <Link to ="/edit"><div className='mainNavLinks'>Account</div></Link>
+            <Link to ="/chat"><div className='mainNavLinks'>Messages</div></Link>
             </Nav.Link>
+            <NavDropdown className='mainNavLinks' title="Account" id="basic-nav-dropdown">
+              <NavDropdown.Item><Nav.Link><Link to ="/edit"><div className='mainNavLinks'>Edit</div></Link></Nav.Link></NavDropdown.Item>
+              <NavDropdown.Item><Nav.Link><Link to ="/orders"><div className='mainNavLinks'>Orders</div></Link></Nav.Link></NavDropdown.Item>
+              </NavDropdown>
             <Nav.Link>
             <Link to ="/"><div className='mainNavLinks' onClick={() => signOut()}>Sign Out</div></Link>
             </Nav.Link>
