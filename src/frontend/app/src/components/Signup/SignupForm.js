@@ -87,7 +87,7 @@ export function SignupForm() {
             <Form.Label>School</Form.Label>
             <Form.Control
               type="school"
-              placeholder="school"
+              placeholder="Enter School"
               onChange={(e) => {
                 setSchool(e.target.value);
               }}
