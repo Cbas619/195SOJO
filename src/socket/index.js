@@ -29,10 +29,12 @@ io.on("connection", (socket)=> {
         const {receiverId} = data;
         //searching for receiver inside the activeusers
         const user = activeUsers.find((user) => user.userId === receiverId)
+        //console.log("This the user", user)
         console.log("Sending from socket to : ", receiverId)
         console.log("Data", data)
         if(user) {
-            io.to(user.socketId).emit("receive-message", data)
+            io.to(user.socketId).emit('receive-message', data)
+            
         }
     })
 
@@ -41,7 +43,7 @@ io.on("connection", (socket)=> {
     socket.on("disconnect", ()=> {
         //from all the users, filter out that specific user that is trying to disconnect
         activeUsers = activeUsers.filter((user) => user.socketId !== socket.id);
-        console.log("User Disconnected", activeUsers);
+        //console.log("User Disconnected", activeUsers);
         io.emit('get-users', activeUsers);
     })
 

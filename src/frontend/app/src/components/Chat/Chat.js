@@ -28,7 +28,7 @@ export function Chat() {
     const [onlineUsers, setOnlineUsers] = useState([]);
     const socket = useRef()
     const [sendMessage, setSendMessage] = useState(null)
-    const [receiveMessage, setReceiveMessage] = useState(null)
+    const [receivedMessage, setReceivedMessage] = useState(null);
     
     /*
      useEffect(() => {
@@ -63,32 +63,38 @@ export function Chat() {
           }
         };
         getChats();
-      }, [currentUser]);
+      }, [currentUser._id]);
 
 
       //socket initialize
     useEffect(() => {
         socket.current = io('http://localhost:8800')
-        socket.current.emit("new-user-add", currentUser._id)
+        socket.current.emit('new-user-add', currentUser._id)
         socket.current.on("get-users", (users)=> {
             setOnlineUsers(users);
         })
     }, [currentUser])
+    
 
     //sends meesage to socket server
     useEffect(() => {
-        if(sendMessage!==null) {
-            socket.current.emit('send-message', sendMessage)
+        
+        if (sendMessage!==null) {
+          socket.current.emit("send-message", sendMessage);
+          //console.log("Sent Message", sendMessage);
+          
         }
-    }, [sendMessage])
+      }, [sendMessage]);
 
 
     //recieve message from socket server
     useEffect(() => {
         socket.current.on("receive-message", (data) => {
-        setReceiveMessage(data)
-        })
-    }, [])
+          setReceivedMessage(data);
+        }
+    
+        );
+      }, []);
 
 /*
     //console.log(user);
@@ -123,7 +129,7 @@ export function Chat() {
 
         <div className="Right-side-chat">
             <div style={{width: '100%', alignSelf: 'flex-end'}}>
-               <ChatBox chat={currentChat} currentUser = {currentUser._id} setSendMessage={setSendMessage} receiveMessage = {receiveMessage}/>
+               <ChatBox chat={currentChat} currentUser = {currentUser._id} setSendMessage={setSendMessage} receivedMessage = {receivedMessage}/>
             </div>
         </div>
 

@@ -8,17 +8,13 @@ import { addMessage } from '../../api/MessageRequests'
 
 
 
-const ChatBox = ({chat, currentUser, setSendMessage, receiveMessage}) => {
+const ChatBox = ({chat, currentUser, setSendMessage, receivedMessage}) => {
     const[userData, setUserData] = useState(null)
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState("")
     const scroll = useRef()
     
-    useEffect(() => {
-        if(receiveMessage !== null && receiveMessage.chatId===chat._id) {
-            setMessages([...messages, receiveMessage])
-        }
-    }, [receiveMessage])
+    
 
     //fetching data for user header when a user has already been clicked
     useEffect(() => {
@@ -41,7 +37,6 @@ const ChatBox = ({chat, currentUser, setSendMessage, receiveMessage}) => {
         const fetchMessages = async() => {
             try {
                 const {data} = await getMessages(chat._id);
-                console.log(data)
                 setMessages(data)
             } catch (error) {
                 console.log(error)
@@ -62,7 +57,9 @@ const ChatBox = ({chat, currentUser, setSendMessage, receiveMessage}) => {
             text: newMessage,
             chatId: chat._id,
         }
-
+        const receiverId = chat.members.find((id) => id !== currentUser);
+        // send messaage to socket server
+        setSendMessage({...message, receiverId})
         //send the message to mongodb
         try {
             const {data} = await addMessage(message);
@@ -72,11 +69,16 @@ const ChatBox = ({chat, currentUser, setSendMessage, receiveMessage}) => {
             console.log(error);
         }
 
-        // send messaage to socket server
-        const receiverId = chat.members.find((id) => id !== currentUser);
-        setSendMessage({...message, receiverId})
+        
     }
 
+    //receive message
+    useEffect(() => {
+        if(receivedMessage !== null && receivedMessage?.chatId===chat?._id) {
+            setMessages([...messages, receivedMessage])
+        }
+
+    }, [receivedMessage])
 
     //scrolls to last message automatically
     useEffect(() => {
