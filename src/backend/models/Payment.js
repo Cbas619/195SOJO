@@ -28,19 +28,19 @@ const userSchema = new mongoose.Schema({
   city: {
     type: String,
     required: true,
-    min: 6,
+    min: 2,
     max: 1024,
   },
   state: {
     type: String,
     required: true,
-    min: 6,
+    min: 2,
     max: 1024,
   },
   zip: {
     type: Number,
     required: true,
-    min: 6,
+    min: 2,
   },
   cardNumber: {
     type: String,
@@ -50,18 +50,18 @@ const userSchema = new mongoose.Schema({
   nameOnCard: {
     type: String,
     required: true,
-    min: 6,
+    min: 2,
     max: 1024,
   },
   expireDate: {
     type: Number,
     required: true,
-    min: 6,
+    min: 3,
   },
   cvvNumber: {
     type: Number,
     required: true,
-    min: 6,
+    min: 3,
   },
   
 });
