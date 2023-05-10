@@ -132,7 +132,7 @@ export default function SearchScreen() {
                 </ul>
             </div>
             <div>
-                <h3>Price</h3>
+                <h3 className='search-price'>Price</h3>
                 <ul>
                     <li>
                         <Link className={'all' === price ? 'text-bold' : ''} to={getFilterUrl({price: 'all'})}>

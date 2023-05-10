@@ -17,7 +17,7 @@ export function Account() {
   useEffect(() => {
     (async () => {
       try {
-        const respo = await axios.get("http://localhost:4000/api/user", {
+        const respo = await axios.get("http://localhost:4000/api/user/user", {
           withCredentials: true,
         });
         console.log("res", respo);

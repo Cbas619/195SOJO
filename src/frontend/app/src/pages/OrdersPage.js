@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import  {useState} from 'react';
 import './styleSheets/OrdersPage.scss'
 import Container from 'react-bootstrap/Container'
+import axios from "axios";
 
 const styles = {
     background: {
@@ -30,14 +31,30 @@ export function OrdersPage() {
     //const {userInfo} = state;
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [user, setUser] = useState("");
+    const [seller, setSeller] = useState("");
+    const [product, setProduct] = useState("");
     
 
     const {loading, error, orders} = useSelector(state => state.orders)
     useEffect(()=> {
         //we want to get all orders from the current user
-        dispatch(getOrders("642e4234c668c0819f972908"))
+        dispatch(getOrders("645b47cd60d998e7a0888826"))
     },[dispatch]);
+    console.log(orders.buyerId)
 
+    useEffect(() => {
+        (async () => {
+          try {
+            const respo = await axios.get("http://localhost:4000/api/user/user", {
+              withCredentials: true,
+            });
+            setUser(respo.data._id);
+          } catch (error) {
+            console.log(error.respo);
+          }
+        })();
+      });
     return (
         <>
         <MainNav/> 
