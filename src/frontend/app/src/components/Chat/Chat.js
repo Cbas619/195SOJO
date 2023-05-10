@@ -10,7 +10,7 @@ import { getUser } from '../../actions/getUserActions';
 import Conversation from './Conversation';
 import { userChats } from '../../api/ChatRequests';
 import ChatBox from './ChatBox';
-
+import axios from 'axios';
 import {io} from 'socket.io-client'
 import { useRef } from 'react';
 
@@ -19,7 +19,8 @@ export function Chat() {
     const dispatch = useDispatch();
     
     //we're gonna need to get current user somehow
-    const {loading, user, error} = useSelector((state) => state.user);
+    //const {loading, user, error} = useSelector((state) => state.user);
+    const [user, setUser] = useState({});
     const [chats, setChats] = useState([]);
     const [currentChat, setCurrentChat] = useState(null);
     const [onlineUsers, setOnlineUsers] = useState([]);
@@ -27,16 +28,32 @@ export function Chat() {
     const [sendMessage, setSendMessage] = useState(null)
     const [receiveMessage, setReceiveMessage] = useState(null)
     
-     useEffect(() => {
-      dispatch(getUser("642a25017b5368ffeac45c87"))
-    }, [dispatch]);
+    // useEffect(() => {
+   //   dispatch(getUser("642a25017b5368ffeac45c87"))
+   //}, [dispatch]);
 
+   
 
+    useEffect(() => {
+        (async () => {
+          try {
+            const respo = await axios.get("http://localhost:4000/api/user/user", {
+              withCredentials: true,
+            });
+            setUser(respo)
+            //console.log(user.data._id);
+          } catch (error) {
+            console.log(error.respo);
+          }
+        })();
+      }, []);
+
+    
   
     useEffect(() => {
         const getChats = async () => {
           try {
-            const { data } = await userChats(user._id);
+            const { data } = await userChats(user.data._id);
             setChats(data);
           } catch (error) {
             console.log(error);
@@ -49,7 +66,7 @@ export function Chat() {
       //socket initialize
     useEffect(() => {
         socket.current = io('http://localhost:8800')
-        socket.current.emit("new-user-add", user._id)
+        socket.current.emit("new-user-add", user.data._id)
         socket.current.on("get-users", (users)=> {
             setOnlineUsers(users);
         })
@@ -93,7 +110,7 @@ export function Chat() {
                 <div className="Chat-list">
                     {chats.map((chat) => (
                         <div onClick={() => setCurrentChat(chat)}>
-                            <Conversation data={chat} currentUserId={user._id} />
+                            <Conversation data={chat} currentUserId={user.data._id} />
                         </div>
                     ))}
                 </div>
@@ -103,7 +120,7 @@ export function Chat() {
 
         <div className="Right-side-chat">
             <div style={{width: '100%', alignSelf: 'flex-end'}}>
-               <ChatBox chat={currentChat} currentUser = {user._id} setSendMessage={setSendMessage} receiveMessage = {receiveMessage}/>
+               <ChatBox chat={currentChat} currentUser = {user.data._id} setSendMessage={setSendMessage} receiveMessage = {receiveMessage}/>
             </div>
         </div>
 

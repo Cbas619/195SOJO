@@ -6,7 +6,9 @@ export const getCurrentUser = () => async (dispatch) => {
         
         dispatch({type: USER_REQUEST })
 
-        const { data } = await axios.get(`http://localhost:4000/api/user/user`)
+        const { data } = await axios.get("http://localhost:4000/api/user/user", {
+            withCredentials: true,
+          });
 
         dispatch({
             type: USER_SUCCESS,
