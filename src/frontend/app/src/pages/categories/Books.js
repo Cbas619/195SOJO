@@ -30,6 +30,7 @@ export function Books() {
           withCredentials: true,
         });
         setSchool(respo.data.school);
+        console.log(respo)
       } catch (error) {
         console.log(error.respo);
       }

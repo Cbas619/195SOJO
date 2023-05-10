@@ -19,8 +19,8 @@ export function Chat() {
     const dispatch = useDispatch();
     
     //we're gonna need to get current user somehow
-    //const {loading, user, error} = useSelector((state) => state.user);
-    const [user, setUser] = useState({});
+    const {loading, user, error} = useSelector((state) => state.user);
+    const [currentUser, setCurrentUser] = useState({});
     const [chats, setChats] = useState([]);
     const [currentChat, setCurrentChat] = useState(null);
     const [onlineUsers, setOnlineUsers] = useState([]);
@@ -28,11 +28,13 @@ export function Chat() {
     const [sendMessage, setSendMessage] = useState(null)
     const [receiveMessage, setReceiveMessage] = useState(null)
     
-    // useEffect(() => {
-   //   dispatch(getUser("642a25017b5368ffeac45c87"))
-   //}, [dispatch]);
+    /*
+     useEffect(() => {
+      dispatch(getUser("642a25017b5368ffeac45c87"))
+    }, [dispatch]);
+    */
 
-   
+
 
     useEffect(() => {
         (async () => {
@@ -40,37 +42,36 @@ export function Chat() {
             const respo = await axios.get("http://localhost:4000/api/user/user", {
               withCredentials: true,
             });
-            setUser(respo)
-            //console.log(user.data._id);
+            setCurrentUser(respo.data)
+            //console.log(respo);
           } catch (error) {
             console.log(error.respo);
           }
         })();
-      }, []);
+      },[]);
 
-    
   
     useEffect(() => {
         const getChats = async () => {
           try {
-            const { data } = await userChats(user.data._id);
+            const { data } = await userChats(currentUser._id);
             setChats(data);
           } catch (error) {
             console.log(error);
           }
         };
         getChats();
-      }, [user]);
+      }, [currentUser]);
 
 
       //socket initialize
     useEffect(() => {
         socket.current = io('http://localhost:8800')
-        socket.current.emit("new-user-add", user.data._id)
+        socket.current.emit("new-user-add", currentUser._id)
         socket.current.on("get-users", (users)=> {
             setOnlineUsers(users);
         })
-    }, [user])
+    }, [currentUser])
 
     //sends meesage to socket server
     useEffect(() => {
@@ -110,7 +111,7 @@ export function Chat() {
                 <div className="Chat-list">
                     {chats.map((chat) => (
                         <div onClick={() => setCurrentChat(chat)}>
-                            <Conversation data={chat} currentUserId={user.data._id} />
+                            <Conversation data={chat} currentUserId={currentUser._id} />
                         </div>
                     ))}
                 </div>
@@ -120,7 +121,7 @@ export function Chat() {
 
         <div className="Right-side-chat">
             <div style={{width: '100%', alignSelf: 'flex-end'}}>
-               <ChatBox chat={currentChat} currentUser = {user.data._id} setSendMessage={setSendMessage} receiveMessage = {receiveMessage}/>
+               <ChatBox chat={currentChat} currentUser = {currentUser._id} setSendMessage={setSendMessage} receiveMessage = {receiveMessage}/>
             </div>
         </div>
 
