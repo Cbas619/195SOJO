@@ -17,7 +17,7 @@ import { Row } from 'react-bootstrap';
 export function Main() {
 
   const dispatch = useDispatch();
-
+  const [school, setSchool] = useState("");
   const {loading, products, error} = useSelector(state => state.products)
 
   const navigate = useNavigate();
@@ -34,6 +34,18 @@ export function Main() {
     }
   };
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const respo = await axios.get("http://localhost:4000/api/user/user", {
+          withCredentials: true,
+        });
+        setSchool(respo.data.school);
+      } catch (error) {
+        console.log(error.respo);
+      }
+    })();
+  });
 
   useEffect(() => {
     dispatch(getProducts())
@@ -52,6 +64,7 @@ export function Main() {
         <div className="mainLine-1"></div>
         <Row>
           {products && products.map(products => (
+          products.purchased === false && products.school === school &&
           <Col key={products._id} sm={6} md={4} lg={2}>
             <div className="mainItemCard">
               <MainItemCards product={products}/>
@@ -68,7 +81,7 @@ export function Main() {
           <MainHeaders categoryHeader="Books for the brain | " linkHeader="See all books" categoryLink="/books"/>
           <Row>
           {products && products.map(products => (
-          products.category === 'books' && products.purchased === false &&
+          products.category === 'books' && products.purchased === false && products.school === school &&
           <Col key={products._id} sm={6} md={4} lg={2}>
             <div className="mainItemCard">
               <MainItemCards product={products}/>
@@ -82,7 +95,7 @@ export function Main() {
           <MainHeaders categoryHeader="Work with Supplies | " linkHeader="See all school supplies" categoryLink="/officesupplies" />
           <Row>
           {products && products.map(products => (
-          products.category === 'supplies' && products.purchased === false &&
+          products.category === 'supplies' && products.purchased === false && products.school === school &&
           <Col key={products._id} sm={6} md={4} lg={2}>
             <div className="mainItemCard">
               <MainItemCards product={products}/>

@@ -35,6 +35,11 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  sellerId: {
+    type: String,
+    required: true,
+    min: 2
+  },
   purchased: {
     type: Boolean,
     required: true

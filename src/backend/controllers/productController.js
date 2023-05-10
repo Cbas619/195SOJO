@@ -12,7 +12,8 @@ const insertItem = async (req, res) => {
         rating: req.body.rating,
         price: req.body.price,
         category: req.body.category,
-        school: "",
+        school: req.body.school,
+        sellerId: req.body.sellerId,
         purchased: false
     });
     try {

@@ -10,6 +10,7 @@ import {useDispatch, useSelector } from 'react-redux'
 import { getProducts } from "../../actions/productActions";
 import { Col } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
+import axios from 'axios';
 export function Books() {
 
   const [state, setState] = useState([])
@@ -21,6 +22,20 @@ export function Books() {
 
 
   const {loading, products, error} = useSelector(state => state.products)
+  const [school, setSchool] = useState("");
+  useEffect(() => {
+    (async () => {
+      try {
+        const respo = await axios.get("http://localhost:4000/api/user/user", {
+          withCredentials: true,
+        });
+        setSchool(respo.data.school);
+      } catch (error) {
+        console.log(error.respo);
+      }
+    })();
+  });
+
 
   useEffect(() => {
     dispatch(getProducts())
@@ -43,7 +58,7 @@ export function Books() {
       <div className="categorySection">
         <Row>
         {products && products.map(products => (
-           products.category === 'books' && products.purchased === false &&
+           products.category === 'books' && products.purchased === false && products.school === school &&
             <Col key={products._id} sm={6} md={4} lg={2}>
               <div className="mainItemCard">
               <MainItemCards product={products}/>

@@ -6,8 +6,6 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import Dropdown from "react-bootstrap/Dropdown";
-import {useDispatch, useSelector } from 'react-redux'
 import { getUsers } from "../../actions/userActions"
 import { useEffect } from 'react';
 
@@ -18,10 +16,9 @@ export function SellForm() {
   const [rating, setRating] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
+  const [school, setSchool] = useState("");
+  const [sellerId, setSellerId] = useState("");
   const navigate = useNavigate()
-  const dispatch = useDispatch();
-
-  const {loading, users, error} = useSelector(state => state.users)
 
   const productInsert = async (e) => {
     e.preventDefault();
@@ -34,6 +31,8 @@ export function SellForm() {
           rating: rating,
           price: price,
           category: category,
+          school: school,
+          sellerId: sellerId
         })
         .then((response, err) => {
           console.log(response);
@@ -43,9 +42,33 @@ export function SellForm() {
       console.log(JSON.stringify(error));
     }
   };
+
   useEffect(() => {
-    dispatch(getUsers())
-  }, [dispatch])
+    (async () => {
+      try {
+        const respo = await axios.get("http://localhost:4000/api/user/user", {
+          withCredentials: true,
+        });
+        setSchool(respo.data.school);
+      } catch (error) {
+        console.log(error.respo);
+      }
+    })();
+  });
+  console.log(school)
+  useEffect(() => {
+    (async () => {
+      try {
+        const respo = await axios.get("http://localhost:4000/api/user/user", {
+          withCredentials: true,
+        });
+        setSellerId(respo.data._id);
+      } catch (error) {
+        console.log(error.respo);
+      }
+    })();
+  });
+
   return (
     <Row>
       <Col>
