@@ -88,9 +88,9 @@ export function SignupForm() {
             <Form.Select aria-label="Default select example" onChange={(e) => {
                 setSchool(e.target.value);
               }}>
-            <option>Enter Rating</option>
-            <option value="new">SJSU</option>
-            <option value="used">SJCC</option>
+            <option>Enter School</option>
+            <option value="SJSU">SJSU</option>
+            <option value="SJCC">SJCC</option>
             </Form.Select>
           </Form.Group>
           <Button variant="primary" type="submit" onClick={register}>
