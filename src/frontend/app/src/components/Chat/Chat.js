@@ -11,6 +11,8 @@ import Conversation from './Conversation';
 import { userChats } from '../../api/ChatRequests';
 import ChatBox from './ChatBox';
 import axios from 'axios';
+import {MainCategories} from '../Main/MainCategories'
+
 import {io} from 'socket.io-client'
 import { useRef } from 'react';
 
@@ -102,7 +104,7 @@ export function Chat() {
 
   return (
     <>
-    
+    <MainCategories />
     <br></br>
     <div className="Chat"> 
         <div className="Left-side-chat">
