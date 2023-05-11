@@ -32,8 +32,8 @@ export function OrdersPage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [user, setUser] = useState("");
-    const [seller, setSeller] = useState("");
-    const [product, setProduct] = useState("")
+    const [productId, setProductId] = useState("");
+    const [products, setProducts] = useState("")
     
 
     // const {loading, error, orders} = useSelector(state => state.orders)
@@ -55,6 +55,23 @@ export function OrdersPage() {
           }
         })();
       });
+      console.log(user)
+
+
+      useEffect(() => {
+        (async () => {
+          try {
+            const respo = await axios.get(`http://localhost:4000/api/orders/find/${user}`, {
+              withCredentials: true,
+            });
+            setProductId(respo.data);
+          } catch (error) {
+            console.log(error.respo);
+          }
+        })();
+      });
+      console.log(productId)
+
     return (
         <>
         <MainNav/> 
@@ -64,33 +81,12 @@ export function OrdersPage() {
                 <Container style={styles.background}>
                     <div className="ordersPageHeader">Order History</div>
                 <div className="orderLine-1"></div>
-                {/* <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>DATE</th>
-                            <th>SELLER</th>
-                            <th>PRODUCT</th>
-                            
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {orders ? ( (Array.isArray(orders) && orders.length > 0) && orders.map(orders =>(
-                            <tr key={orders._id}>
-                                <td>{orders._id}</td>
-                                <td>{orders.date.substring(0,10)}</td>
-                                <td>{orders.buyerId}</td>
-                                <td>{orders.productId}</td>
-                            </tr> 
-                        )) ) : (
-                            <>
-                            </>
-                        )}
-                        
-                    </tbody>
-                </table> */}
+                {productId && productId.map(productId => (
+                <div className="mainItemCard">
+              <OrderCard product={productId}/>
+                </div>
+                ))}
                 </Container>
-
             </div>
         </div>
         </>

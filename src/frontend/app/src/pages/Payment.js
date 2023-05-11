@@ -38,6 +38,25 @@ export function Payment() {
         .post("http://localhost:4000/api/orders/insert", {
           buyerId: buyerId,
           productId: _id,
+          productName: productId.productName,
+          image: productId.image,
+          description: productId.description,
+          rating: productId.rating,
+          price: productId.price,
+          category: productId.category,
+          school: productId.school,
+        })
+        .then((response, err) => {
+          console.log(response);
+          navigate('/paymentconfirmation');
+        });
+    } catch (error) {
+      console.log(JSON.stringify(error));
+    }
+    try {
+      axios
+        .put(`http://localhost:4000/api/product/edit/${_id}`, {
+          purchased: true 
         })
         .then((response, err) => {
           console.log(response);
@@ -67,7 +86,7 @@ export function Payment() {
         const respo = await axios.get(`http://localhost:4000/api/product/find/${_id}`, {
           withCredentials: true,
         });
-        setProductId(respo.data._id);
+        setProductId(respo.data);
       } catch (error) {
         console.log(error.respo);
       }
@@ -75,6 +94,7 @@ export function Payment() {
   }, []);
 
   console.log(productId)
+  console.log(productId.description)
 
 return (
   <div>
