@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const {addOrder, getOrder, getAllOrders} = require("../controllers/orderController")
+const {addOrder, getOrder, getAllOrders, putOrder} = require("../controllers/orderController")
 
 router.post('/insert', addOrder);
 router.get('/find/:id', getOrder);

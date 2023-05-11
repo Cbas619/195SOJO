@@ -1,5 +1,6 @@
 import Card from 'react-bootstrap/Card';
-import { Link } from 'react-router-dom'
+import { Link  } from 'react-router-dom'
+import Button from "react-bootstrap/Button";
 import '../../App.scss'
 
 const styles = {
@@ -11,7 +12,7 @@ const styles = {
 }
 
 export function MainItemCards(props) {
-  const{ product } = props;
+  const{ product } = props
   return (
     <Card style={{ width: '15vw' }}>
     <Link to={`/item/${product._id}`}>

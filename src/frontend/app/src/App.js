@@ -15,7 +15,6 @@ import { Clothing } from './pages/categories/Clothing';
 import { Electronics } from './pages/categories/Electronics';
 import { Entertainment } from './pages/categories/Entertainment';
 import { General } from './pages/categories/General';
-import { Product } from './pages/Product'
 import { SchoolSupplies } from './pages/categories/SchoolSupplies';
 import { PaymentConfirmation } from './pages/PaymentConfirmation';
 import { RequireAuth } from 'react-auth-kit';
@@ -39,7 +38,7 @@ function App() {
     </RequireAuth>}/>
     <Route path="/login" element={<Login/>}/>
     <Route path="/signup" element={<Signup/>}/>
-    <Route path="/payment" element={
+    <Route path="/payment/:_id" element={
     <RequireAuth loginPath='/login'><Payment/>
     </RequireAuth>}/>
     <Route path="/main" element={

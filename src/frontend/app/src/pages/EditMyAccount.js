@@ -22,7 +22,15 @@ export function EditMyAccount() {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
+  const styles = {
+    background: {
+    backgroundColor: 'white',
+    //width: '14.9vw',
+    height: '100vh',
+    paddingTop: '30px',
+    borderRadius: '10px'
+    }
+  }
   //connect to backend
   useEffect(() => {
     if (location.state) {
@@ -67,9 +75,14 @@ export function EditMyAccount() {
     <div>
       <MainNav />
       <MainCategories />
+      <div className="background-1">
+      <div className="ordersPageContainer">
+      <Container style={styles.background}>
+      <Container >
+  <div className="ordersPageHeader">Edit Your Account</div>
+                <div className="orderLine-1"></div>
+  </Container>
       <Container className="edit_text">
-        <h3>Edit Your Account</h3>
-        <h4>Your Info</h4>
         <Form onSubmit={handleSubmit}>
           <Form.Group
             as={Row}
@@ -165,6 +178,9 @@ export function EditMyAccount() {
           </Form.Group>
         </Form>
       </Container>
+      </Container>
+      </div>
+      </div>
     </div> //end div
   );
 }
