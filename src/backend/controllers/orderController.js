@@ -3,7 +3,14 @@ const Order = require("../models/Orders");
 const addOrder = async (req, res) => {
     const newOrder = new Order({
         buyerId: req.body.buyerId,
-        productId:req.body.productId
+        productId:req.body.productId,
+        productName: req.body.productName,
+        image: req.body.image,
+        description: req.body.description,
+        rating: req.body.rating,
+        price: req.body.price,
+        category: req.body.category,
+        school: req.body.school,
     });
     try {
         const savedOrder = await newOrder.save()
