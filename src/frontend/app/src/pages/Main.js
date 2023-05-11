@@ -41,11 +41,14 @@ export function Main() {
           withCredentials: true,
         });
         setSchool(respo.data.school);
+        
       } catch (error) {
         console.log(error.respo);
       }
     })();
   });
+
+  
 
   useEffect(() => {
     dispatch(getProducts())
