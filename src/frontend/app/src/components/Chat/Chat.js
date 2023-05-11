@@ -3,7 +3,8 @@ import  {useState} from 'react';
 import { useEffect } from 'react';
 import "./Chat.scss";
 import {useDispatch, useSelector } from 'react-redux';
-import { getCurrentUser } from '../../actions/currentUserAction';
+//import { getCurrentUser } from '../../actions/currentUserAction';
+import { getCurrentUser } from '../../api/UserRequests';
 import { getUsers } from '../../actions/userActions';
 import { getUser } from '../../actions/getUserActions';
 //import { getChats } from '../../actions/chatsAction';
@@ -21,7 +22,8 @@ export function Chat() {
     const dispatch = useDispatch();
     
     //we're gonna need to get current user somehow
-    const {loading, user, error} = useSelector((state) => state.user);
+    //const {loading, user, error} = useSelector((state) => state.user);
+    const[user, setUser] = useState({});
     const [currentUser, setCurrentUser] = useState({});
     const [chats, setChats] = useState([]);
     const [currentChat, setCurrentChat] = useState(null);
@@ -41,60 +43,60 @@ export function Chat() {
     useEffect(() => {
         (async () => {
           try {
-            const respo = await axios.get("http://localhost:4000/api/user/user", {
-              withCredentials: true,
-            });
-            setCurrentUser(respo.data)
-            //console.log(respo);
+            const {data} =  await getCurrentUser();
+            setUser(data)
+            console.log("SDSD", data)
           } catch (error) {
-            console.log(error.respo);
+            //console.log(error.respo);
           }
         })();
       },[]);
 
+      
+        //console.log("THE USAHH", user._id)
+      
+      
   
     useEffect(() => {
         const getChats = async () => {
           try {
-            const { data } = await userChats(currentUser._id);
+            const { data } = await userChats(user._id);
             setChats(data);
           } catch (error) {
             console.log(error);
           }
         };
         getChats();
-      }, [currentUser._id]);
+      }, [user._id]);
 
 
       //socket initialize
-    useEffect(() => {
-        socket.current = io('http://localhost:8800')
-        socket.current.emit('new-user-add', currentUser._id)
-        socket.current.on("get-users", (users)=> {
-            setOnlineUsers(users);
-        })
-    }, [currentUser])
+      useEffect(() => {
+        socket.current = io("http://localhost:8800");
+        socket.current.emit('new-user-add', user._id);
+        socket.current.on("get-users", (users) => {
+          setOnlineUsers(users);
+        });
+        socket.current.on("receive-message", (data) => {
+          console.log(data);
+          setReceivedMessage(data);
+        });
+      }, [user]);
+      
     
 
     //sends meesage to socket server
     useEffect(() => {
-        
-        if (sendMessage!==null) {
-          socket.current.emit("send-message", sendMessage);
-          //console.log("Sent Message", sendMessage);
-          
-        }
-      }, [sendMessage]);
 
+      if (sendMessage!==null) {
+        socket.current.emit("send-message", sendMessage);
+        console.log("MESSAGE SENTAH")
+      }
 
-    //recieve message from socket server
-    useEffect(() => {
-        socket.current.on("receive-message", (data) => {
-          setReceivedMessage(data);
-        }
+    }, [sendMessage]);
+
     
-        );
-      }, []);
+
 
 /*
     //console.log(user);
@@ -110,7 +112,7 @@ export function Chat() {
 
   return (
     <>
-    <MainCategories />
+
     <br></br>
     <div className="Chat"> 
         <div className="Left-side-chat">
@@ -119,7 +121,7 @@ export function Chat() {
                 <div className="Chat-list">
                     {chats.map((chat) => (
                         <div onClick={() => setCurrentChat(chat)}>
-                            <Conversation data={chat} currentUserId={currentUser._id} />
+                            <Conversation data={chat} currentUserId={user._id} />
                         </div>
                     ))}
                 </div>
@@ -129,7 +131,7 @@ export function Chat() {
 
         <div className="Right-side-chat">
             <div style={{width: '100%', alignSelf: 'flex-end'}}>
-               <ChatBox chat={currentChat} currentUser = {currentUser._id} setSendMessage={setSendMessage} receivedMessage = {receivedMessage}/>
+               <ChatBox chat={currentChat} currentUser = {user._id} setSendMessage={setSendMessage} receivedMessage = {receivedMessage}/>
             </div>
         </div>
 

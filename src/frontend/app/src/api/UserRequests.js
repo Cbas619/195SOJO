@@ -12,3 +12,6 @@ API.interceptors.request.use((req) => {
 
 export const getUser = (userId) => API.get(`/api/user/user/${userId}`);
 export const getAllUser = ()=> API.get('/api/user/all')
+export const getCurrentUser = ()=> API.get('/api/user/user', {
+  withCredentials: true,
+})

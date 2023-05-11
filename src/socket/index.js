@@ -11,8 +11,10 @@ io.on("connection", (socket)=> {
     //add new user
     //registers a user into our socket server
     socket.on('new-user-add', (newUserId)=> {
-        //if user wasnt added previously
-        if(!activeUsers.some((user) => user.userId == newUserId))
+        if(newUserId !== null) {
+            console.log("NOT NULL");
+            //if user wasnt added previously
+        if(!activeUsers.some((user) => user.userId === newUserId))
         {
             activeUsers.push({
                 userId: newUserId,
@@ -22,19 +24,23 @@ io.on("connection", (socket)=> {
         console.log("Connected Users", activeUsers);
         //emitting to the client side
         io.emit('get-users', activeUsers);
-    })
+        }
+        
+    });
 
-    //sendnig message
+    //sending message
     socket.on("send-message", (data) => {
         const {receiverId} = data;
         //searching for receiver inside the activeusers
         const user = activeUsers.find((user) => user.userId === receiverId)
-        //console.log("This the user", user)
-        console.log("Sending from socket to : ", receiverId)
-        console.log("Data", data)
+        //console.log("Active Users", activeUsers);
+        //console.log("This the user", receiverId)
+        //console.log("Sending from socket to : ", receiverId)
+        //console.log("Data", data)
         if(user) {
+            //console.log("user socket id", user.socketId)
             io.to(user.socketId).emit('receive-message', data)
-            
+            //console.log("In user", data)
         }
     })
 
@@ -43,7 +49,7 @@ io.on("connection", (socket)=> {
     socket.on("disconnect", ()=> {
         //from all the users, filter out that specific user that is trying to disconnect
         activeUsers = activeUsers.filter((user) => user.socketId !== socket.id);
-        //console.log("User Disconnected", activeUsers);
+        console.log("User Disconnected", activeUsers);
         io.emit('get-users', activeUsers);
     })
 
