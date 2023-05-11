@@ -5,7 +5,7 @@ import { Col } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { useContext, useReducer } from "react";
 import { store } from '../store';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams, } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrders } from "../actions/orderActions";
 import { useEffect } from 'react';
@@ -33,15 +33,15 @@ export function OrdersPage() {
     const dispatch = useDispatch();
     const [user, setUser] = useState("");
     const [seller, setSeller] = useState("");
-    const [product, setProduct] = useState("");
+    const [product, setProduct] = useState("")
     
 
-    const {loading, error, orders} = useSelector(state => state.orders)
-    useEffect(()=> {
-        //we want to get all orders from the current user
-        dispatch(getOrders("645b47cd60d998e7a0888826"))
-    },[dispatch]);
-    console.log(orders.buyerId)
+    // const {loading, error, orders} = useSelector(state => state.orders)
+    // useEffect(()=> {
+    //     //we want to get all orders from the current user
+    //     dispatch(getOrders("6458a2a693eddbd1d0ba0c5b"))
+    // },[dispatch]);
+    // console.log(orders.buyerId)
 
     useEffect(() => {
         (async () => {
@@ -64,7 +64,7 @@ export function OrdersPage() {
                 <Container style={styles.background}>
                     <div className="ordersPageHeader">Order History</div>
                 <div className="orderLine-1"></div>
-                <table>
+                {/* <table>
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -88,7 +88,7 @@ export function OrdersPage() {
                         )}
                         
                     </tbody>
-                </table>
+                </table> */}
                 </Container>
 
             </div>

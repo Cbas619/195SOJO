@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -6,23 +6,25 @@ import Row from 'react-bootstrap/Row';
 import { Container } from 'react-bootstrap';
 import { MainNav } from "../components/Main/MainNav";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { MainCategories } from '../components/Main/MainCategories';
+
 
 
 export function Payment() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [zip, setZip] = useState("");
-  const [cardNumber, setCard] = useState("");
-  const [expireDate, setExpire] = useState("");
-  const [cvvNumber, setCVV] = useState("");
-  const [nameOnCard, setName] = useState("");
+  const [buyerId, setBuyerId] = useState("");
+  const [productId, setProductId] = useState("");
   const navigate = useNavigate();
-
+  const {_id} = useParams();
+  const styles = {
+    background: {
+    backgroundColor: 'white',
+    //width: '14.9vw',
+    height: '100vh',
+    paddingTop: '30px',
+    borderRadius: '10px'
+    }
+  }
   // const handleSubmit=(e) => {
   //   e.preventDefault();
   //   console.log(firstName, lastName, email, address, city, state, zip, cardNumber, expireDate, cvvNumber, nameOnCard);
@@ -33,18 +35,9 @@ export function Payment() {
     e.preventDefault();
     try {
       axios
-        .post("http://localhost:4000/api/payment/insert", {
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          address: address,
-          city: city,
-          state: state,
-          zip: zip,
-          cardNumber: cardNumber,
-          expireDate: expireDate,
-          cvvNumber: cvvNumber,
-          nameOnCard: nameOnCard
+        .post("http://localhost:4000/api/orders/insert", {
+          buyerId: buyerId,
+          productId: _id,
         })
         .then((response, err) => {
           console.log(response);
@@ -55,12 +48,44 @@ export function Payment() {
     }
   };
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const respo = await axios.get("http://localhost:4000/api/user/user", {
+          withCredentials: true,
+        });
+        setBuyerId(respo.data._id);
+      } catch (error) {
+        console.log(error.respo);
+      }
+    })();
+  });
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const respo = await axios.get(`http://localhost:4000/api/product/find/${_id}`, {
+          withCredentials: true,
+        });
+        setProductId(respo.data._id);
+      } catch (error) {
+        console.log(error.respo);
+      }
+    })();
+  }, []);
+
+  console.log(productId)
+
 return (
   <div>
-  <MainNav/> 
-  <br></br>
+  <MainNav/>
+  <MainCategories/> 
+  <div className="background-1">
+  <div className="ordersPageContainer">
+  <Container style={styles.background}>
   <Container >
-    <h4>Checkout / Cart</h4>
+  <div className="ordersPageHeader">Checkout / Cart</div>
+                <div className="orderLine-1"></div>
   </Container>
   <br></br>
   <Container>
@@ -72,35 +97,35 @@ return (
   <Col className="mb-3">
     <Form.Group as={Col} controlId="formFirstName">
       <Form.Label>First Name</Form.Label>
-      <Form.Control type="firstname" placeholder="First Name" onChange={(e) => {setFirstName(e.target.value)}}/>
+      <Form.Control type="firstname" placeholder="First Name"/>
 
     </Form.Group> <br></br>
 
     <Form.Group as={Col} controlId="formLastName">
       <Form.Label>Last Name</Form.Label>
-      <Form.Control type="lastName" placeholder="Last Name" onChange={(e) => {setLastName(e.target.value)}}/>
+      <Form.Control type="lastName" placeholder="Last Name"/>
     </Form.Group>
   </Col>
 
   <Form.Group className="mb-3" controlId="formGridAddress1">
     <Form.Label>Email</Form.Label>
-    <Form.Control placeholder="Email Address" onChange={(e) => {setEmail(e.target.value)}}/>
+    <Form.Control placeholder="Email Address"/>
   </Form.Group>
 
   <Form.Group className="mb-3" controlId="formGridAddress2">
     <Form.Label>Address</Form.Label>
-    <Form.Control placeholder="1234 Main St, #82" onChange={(e) => {setAddress(e.target.value)}}/>
+    <Form.Control placeholder="1234 Main St, #82"/>
   </Form.Group>
 
   <Row className="mb-3">
     <Form.Group as={Col} controlId="formCity">
       <Form.Label>City</Form.Label>
-      <Form.Control placeholder='City' onChange={(e) => {setCity(e.target.value)}}/>
+      <Form.Control placeholder='City'/>
   </Form.Group>
 
   <Form.Group as={Col} controlId="formState">
       <Form.Label>State</Form.Label>
-      <Form.Select defaultValue="Choose..." onChange={(e) => {setState(e.target.value)}}>
+      <Form.Select defaultValue="Choose...">
         <option value="Alabama">Alabama</option>
         <option value="Alaska">Alaska</option>
         <option value="Arizona">Arizona</option>
@@ -119,7 +144,7 @@ return (
 
     <Form.Group as={Col} controlId="formZip">
       <Form.Label>Zip</Form.Label>
-      <Form.Control placeholder='Zip Code' onChange={(e) => {setZip(e.target.value)}}/>
+      <Form.Control placeholder='Zip Code'/>
     </Form.Group>
   </Row>
 
@@ -132,29 +157,29 @@ return (
 
   <Form.Group className="mb-3" controlId="formGridAddress1">
     <Form.Label>Card Number</Form.Label>
-    <Form.Control placeholder="123456789" onChange={(e) => {setCard(e.target.value)}}/>
+    <Form.Control placeholder="123456789"/>
   </Form.Group>
 
   <Form.Group className="mb-3" controlId="formName">
     <Form.Label>Name</Form.Label>
-    <Form.Control placeholder="Full Name" onChange={(e) => {setName(e.target.value)}}/>
+    <Form.Control placeholder="Full Name"/>
   </Form.Group>
 
   <Row className="mb-3">
     <Form.Group as={Col} controlId="formExpireDate">
       <Form.Label>Expire Date</Form.Label>
-      <Form.Control placeholder='Date' onChange={(e) => {setExpire(e.target.value)}}/>
+      <Form.Control placeholder='Date'/>
   </Form.Group>
 
   <Form.Group as={Col} controlId="formCVV">
       <Form.Label>CVV</Form.Label>
-      <Form.Control placeholder='123' onChange={(e) => {setCVV(e.target.value)}}/>
+      <Form.Control placeholder='123'/>
 
   </Form.Group>
 
     <Form.Group as={Col} controlId="formZip">
       <Form.Label>Zip</Form.Label>
-      <Form.Control placeholder='Zip Code' onChange={(e) => {setZip(e.target.value)}}/>
+      <Form.Control placeholder='Zip Code'/>
     </Form.Group>
   </Row>
 
@@ -163,6 +188,9 @@ return (
   </Button>
 </Form>
 </Container>
+</Container>
+</div>
+</div>
 </div>
 
   ); // end return

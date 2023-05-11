@@ -7,9 +7,10 @@ const orderSchema = new mongoose.Schema({
     min: 2
   },
   productId: {
-    type: Array,
+    type: String,
+    required: true,
+    min: 2
   },
-  
 });
 
 module.exports = mongoose.model("Order", orderSchema);

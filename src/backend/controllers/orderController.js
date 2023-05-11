@@ -3,7 +3,7 @@ const Order = require("../models/Orders");
 const addOrder = async (req, res) => {
     const newOrder = new Order({
         buyerId: req.body.buyerId,
-        productId:[]
+        productId:req.body.productId
     });
     try {
         const savedOrder = await newOrder.save()
@@ -24,15 +24,6 @@ const putOrder = async (req, res) => {
         res.status(201).json(savedOrder)
     } catch (err) {
         res.status(500).json(err);
-    }
-};
-
-const getOrder = async (req, res) => {
-    try {
-        const OrderID = await Order.findById(req.params.id)
-        res.status(200).json(OrderID)
-    } catch (err) {
-        res.status(500).json(err)
     }
 };
 
@@ -58,6 +49,16 @@ const getAllOrders = async (req, res) => {
     } catch (err) {
       res.status(500).json(err)
     }
+};
+
+const getOrder = async (req, res) => {
+  const {buyerId} = req.params
+  try {
+      const result = await Order.find({buyerId});
+      res.status(200).json(result)
+  } catch (error) {
+      res.status(500).json(error)
+  }
 };
 
 module.exports = {addOrder, getOrder, getAllOrders, putOrder};
