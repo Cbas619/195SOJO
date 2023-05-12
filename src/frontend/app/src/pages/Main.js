@@ -63,13 +63,13 @@ export function Main() {
   useEffect(() => {
     (async () => {
       try {
-        const {data} =  await getOrders("645b455608d3a937d7d45a0c");
+        const {data} =  await getOrders(user._id.toString());
         setOrders(data)
       } catch (error) {
         //console.log(error.respo);
       }
     })();
-  },[]);
+  },[user._id]);
 
 
   return (
@@ -77,21 +77,23 @@ export function Main() {
     <MainNav/> 
     <MainCategories/>
     <div className="background-1">
-    {orders ? (<>
-     <div className="mainMessagesSection">
-      <Link to="/chat"><a id="mainMessagesHeader">Your messages</a></Link>
-        <div className="mainLine-1"></div>
-        <Row>
-          {orders && orders.slice(0,5).map(orders => (
-          <Col key={orders._id} sm={6} md={4} lg={2}>
-            <div className="mainItemCard">
-              <MainMessageCard order={orders}/>
-            </div>
-          </Col>
-        ))}
-        </Row>
-      </div>
-    </>) : (<></>)}
+    {orders && orders.length > 0 && (
+        <div className="mainMessagesSection">
+          <Link to="/chat">
+            <a id="mainMessagesHeader">Your messages</a>
+          </Link>
+          <div className="mainLine-1"></div>
+          <Row>
+            {orders.slice(0, 5).map(order => (
+              <Col key={order._id} sm={6} md={4} lg={2}>
+                <div className="mainItemCard">
+                  <MainMessageCard order={order}/>
+                </div>
+              </Col>
+            ))}
+          </Row>
+        </div>
+      )}
      
 
       <div className="mainFeaturedSection">
