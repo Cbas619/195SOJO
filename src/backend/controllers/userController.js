@@ -50,7 +50,7 @@ const selectUser = async (req, res) => {
     const userID = await User.findById(req.params.id);
     res.status(200).json(userID);
   } catch (error) {
-    return res.status(500).json(err);
+    return res.status(500).json(error);
   }
 };
 
