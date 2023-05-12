@@ -113,21 +113,16 @@ export function OrdersPage() {
                 <Container style={styles.background}>
                     <div className="ordersPageHeader">Order History</div>
                 <div className="orderLine-1"></div>
- 
-        {loading ? (
-          <tr>
-            <td colSpan={4}>Loading...</td>
-          </tr>
-        ) : (
-        
-          orders.map((order) => (
-            <Row md={4}>
-            <Col key={order._id} sm={6} md={4} lg={2}>
+                <Row>
+                {
+                orders.map((order) => (
+            <Col key={order._id}>
               <OrderCard product={order}/>
+              <br/>
+              <br/>
               </Col>
-              </Row>
-          ))
-        )}
+              ))}
+          </Row>
                 </Container>
             </div>
         </div>
