@@ -113,36 +113,21 @@ export function OrdersPage() {
                 <Container style={styles.background}>
                     <div className="ordersPageHeader">Order History</div>
                 <div className="orderLine-1"></div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>DATE</th>
-                            <th>SELLER</th>
-                            <th>PRODUCT</th>
-                            <th>PRICE</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+ 
         {loading ? (
           <tr>
             <td colSpan={4}>Loading...</td>
           </tr>
         ) : (
+        
           orders.map((order) => (
-            <tr key={order._id}>
-              <td>{order._id}</td>
-              <td>
-                {new Date(parseInt(order._id.toString().substring(0, 8), 16) * 1000).toDateString()}
-              </td>
-              <td>{order.sellerName}</td>
-              <td>{order.productName}</td>
-              <td>${order.price}</td>
-            </tr>
+            <Row md={4}>
+            <Col key={order._id} sm={6} md={4} lg={2}>
+              <OrderCard product={order}/>
+              </Col>
+              </Row>
           ))
         )}
-      </tbody>
-                </table>
                 </Container>
             </div>
         </div>

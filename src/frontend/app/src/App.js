@@ -20,6 +20,7 @@ import { PaymentConfirmation } from './pages/PaymentConfirmation';
 import { RequireAuth } from 'react-auth-kit';
 import { OrdersPage } from './pages/OrdersPage';
 import SearchScreen from './pages/SearchScreen';
+import { SingleOrder } from './pages/SingleOrder';
 
 
 function App() {
@@ -37,7 +38,7 @@ function App() {
     <RequireAuth loginPath='/login'><Item/>
     </RequireAuth>}/>
     <Route path="/singleorder/:_id" element={
-    <RequireAuth loginPath='/login'><Item/>
+    <RequireAuth loginPath='/login'><SingleOrder/>
     </RequireAuth>}/>
     <Route path="/login" element={<Login/>}/>
     <Route path="/signup" element={<Signup/>}/>
