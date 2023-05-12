@@ -113,8 +113,9 @@ export default function SearchScreen() {
         <MainCategories/>
         <div className="background-1">
         <Row>
-            <Col md={3}>
-            <h3>Department</h3>
+            <Col md={2} className='boxertemp'>
+                {/* comment with 'command ?' */}
+            <h3 className='dept'>Department</h3> 
             <div>
                 <ul>
                     <li>
@@ -132,7 +133,7 @@ export default function SearchScreen() {
                 </ul>
             </div>
             <div>
-                <h3>Price</h3>
+                <h3 className='price-bottom'>Price</h3>
                 <ul>
                     <li>
                         <Link className={'all' === price ? 'text-bold' : ''} to={getFilterUrl({price: 'all'})}>
