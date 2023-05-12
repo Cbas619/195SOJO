@@ -102,7 +102,7 @@ export function Main() {
         <div className="mainFeaturedCategoryContainer">
           <MainHeaders categoryHeader="Books for the brain | " linkHeader="See all books" categoryLink="/books"/>
           <Row>
-          {products && products.slice(0,5).map(products => (
+          {products && products.map(products => (
           products.category === 'books' && products.purchased === false && products.school === school &&
           <Col key={products._id} sm={6} md={4} lg={2}>
             <div className="mainItemCard">
@@ -116,7 +116,7 @@ export function Main() {
         <div className="mainFeaturedCategoryContainer">
           <MainHeaders categoryHeader="Work with Supplies | " linkHeader="See all school supplies" categoryLink="/officesupplies" />
           <Row>
-          {products && products.slice(0,5).map(products => (
+          {products && products.map(products => (
           products.category === 'supplies' && products.purchased === false && products.school === school &&
           <Col key={products._id} sm={6} md={4} lg={2}>
             <div className="mainItemCard">
