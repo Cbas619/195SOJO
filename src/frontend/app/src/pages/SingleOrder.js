@@ -23,6 +23,18 @@ export function SingleOrder() {
   }
   const [data, setData] = useState("");
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const respo = await axios.get(`http://localhost:4000/api/product/find/${_id}`, {
+          withCredentials: true,
+        });
+        setData(respo.data);
+      } catch (error) {
+        console.log(error.respo);
+      }
+    })();
+  },[]);
 
   console.log(data)
 
@@ -35,11 +47,18 @@ export function SingleOrder() {
                 <Container style={styles.background}>
                     <div className="ordersPageHeader">{data.productName}</div>
                 <div className="orderLine-1"></div>
-    <h6>{data.image}</h6>
-    <h3>{data.description}</h3>
-    <h3>{data.rating}</h3>
-    <h3>{data.price}</h3>
-    <h3>{data.category}</h3>
+                <img src={data.image} className="item-img"alt="No img provided" width="450" height="450"/> 
+                <div className="item-content">
+      <br/>
+    <h3>Description: {data.description}</h3>
+    <br/>
+    <h3>Condition: {data.rating}</h3>
+    <br/>
+    <h3>Price: ${data.price}</h3>
+    <br/>
+    <h3>Category: {data.category}</h3>
+    <br/>
+    </div>
                 </Container>
 
             </div>

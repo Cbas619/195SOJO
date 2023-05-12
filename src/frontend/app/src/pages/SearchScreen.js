@@ -200,7 +200,7 @@ export default function SearchScreen() {
                     </Row>
                     {products.length === 0 && <div>No Product Found</div>}
                     <Row>
-                        {products.map((product) => ( product.school === school &&
+                        {products.map((product) => ( product.school === school && product.purchased === false &&
                             <Col sm={6} lg={4} className="mb-3" key={product._id}>
                                 <MainItemCards product={product}></MainItemCards>
                             </Col>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { MainCategories } from "../components/Main/MainCategories";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineUser } from "react-icons/ai";
 import { MdEdit } from "react-icons/md";
@@ -6,12 +7,24 @@ import { MainNav } from "../components/Main/MainNav";
 import { useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import Container from 'react-bootstrap/Container'
 
 export function Account() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [id, setId] = useState("");
+
+  const styles = {
+    background: {
+    backgroundColor: 'white',
+    //width: '14.9vw',
+    height: '100vh',
+    paddingLeft: '90px',
+    paddingTop: '30px',
+    borderRadius: '10px'
+    }
+  }
 
   //connect to backend
   useEffect(() => {
@@ -48,8 +61,13 @@ export function Account() {
   return (
     <>
       <MainNav />
+      <MainCategories />
+      <div className="background-1">
+      <div className="ordersPageContainer">
+      <Container style={styles.background}>
       <div className="container-fill d-flex flex-column gap-5">
-        <h1>My Account</h1>
+      <div className="ordersPageHeader">My Account</div>
+                <div className="orderLine-1"></div>
         <div className="d-flex gap-4 align-items-center">
           <AiOutlineUser style={{ fontSize: "13ch" }} />
           <h5>Hi, {firstName}!</h5>
@@ -74,6 +92,9 @@ export function Account() {
             <p style={{ flex: "1 1 30ch" }}>Last Name: {lastName}</p>
             <p style={{ flex: "1 1 30ch" }}>Email: {email}</p>
           </div>
+        </div>
+        </div>
+        </Container>
         </div>
       </div>
     </>

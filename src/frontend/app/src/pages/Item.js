@@ -52,14 +52,21 @@ export function Item() {
                 <Container style={styles.background}>
                     <div className="ordersPageHeader">{data.productName}</div>
                 <div className="orderLine-1"></div>
-    <h6>{data.image}</h6>
-    <h3>{data.description}</h3>
-    <h3>{data.rating}</h3>
-    <h3>{data.price}</h3>
-    <h3>{data.category}</h3>
-    <Link to={`/payment/${data._id}`}><Button>Add to Cart</Button></Link>
+    <img src={data.image} className="item-img"alt="No img provided" width="450" height="450"/> 
+    <div className="item-content">
+      <br/>
+    <h3>Description: {data.description}</h3>
+    <br/>
+    <h3>Condition: {data.rating}</h3>
+    <br/>
+    <h3>Price: ${data.price}</h3>
+    <br/>
+    <h3>Category: {data.category}</h3>
+    <br/>
+    <Link to={`/payment/${data._id}`}><Button>Buy now</Button></Link>
+    </div>
+   
                 </Container>
-
             </div>
    
     </div>
