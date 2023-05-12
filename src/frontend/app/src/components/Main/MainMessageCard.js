@@ -6,15 +6,15 @@ import '../../App.scss'
 const styles = {
   cardImage: {
   objectFit: 'cover',
-  width: '14.9vw',
-  height: '30vh'
+  width: '9.9vw',
+  height: '15vh'
   }
 }
 
 export function MainMessageCard(props) {
   const{ order } = props
   return (
-    <Card style={{ width: '15vw' }}>
+    <Card style={{ width: '10vw' }}>
     <Link to={`/chat`}>
       <Card.Img variant="top" src={order.image} style={styles.cardImage}/>
     </Link>
