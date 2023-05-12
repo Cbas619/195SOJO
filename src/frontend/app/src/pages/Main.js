@@ -85,7 +85,7 @@ export function Main() {
     <MainNav/> 
     <MainCategories/>
     <div className="background-1">
-    {products && (
+    {chats.length > 0 && (
           <div className="mainMessagesSection">
             <Link to="/chat">
               <a id="mainMessagesHeader">Your messages</a>
@@ -105,9 +105,6 @@ export function Main() {
                 );
               })}
             </Row>
-            {chats.length === 0 && (
-              <div>No chat available</div>
-            )}
           </div>
         )}
      
