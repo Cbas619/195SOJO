@@ -128,8 +128,9 @@ export default function SearchScreen() {
         <MainCategories/>
         <div className="background-1">
         <Row>
-            <Col md={3}>
-            <h3>Department</h3>
+            <Col md={2} className='boxertemp'>
+                {/* comment with 'command ?' */}
+            <h3 className='dept'>Department</h3> 
             <div>
                 <ul>
                     <li>
