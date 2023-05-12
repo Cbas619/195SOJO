@@ -17,6 +17,7 @@ import { Col } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { getCurrentUser } from "../api/UserRequests";
 import { getOrders } from "../api/OrderRequests";
+import { userChats } from "../api/ChatRequests";
 
 export function Main() {
 
@@ -25,7 +26,6 @@ export function Main() {
   const {loading, products, error} = useSelector(state => state.products)
   //const{orders} = useSelector(state => state.orders)
   const[user, setUser] = useState({});
-  const[orders, setOrders] = useState([]);
   const navigate = useNavigate();
 
   const Logout = async (e) => {
@@ -60,16 +60,24 @@ export function Main() {
     dispatch(getProducts())
   }, [dispatch])
 
+
+
+
+  //chat
+  const [chats, setChats] = useState([]);
+
   useEffect(() => {
-    (async () => {
+    const getChats = async () => {
       try {
-        const {data} =  await getOrders(user._id.toString());
-        setOrders(data)
+        const { data } = await userChats(user._id);
+        setChats(data);
       } catch (error) {
-        //console.log(error.respo);
+        console.log(error);
       }
-    })();
-  },[user._id]);
+    };
+  
+    getChats();
+  }, [user._id]);
 
 
   return (
@@ -77,23 +85,31 @@ export function Main() {
     <MainNav/> 
     <MainCategories/>
     <div className="background-1">
-    {orders && orders.length > 0 && (
-        <div className="mainMessagesSection">
-          <Link to="/chat">
-            <a id="mainMessagesHeader">Your messages</a>
-          </Link>
-          <div className="mainLine-1"></div>
-          <Row>
-            {orders.slice(0, 5).map(order => (
-              <Col key={order._id} sm={6} md={4} lg={2}>
-                <div className="mainItemCard">
-                  <MainMessageCard order={order}/>
-                </div>
-              </Col>
-            ))}
-          </Row>
-        </div>
-      )}
+    {products && (
+          <div className="mainMessagesSection">
+            <Link to="/chat">
+              <a id="mainMessagesHeader">Your messages</a>
+            </Link>
+            <div className="mainLine-1"></div>
+            <Row>
+              {chats.map(chat => {
+                const product = products.find(product => product._id === chat.productId);
+                return (
+                  product && (
+                    <Col key={product._id} sm={6} md={4} lg={2}>
+                      <div className="mainItemCard">
+                        <MainMessageCard order={product} />
+                      </div>
+                    </Col>
+                  )
+                );
+              })}
+            </Row>
+            {chats.length === 0 && (
+              <div>No chat available</div>
+            )}
+          </div>
+        )}
      
 
       <div className="mainFeaturedSection">
@@ -130,8 +146,25 @@ export function Main() {
           ))}
          </Row>
         </div>
+
+
+        <div className="mainFeaturedCategoryContainer">
+          <MainHeaders categoryHeader="Tinker with Electronics | " linkHeader="See all electronics" categoryLink="/electronics" />
+          <Row>
+          {products && products
+            .filter(product => product.category === 'electronics' && product.purchased === false && product.school === school)
+            .slice(0, 5)
+            .map(product => (
+              <Col key={product._id} sm={6} md={4} lg={2}>
+                <div className="mainItemCard">
+                  <MainItemCards product={product}/>
+                </div>
+              </Col>
+          ))}
+         </Row>
+        </div>
+
       </div>
-      
       <br></br>
     </div>
     
