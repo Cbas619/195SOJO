@@ -218,8 +218,8 @@ return (
       <Form.Control placeholder='Zip Code'/>
     </Form.Group>
   </Row>
-
-  <Button className='form-group-t' variant="primary" type="submit" onClick={handleSubmit}>
+  <br/>
+  <Button className='form-group-t'variant="primary" type="submit" onClick={handleSubmit}>
     Submit
   </Button>
 </Form>

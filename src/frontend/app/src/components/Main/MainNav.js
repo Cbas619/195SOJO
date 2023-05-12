@@ -47,13 +47,6 @@ export function MainNav() {
               </NavDropdown.Item>
               <NavDropdown.Item>
                 <Nav.Link>
-                  <Link to="/edit">
-                    <div className="mainNavLinks">Edit</div>
-                  </Link>
-                </Nav.Link>
-              </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Nav.Link>
                   <Link to="/orders">
                     <div className="mainNavLinks">Orders</div>
                   </Link>

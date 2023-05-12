@@ -23,7 +23,7 @@ export function OrderCard(props) {
       <Card.Body>
           <Card.Title>{product.productName}</Card.Title>
         <Card.Text>
-            ${product.price}
+        Purchased: {new Date(parseInt(product._id.toString().substring(0, 8), 16) * 1000).toDateString()}
         </Card.Text>
       </Card.Body>
       
