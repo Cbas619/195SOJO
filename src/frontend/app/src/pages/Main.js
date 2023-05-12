@@ -102,28 +102,32 @@ export function Main() {
         <div className="mainFeaturedCategoryContainer">
           <MainHeaders categoryHeader="Books for the brain | " linkHeader="See all books" categoryLink="/books"/>
           <Row>
-          {products && products.map(products => (
-          products.category === 'books' && products.purchased === false && products.school === school &&
-          <Col key={products._id} sm={6} md={4} lg={2}>
-            <div className="mainItemCard">
-              <MainItemCards product={products}/>
-            </div>
-          </Col>
-        ))}
+          {products && products
+            .filter(product => product.category === 'books' && product.purchased === false && product.school === school)
+            .slice(0, 5)
+            .map(product => (
+              <Col key={product._id} sm={6} md={4} lg={2}>
+                <div className="mainItemCard">
+                  <MainItemCards product={product}/>
+                </div>
+              </Col>
+          ))}
           </Row>
         </div>
 
         <div className="mainFeaturedCategoryContainer">
           <MainHeaders categoryHeader="Work with Supplies | " linkHeader="See all school supplies" categoryLink="/officesupplies" />
           <Row>
-          {products && products.map(products => (
-          products.category === 'supplies' && products.purchased === false && products.school === school &&
-          <Col key={products._id} sm={6} md={4} lg={2}>
-            <div className="mainItemCard">
-              <MainItemCards product={products}/>
-            </div>
-          </Col>
-        ))}
+          {products && products
+            .filter(product => product.category === 'supplies' && product.purchased === false && product.school === school)
+            .slice(0, 5)
+            .map(product => (
+              <Col key={product._id} sm={6} md={4} lg={2}>
+                <div className="mainItemCard">
+                  <MainItemCards product={product}/>
+                </div>
+              </Col>
+          ))}
          </Row>
         </div>
       </div>

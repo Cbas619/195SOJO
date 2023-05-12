@@ -6,15 +6,15 @@ import '../../App.scss'
 const styles = {
   cardImage: {
   objectFit: 'cover',
-  width: '14.9vw',
-  height: '30vh'
+  width: '11.9vw',
+  height: '25vh'
   }
 }
 
 export function MainItemCards(props) {
   const{ product } = props
   return (
-    <Card style={{ width: '15vw' }}>
+    <Card style={{ width: '12vw' }}>
     <Link to={`/item/${product._id}`}>
       <Card.Img variant="top" src={product.image} style={styles.cardImage}/>
     </Link>
