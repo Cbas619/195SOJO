@@ -3,6 +3,7 @@ const Order = require("../models/Orders");
 const addOrder = async (req, res) => {
     const newOrder = new Order({
         buyerId: req.body.buyerId,
+        sellerId: req.body.sellerId,
         productId:req.body.productId,
         productName: req.body.productName,
         image: req.body.image,

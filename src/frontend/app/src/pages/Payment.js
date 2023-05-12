@@ -37,6 +37,7 @@ export function Payment() {
       axios
         .post("http://localhost:4000/api/orders/insert", {
           buyerId: buyerId,
+          sellerId: productId.sellerId,
           productId: _id,
           productName: productId.productName,
           image: productId.image,

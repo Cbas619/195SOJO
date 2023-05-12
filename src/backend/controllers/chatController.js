@@ -2,7 +2,9 @@ const Chat = require("../models/Chat");
 
 const startChat = async (req, res) => {
     const newChat = new Chat({
-        members: [req.body.senderId, req.body.receiverId]
+        members: [req.body.senderId, req.body.receiverId],
+        productId: req.body.productId,
+        productName: req.body.productName,
     });
 
     try {

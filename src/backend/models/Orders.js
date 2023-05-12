@@ -6,6 +6,11 @@ const orderSchema = new mongoose.Schema({
     required: true,
     min: 2
   },
+  sellerId: {
+    type: String,
+    required: true,
+    min: 2
+  },
   productId: {
     type: String,
     required: true,

@@ -6,8 +6,12 @@ const chatSchema = new mongoose.Schema({
   },
   productId: {
     type: String,
-    required: true,
     min: 2
+  },
+  productName: {
+    type: String,
+    min: 2,
+    max: 255,
   },
 },
  {

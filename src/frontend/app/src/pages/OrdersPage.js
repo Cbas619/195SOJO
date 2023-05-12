@@ -7,12 +7,14 @@ import { useContext, useReducer } from "react";
 import { store } from '../store';
 import { useNavigate, useParams, } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrders } from "../actions/orderActions";
+import { getOrders } from "../api/OrderRequests";
+import { getCurrentUser } from "../api/UserRequests";
 import { useEffect } from 'react';
 import  {useState} from 'react';
 import './styleSheets/OrdersPage.scss'
 import Container from 'react-bootstrap/Container'
 import axios from "axios";
+import { getUser } from "../api/UserRequests";
 
 const styles = {
     background: {
@@ -34,7 +36,8 @@ export function OrdersPage() {
     const [user, setUser] = useState("");
     const [productId, setProductId] = useState("");
     const [products, setProducts] = useState("")
-    
+    const [orders, setOrders] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     // const {loading, error, orders} = useSelector(state => state.orders)
     // useEffect(()=> {
@@ -44,33 +47,62 @@ export function OrdersPage() {
     // console.log(orders.buyerId)
 
     useEffect(() => {
-        (async () => {
-          try {
-            const respo = await axios.get("http://localhost:4000/api/user/user", {
-              withCredentials: true,
-            });
-            setUser(respo.data._id);
-          } catch (error) {
-            console.log(error.respo);
-          }
-        })();
-      });
-      console.log(user)
+      (async () => {
+        try {
+          const {data} =  await getCurrentUser();
+          setUser(data)
+          console.log("SDSD", data)
+        } catch (error) {
+          //console.log(error.respo);
+        }
+      })();
+    },[]);
 
 
+    useEffect(() => {
+      (async () => {
+        try {
+          const { data } = await getOrders(user._id.toString());
+          setOrders(data);
+          setLoading(false); // Mark loading as complete when orders are fetched
+        } catch (error) {
+          // Handle error
+          setLoading(false); // Mark loading as complete even in case of error
+        }
+      })();
+    }, [user._id]);
+
+      const getSellerName = async (sellerId) => {
+        try {
+          const response = await getUser(sellerId.toString());
+          return response.data.firstName; // Adjust the property according to your API response
+        } catch (error) {
+          // Handle error
+          return "";
+        }
+      };
+    
       useEffect(() => {
         (async () => {
           try {
-            const respo = await axios.get(`http://localhost:4000/api/orders/find/${user}`, {
-              withCredentials: true,
-            });
-            setProductId(respo.data);
+            const { data } = await getOrders(user._id.toString());
+            const updatedOrders = await Promise.all(
+              data.map(async (order) => {
+                const sellerName = await getSellerName(order.sellerId);
+                return {
+                  ...order,
+                  sellerName: sellerName,
+                };
+              })
+            );
+            setOrders(updatedOrders);
+            setLoading(false); // Mark loading as complete when orders are fetched
           } catch (error) {
-            console.log(error.respo);
+            // Handle error
+            setLoading(false); // Mark loading as complete even in case of error
           }
         })();
-      });
-      console.log(productId)
+      }, [user._id]);
 
     return (
         <>
@@ -81,11 +113,35 @@ export function OrdersPage() {
                 <Container style={styles.background}>
                     <div className="ordersPageHeader">Order History</div>
                 <div className="orderLine-1"></div>
-                {productId && productId.map(productId => (
-                <div className="mainItemCard">
-              <OrderCard product={productId}/>
-                </div>
-                ))}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>DATE</th>
+                            <th>SELLER</th>
+                            <th>PRODUCT</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+        {loading ? (
+          <tr>
+            <td colSpan={4}>Loading...</td>
+          </tr>
+        ) : (
+          orders.map((order) => (
+            <tr key={order._id}>
+              <td>{order._id}</td>
+              <td>
+                {new Date(parseInt(order._id.toString().substring(0, 8), 16) * 1000).toDateString()}
+              </td>
+              <td>{order.sellerName}</td>
+              <td>{order.productName}</td>
+            </tr>
+          ))
+        )}
+      </tbody>
+                </table>
                 </Container>
             </div>
         </div>
