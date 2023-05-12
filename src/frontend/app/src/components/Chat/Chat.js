@@ -45,7 +45,6 @@ export function Chat() {
           try {
             const {data} =  await getCurrentUser();
             setUser(data)
-            console.log("SDSD", data)
           } catch (error) {
             //console.log(error.respo);
           }

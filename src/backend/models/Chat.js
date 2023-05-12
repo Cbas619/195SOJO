@@ -4,6 +4,11 @@ const chatSchema = new mongoose.Schema({
   members: {
     type: Array,
   },
+  productId: {
+    type: String,
+    required: true,
+    min: 2
+  },
 },
  {
     timestamps: true,

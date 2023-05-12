@@ -14,6 +14,7 @@ import Button from 'react-bootstrap/Button';
 import { MainItemCards } from '../components/Main/MainItemCards';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import { getCurrentUser } from '../api/UserRequests';
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -67,6 +68,20 @@ export default function SearchScreen() {
         loading: true,
         error: '',
     });
+    const [school, setSchool] = useState("");
+
+
+    useEffect(() => {
+        (async () => {
+          try {
+            const {data} =  await getCurrentUser();
+            setSchool(data.school);
+          } catch (error) {
+            //console.log(error.respo);
+          }
+        })();
+      },[]);
+    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -185,7 +200,7 @@ export default function SearchScreen() {
                     </Row>
                     {products.length === 0 && <div>No Product Found</div>}
                     <Row>
-                        {products.map((product) => (
+                        {products.map((product) => ( product.school === school &&
                             <Col sm={6} lg={4} className="mb-3" key={product._id}>
                                 <MainItemCards product={product}></MainItemCards>
                             </Col>
