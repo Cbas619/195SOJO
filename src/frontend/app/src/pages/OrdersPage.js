@@ -120,7 +120,7 @@ export function OrdersPage() {
                             <th>DATE</th>
                             <th>SELLER</th>
                             <th>PRODUCT</th>
-                            
+                            <th>PRICE</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -137,6 +137,7 @@ export function OrdersPage() {
               </td>
               <td>{order.sellerName}</td>
               <td>{order.productName}</td>
+              <td>${order.price}</td>
             </tr>
           ))
         )}
