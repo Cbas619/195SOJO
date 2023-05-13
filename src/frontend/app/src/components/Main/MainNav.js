@@ -27,6 +27,13 @@ export function MainNav() {
     })();
   },[]);
 
+  const getGreeting = () => {
+    if (user.firstName) {
+      return `Hi, ${user.firstName}`;
+    } else {
+      return "Hi";
+    }
+  };
 
   return (
     <Navbar bg="secondary" expand="lg">
@@ -53,7 +60,7 @@ export function MainNav() {
             </Nav.Link>
             <NavDropdown
               className="mainNavLinks"
-              title={`Hi, ${user.firstName}`}
+              title={getGreeting()}
               id="basic-nav-dropdown"
             >
               <NavDropdown.Item>
