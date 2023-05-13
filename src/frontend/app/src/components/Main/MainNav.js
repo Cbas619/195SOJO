@@ -7,9 +7,27 @@ import { Link } from "react-router-dom";
 import { useSignOut } from "react-auth-kit";
 import "./SearchBar";
 import { SearchBar } from "./SearchBar";
+import { getCurrentUser } from "../../api/UserRequests";
+import  {useState} from 'react';
+import { useEffect } from 'react';
 
 export function MainNav() {
   const signOut = useSignOut();
+  const[user, setUser] = useState({});
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const {data} =  await getCurrentUser();
+        setUser(data)
+        console.log("SDSD", data)
+      } catch (error) {
+        //console.log(error.respo);
+      }
+    })();
+  },[]);
+
+
   return (
     <Navbar bg="secondary" expand="lg">
       <Container>
@@ -35,7 +53,7 @@ export function MainNav() {
             </Nav.Link>
             <NavDropdown
               className="mainNavLinks"
-              title="Account"
+              title={`Hi, ${user.firstName}`}
               id="basic-nav-dropdown"
             >
               <NavDropdown.Item>
