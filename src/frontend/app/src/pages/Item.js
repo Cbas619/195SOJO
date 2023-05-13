@@ -57,16 +57,14 @@ export function Item() {
   const messageSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Check if chat already exists
       const existingChatResponse = await axios.get(
-        `http://localhost:4000/api/chat/find/${user._id}/${data.sellerId}`
+        `http://localhost:4000/api/chat/find/${user._id}/${data.sellerId}`,
+        { params: { productId: data._id } }
       );
   
-      if (existingChatResponse.data) {
-        // Chat already exists, navigate to the existing chat
+      if (existingChatResponse.data && existingChatResponse.data.productId === data._id) {
         navigate('/chat');
       } else {
-        // Chat does not exist, start a new chat
         axios
           .post("http://localhost:4000/api/chat/start", {
             senderId: user._id,

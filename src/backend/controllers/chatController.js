@@ -28,13 +28,24 @@ const getId = async (req, res) => {
 
 const getTwoIds = async (req, res) => {
     try {
-        const chat = await Chat.findOne({
-            members: {$all: [req.params.firstId, req.params.secondId]}
-        })
-        res.status(200).json(chat)
+      const { firstId, secondId } = req.params;
+  
+      let chat = await Chat.findOne({
+        members: { $all: [firstId, secondId] },
+      });
+  
+      // Check if chat exists with the same seller
+      if (chat) {
+        // Check if the product ID is different
+        if (chat.productId !== req.query.productId) {
+          chat = null; // Reset chat if product ID is different
+        }
+      }
+  
+      res.status(200).json(chat);
     } catch (error) {
-        res.status(500).json(error)
+      res.status(500).json(error);
     }
-};
+  };
 
 module.exports = { startChat, getId, getTwoIds };
