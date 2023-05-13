@@ -6,8 +6,8 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import { getUsers } from "../../actions/userActions"
-import { useEffect } from 'react';
+import { getUsers } from "../../actions/userActions";
+import { useEffect } from "react";
 
 export function SellForm() {
   const [productName, setProductName] = useState("");
@@ -18,7 +18,7 @@ export function SellForm() {
   const [category, setCategory] = useState("");
   const [school, setSchool] = useState("");
   const [sellerId, setSellerId] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const productInsert = async (e) => {
     e.preventDefault();
@@ -32,7 +32,7 @@ export function SellForm() {
           price: price,
           category: category,
           school: school,
-          sellerId: sellerId
+          sellerId: sellerId,
         })
         .then((response, err) => {
           console.log(response);
@@ -42,6 +42,39 @@ export function SellForm() {
       console.log(JSON.stringify(error));
     }
   };
+
+  //Upload image API
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/api/product/get")
+      .then((res) => {
+        console.log(res.data);
+        setImage(res.data);
+      })
+      .catch((err) => console.log(err));
+  });
+
+  const uploadImage = async (e) => {
+    e.preventDefault();
+    try {
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append("image", file);
+      const respo = await axios.post(
+        "http://localhost:4000/api/product/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true,
+        }
+      );
+      setImage(respo.data);
+    } catch (error) {
+      console.log(error.respo);
+    }
+  }; ////end upload image API
 
   useEffect(() => {
     (async () => {
@@ -55,7 +88,7 @@ export function SellForm() {
       }
     })();
   });
-  console.log(school)
+  console.log(school);
   useEffect(() => {
     (async () => {
       try {
@@ -108,17 +141,17 @@ export function SellForm() {
             </Form.Group> */}
           <Form.Group className="mb-3" controlId="formRating">
             <Form.Label>Rating</Form.Label>
-            <Form.Select aria-label="Default select example" onChange={(e) => {
+            <Form.Select
+              aria-label="Default select example"
+              onChange={(e) => {
                 setRating(e.target.value);
-              }}>
-            <option>Enter Rating</option>
-            <option value="new">New</option>
-            <option value="used">Used</option>
+              }}
+            >
+              <option>Enter Rating</option>
+              <option value="new">New</option>
+              <option value="used">Used</option>
             </Form.Select>
           </Form.Group>
-
-
-          
 
           <Form.Group className="mb-3" controlId="formPrice">
             <Form.Label>Price</Form.Label>
@@ -155,16 +188,19 @@ export function SellForm() {
 
           <Form.Group className="mb-3" controlId="formCategory">
             <Form.Label>Category</Form.Label>
-            <Form.Select aria-label="Default select example" onChange={(e) => {
+            <Form.Select
+              aria-label="Default select example"
+              onChange={(e) => {
                 setCategory(e.target.value);
-              }}>
-            <option>Open this select menu</option>
-            <option value="books">Books</option>
-            <option value="supplies">Supplies</option>
-            <option value="electronics">Electronics</option>
-            <option value="clothing">Clothing</option>
-            <option value="entertainment">Entertainment</option>
-            <option value=" ">General</option>
+              }}
+            >
+              <option>Open this select menu</option>
+              <option value="books">Books</option>
+              <option value="supplies">Supplies</option>
+              <option value="electronics">Electronics</option>
+              <option value="clothing">Clothing</option>
+              <option value="entertainment">Entertainment</option>
+              <option value=" ">General</option>
             </Form.Select>
           </Form.Group>
           <Button variant="primary" type="submit" onClick={productInsert}>
