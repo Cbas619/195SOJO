@@ -34,7 +34,7 @@ const getSpecificItem = async (req, res) => {
 };
 
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 25;
 const searchItem = async (req, res) => {
     try {
       const { query } = req;

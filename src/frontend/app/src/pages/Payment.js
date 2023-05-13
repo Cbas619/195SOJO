@@ -66,21 +66,6 @@ export function Payment() {
     } catch (error) {
       console.log(JSON.stringify(error));
     }
-    try {
-      axios
-      .post("http://localhost:4000/api/chat/start", {
-        senderId: buyerId,
-        receiverId: productId.sellerId,
-        productId: _id,
-        productName: productId.productName,
-      })
-        .then((response, err) => {
-          console.log(response);
-          navigate('/paymentconfirmation');
-        });
-    } catch (error) {
-      console.log(JSON.stringify(error));
-    }
   };
 
   useEffect(() => {

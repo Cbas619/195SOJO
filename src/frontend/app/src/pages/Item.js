@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import  {useState, useEffect} from 'react';
 import axios from "axios";
 import Container from 'react-bootstrap/Container';
+import { getCurrentUser } from "../api/UserRequests";
 
 export function Item() {
 
@@ -27,6 +28,18 @@ export function Item() {
     }
   }
   const [data, setData] = useState("");
+  const[user, setUser] = useState({});
+  useEffect(() => {
+    (async () => {
+      try {
+        const {data} =  await getCurrentUser();
+        setUser(data)
+        console.log("SDSD", data)
+      } catch (error) {
+        //console.log(error.respo);
+      }
+    })();
+  },[]);
 
   useEffect(() => {
     (async () => {
@@ -40,6 +53,36 @@ export function Item() {
       }
     })();
   },[]);
+
+  const messageSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // Check if chat already exists
+      const existingChatResponse = await axios.get(
+        `http://localhost:4000/api/chat/find/${user._id}/${data.sellerId}`
+      );
+  
+      if (existingChatResponse.data) {
+        // Chat already exists, navigate to the existing chat
+        navigate('/chat');
+      } else {
+        // Chat does not exist, start a new chat
+        axios
+          .post("http://localhost:4000/api/chat/start", {
+            senderId: user._id,
+            receiverId: data.sellerId,
+            productId: data._id,
+            productName: data.productName,
+          })
+          .then((response) => {
+            console.log(response);
+            navigate('/chat');
+          });
+      }
+    } catch (error) {
+      console.log(JSON.stringify(error));
+    }
+  };
 
   console.log(data)
 
@@ -64,6 +107,9 @@ export function Item() {
     <h3>Category: {data.category}</h3>
     <br/>
     <Link to={`/payment/${data._id}`}><Button>Buy now</Button></Link>
+    <br></br>
+    <br></br>
+    <Link to={`/chat`}><button type="button" class="btn btn-info" onClick={messageSubmit}>Message Seller</button></Link>
     </div>
    
                 </Container>
