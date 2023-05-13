@@ -46,7 +46,7 @@ export function SellForm() {
   //Upload image API
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/product/get")
+      .get("http://localhost:4000/api//product/insert")
       .then((res) => {
         console.log(res.data);
         setImage(res.data);
@@ -54,14 +54,14 @@ export function SellForm() {
       .catch((err) => console.log(err));
   });
 
-  const uploadImage = async (e) => {
+  const productImage = async (e) => {
     e.preventDefault();
     try {
       const file = e.target.files[0];
       const formData = new FormData();
       formData.append("image", file);
       const respo = await axios.post(
-        "http://localhost:4000/api/product/upload",
+        "http://localhost:4000/api//product/insert",
         formData,
         {
           headers: {
@@ -105,7 +105,12 @@ export function SellForm() {
   return (
     <Row>
       <Col>
-        <Form className="sellFormContainer">
+        <Form
+          className="sellFormContainer"
+          action="/sell"
+          method="post"
+          enctype="multipart/form-data"
+        >
           <Form.Group className="mb-3" controlId="formItemName">
             <Form.Label>Item Name</Form.Label>
             <Form.Control
@@ -178,7 +183,7 @@ export function SellForm() {
           <Form.Group className="mb-3" controlId="formImage">
             <Form.Label>Image</Form.Label>
             <Form.Control
-              type="ItemImage"
+              type="file"
               placeholder="Enter Image"
               onChange={(e) => {
                 setImage(e.target.value);
