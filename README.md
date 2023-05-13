@@ -1,5 +1,7 @@
 # 195SOJO
 
+please refer to readme.docx submitted if you wish to run this locally
+
 Available Scripts
 
 In the project directory, you can run:
