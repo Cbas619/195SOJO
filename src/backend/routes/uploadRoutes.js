@@ -4,11 +4,13 @@ const Product = require("../models/Product");
 
 const router = Router();
 
+// get api
 router.get("/api/upload", async (req, res) => {
   const allImages = await Product.find().sort({ createdAt: "descending" });
   res.send(allImages);
 });
 
+//post api
 router.post("/api/save", uploadMiddleware.single("image"), (req, res) => {
   const image = req.file.filename;
 
