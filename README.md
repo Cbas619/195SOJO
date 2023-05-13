@@ -1,6 +1,6 @@
 # 195SOJO
 
-please refer to readme.docx submitted if you wish to run this locally
+please refer to readme.pdf submitted if you wish to run this locally
 
 Available Scripts
 
