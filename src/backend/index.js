@@ -5,6 +5,10 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const { connection } = require("./utils/Connection");
 const bodyParser = require("body-parser");
+const path = require("path");
+
+app.use(express.static("public"));
+app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 
 app.use(bodyParser.json());
 app.use(express.json());
