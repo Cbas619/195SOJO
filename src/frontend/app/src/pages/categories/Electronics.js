@@ -21,6 +21,7 @@ export function Electronics() {
 
   const {loading, products, error} = useSelector(state => state.products)
   const [school, setSchool] = useState("");
+  const [id, setId] = useState("");
   useEffect(() => {
     (async () => {
       try {
@@ -28,6 +29,7 @@ export function Electronics() {
           withCredentials: true,
         });
         setSchool(respo.data.school);
+        setId(respo.data._id);
       } catch (error) {
         console.log(error.respo);
       }
@@ -48,7 +50,7 @@ export function Electronics() {
       <div className="categorySection">
       <Row>
         {products && products.map(products => (
-          products.category === 'electronics' && products.purchased === false && products.school === school &&
+          products.category === 'electronics' && products.purchased === false && products.school === school && products.sellerId !== id &&
             <Col key={products._id} sm={6} md={4} lg={2}>
               <div className="mainItemCard">
                 <MainItemCards product={products}/>

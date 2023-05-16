@@ -14,6 +14,17 @@ import { MainCategories } from '../components/Main/MainCategories';
 export function Payment() {
   const [buyerId, setBuyerId] = useState("");
   const [productId, setProductId] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [selectState, setSelectState] = useState("");
+  const [zip, setZip] = useState("");
+  const [cardNumber, setCard] = useState("");
+  const [expireDate, setExpire] = useState("");
+  const [cvvNumber, setCVV] = useState("");
+  const [nameOnCard, setName] = useState("");
   const navigate = useNavigate();
   const {_id} = useParams();
   const styles = {
@@ -35,25 +46,45 @@ export function Payment() {
     e.preventDefault();
     try {
       axios
-        .post("http://localhost:4000/api/orders/insert", {
-          buyerId: buyerId,
-          sellerId: productId.sellerId,
-          productId: _id,
-          productName: productId.productName,
-          image: productId.image,
-          description: productId.description,
-          rating: productId.rating,
-          price: productId.price,
-          category: productId.category,
-          school: productId.school,
+        .post("http://localhost:4000/api/payment/insert", {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          address: address,
+          city: city,
+          state: selectState,
+          zip: zip,
+          cardNumber: cardNumber,
+          expireDate: expireDate,
+          cvvNumber: cvvNumber,
+          nameOnCard: nameOnCard
+
+        }).then((response, err) => {
+          axios
+          .post("http://localhost:4000/api/orders/insert", {
+            buyerId: buyerId,
+            sellerId: productId.sellerId,
+            productId: _id,
+            productName: productId.productName,
+            image: productId.image,
+            description: productId.description,
+            rating: productId.rating,
+            price: productId.price,
+            category: productId.category,
+            school: productId.school,
+          })
+          axios
+        .put(`http://localhost:4000/api/product/edit/${_id}`, {
+          purchased: true 
         })
-        .then((response, err) => {
+        }).then((response, err) => {
           console.log(response);
           navigate('/paymentconfirmation');
         });
     } catch (error) {
       console.log(JSON.stringify(error));
     }
+
     try {
       axios
         .put(`http://localhost:4000/api/product/edit/${_id}`, {
@@ -61,7 +92,6 @@ export function Payment() {
         })
         .then((response, err) => {
           console.log(response);
-          navigate('/paymentconfirmation');
         });
     } catch (error) {
       console.log(JSON.stringify(error));
@@ -105,7 +135,7 @@ return (
   <div className="ordersPageContainer">
   <Container style={styles.background}>
   <Container >
-  <div className="ordersPageHeader">Checkout / Cart</div>
+  <div className="ordersPageHeader">Checkout</div>
                 <div className="orderLine-1"></div>
   </Container>
   <br></br>
@@ -118,35 +148,35 @@ return (
   <Col className="mb-3">
     <Form.Group as={Col} controlId="formFirstName">
       <Form.Label>First Name</Form.Label>
-      <Form.Control type="firstname" placeholder="First Name"/>
+      <Form.Control type="firstname" placeholder="First Name" onChange={(e) => {setFirstName(e.target.value)}}/>
 
     </Form.Group> <br></br>
 
     <Form.Group as={Col} controlId="formLastName">
       <Form.Label>Last Name</Form.Label>
-      <Form.Control type="lastName" placeholder="Last Name"/>
+      <Form.Control type="lastName" placeholder="Last Name" onChange={(e) => {setLastName(e.target.value)}}/>
     </Form.Group>
   </Col>
 
   <Form.Group className="mb-3" controlId="formGridAddress1">
     <Form.Label>Email</Form.Label>
-    <Form.Control placeholder="Email Address"/>
+    <Form.Control placeholder="Email Address" onChange={(e) => {setEmail(e.target.value)}}/>
   </Form.Group>
 
   <Form.Group className="mb-3" controlId="formGridAddress2">
     <Form.Label>Address</Form.Label>
-    <Form.Control placeholder="1234 Main St, #82"/>
+    <Form.Control placeholder="1234 Main St, #82" onChange={(e) => {setAddress(e.target.value)}}/>
   </Form.Group>
 
   <Row className="mb-3">
     <Form.Group as={Col} controlId="formCity">
       <Form.Label>City</Form.Label>
-      <Form.Control placeholder='City'/>
+      <Form.Control placeholder='City' onChange={(e) => {setCity(e.target.value)}}/>
   </Form.Group>
 
   <Form.Group as={Col} controlId="formState">
       <Form.Label>State</Form.Label>
-      <Form.Select defaultValue="Choose...">
+      <Form.Select defaultValue="Choose..." onChange={(e) => {setSelectState(e.target.value)}}>
         <option value="Alabama">Alabama</option>
         <option value="Alaska">Alaska</option>
         <option value="Arizona">Arizona</option>
@@ -165,7 +195,7 @@ return (
 
     <Form.Group as={Col} controlId="formZip">
       <Form.Label>Zip</Form.Label>
-      <Form.Control placeholder='Zip Code'/>
+      <Form.Control placeholder='Zip Code' onChange={(e) => {setZip(e.target.value)}}/>
     </Form.Group>
   </Row>
 
@@ -178,33 +208,33 @@ return (
 
   <Form.Group className="mb-3" controlId="formGridAddress1">
     <Form.Label>Card Number</Form.Label>
-    <Form.Control placeholder="123456789"/>
+    <Form.Control placeholder="123456789" onChange={(e) => {setCard(e.target.value)}}/>
   </Form.Group>
 
   <Form.Group className="mb-3" controlId="formName">
     <Form.Label>Name</Form.Label>
-    <Form.Control placeholder="Full Name"/>
+    <Form.Control placeholder="Full Name" onChange={(e) => {setName(e.target.value)}}/>
   </Form.Group>
 
   <Row className="mb-3">
     <Form.Group as={Col} controlId="formExpireDate">
       <Form.Label>Expire Date</Form.Label>
-      <Form.Control placeholder='Date'/>
+      <Form.Control placeholder='Date' onChange={(e) => {setExpire(e.target.value)}}/>
   </Form.Group>
 
   <Form.Group as={Col} controlId="formCVV">
       <Form.Label>CVV</Form.Label>
-      <Form.Control placeholder='123'/>
+      <Form.Control placeholder='123' onChange={(e) => {setCVV(e.target.value)}}/>
 
   </Form.Group>
 
     <Form.Group as={Col} controlId="formZip">
       <Form.Label>Zip</Form.Label>
-      <Form.Control placeholder='Zip Code'/>
+      <Form.Control placeholder='Zip Code' onChange={(e) => {setZip(e.target.value)}}/>
     </Form.Group>
   </Row>
-  <br/>
-  <Button className='form-group-t'variant="primary" type="submit" onClick={handleSubmit}>
+
+  <Button className='form-group-t' variant="primary" type="submit" onClick={handleSubmit}>
     Submit
   </Button>
 </Form>

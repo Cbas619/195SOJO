@@ -48,15 +48,18 @@ const insertItem = async (req, res) => {
     const sv = process.env.PUBLIC_IMG_URL + req.file.originalname;
     console.log(sv);
     const newProduct = new Product({
-      productName: productName,
-      image: sv,
-      description: description,
-      rating: rating,
-      price: price,
-      category: category,
-      school: school,
-      sellerId: sellerId,
-      purchased: false,
+        productName: req.body.productName,
+        image: req.body.image,
+        description: req.body.description,
+        rating: req.body.rating,
+        price: req.body.price,
+        category: req.body.category,
+        school: req.body.school,
+        sellerId: req.body.sellerId,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        paymentType: req.body.paymentType,
+        purchased: false
     });
 
     try {

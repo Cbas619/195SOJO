@@ -21,7 +21,7 @@ export function Item() {
     background: {
     backgroundColor: 'white',
     //width: '14.9vw',
-    height: '100vh',
+    height: '650px',
     paddingLeft: '90px',
     paddingTop: '30px',
     borderRadius: '10px'
@@ -95,15 +95,15 @@ export function Item() {
                 <div className="orderLine-1"></div>
     <img src={data.image} className="item-img"alt="No img provided" width="450" height="450"/> 
     <div className="item-content">
-      <br/>
-    <h3>Description: {data.description}</h3>
+    <div>Price: ${data.price}</div>
     <br/>
-    <h3>Condition: {data.rating}</h3>
+    <div>Condition: {data.rating}</div>
     <br/>
-    <h3>Price: ${data.price}</h3>
+    <div>Category: {data.category}</div>
     <br/>
-    <h3>Category: {data.category}</h3>
+    <div>Description: {data.description}</div>
     <br/>
+    <div>Sold by:  {data.firstName} {data.lastName}</div>
     <Link to={`/payment/${data._id}`}><Button>Buy now</Button></Link>
     <br></br>
     <br></br>

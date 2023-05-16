@@ -6,10 +6,8 @@ export function Sell() {
   const styles = {
     background: {
     backgroundColor: 'white',
-    //width: '14.9vw',
-    height: '100vh',
-    paddingLeft: '90px',
-    paddingRight: '90px',
+    width: '30%',
+    height: '50%',
     paddingTop: '30px',
     borderRadius: '10px'
     }
@@ -24,6 +22,8 @@ export function Sell() {
                     <div className="ordersPageHeader">Sell Item</div>
                 <div className="orderLine-1"></div>
                 <SellForm />
+                <br/>
+                <br/>
                 </Container>
 
             </div>

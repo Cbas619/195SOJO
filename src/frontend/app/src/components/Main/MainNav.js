@@ -48,16 +48,6 @@ export function MainNav() {
           <Nav className="me-auto"></Nav>
           <SearchBar />
           <Nav>
-            <Nav.Link>
-              <Link to="/sell">
-                <div className="mainNavLinks">Sell</div>
-              </Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link to="/chat">
-                <div className="mainNavLinks">Messages</div>
-              </Link>
-            </Nav.Link>
             <NavDropdown
               className="mainNavLinks"
               title={getGreeting()}
@@ -66,16 +56,37 @@ export function MainNav() {
               <NavDropdown.Item>
                 <Nav.Link>
                   <Link to="/account">
-                    <div className="mainNavLinks">Profile</div>
+                    <div className="mainNavLinks">My Profile</div>
                   </Link>
                 </Nav.Link>
               </NavDropdown.Item>
               <NavDropdown.Item>
                 <Nav.Link>
                   <Link to="/orders">
-                    <div className="mainNavLinks">Orders</div>
+                    <div className="mainNavLinks">My Orders</div>
                   </Link>
                 </Nav.Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+              <Nav.Link>
+              <Link to="/myitems">
+                <div className="mainNavLinks">My Items</div>
+              </Link>
+            </Nav.Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+              <Nav.Link>
+              <Link to="/sell">
+                <div className="mainNavLinks">Sell Items</div>
+              </Link>
+            </Nav.Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Nav.Link>
+                <Link to="/chat">
+                <div className="mainNavLinks">Messages</div>
+              </Link>
+            </Nav.Link>
               </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link>

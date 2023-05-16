@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Alert from 'react-bootstrap/Alert';
 
 export function SignupForm() {
   const [firstName, setFirstName] = useState("");
@@ -13,12 +14,13 @@ export function SignupForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [school, setSchool] = useState("");
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const register = async (e) => {
     e.preventDefault();
     try {
-      axios
+      const res = await axios
         .post("http://localhost:4000/api/auth/register", {
           firstName: firstName,
           lastName: lastName,
@@ -26,12 +28,11 @@ export function SignupForm() {
           password: password,
           school: school,
         })
-        .then((response, err) => {
-          console.log(response);
+        console.log(res);
           navigate("/login");
-        });
-    } catch (error) {
-      console.log(JSON.stringify(error));
+    } catch (err) {
+      setError("Failed to create account")
+      console.log(err);
     }
   };
 
@@ -40,7 +41,7 @@ export function SignupForm() {
       <Col>
         <Form className="container">
           <Form.Group className="mb-3" controlId="formFirstName">
-            <Form.Label>First Name</Form.Label>
+            <Form.Label>First Name:</Form.Label>
             <Form.Control
               type="firstName"
               placeholder="Enter First Name"
@@ -51,7 +52,7 @@ export function SignupForm() {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formLastName">
-            <Form.Label>Last Name</Form.Label>
+            <Form.Label>Last Name:</Form.Label>
             <Form.Control
               type="lastName"
               placeholder="Enter Last Name"
@@ -62,7 +63,7 @@ export function SignupForm() {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
+            <Form.Label>Email address:</Form.Label>
             <Form.Control
               type="email"
               placeholder="Enter email"
@@ -73,7 +74,7 @@ export function SignupForm() {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
+            <Form.Label>Password:</Form.Label>
             <Form.Control
               type="password"
               placeholder="Password"
@@ -83,11 +84,9 @@ export function SignupForm() {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicSchool">
-            <Form.Label>School</Form.Label>
-            <Form.Select
-              aria-label="Default select example"
-              onChange={(e) => {
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>School:</Form.Label>
+            <Form.Select aria-label="Default select example" onChange={(e) => {
                 setSchool(e.target.value);
               }}
             >
@@ -96,7 +95,11 @@ export function SignupForm() {
               <option value="SJCC">SJCC</option>
             </Form.Select>
           </Form.Group>
-          <Button variant="primary" type="submit" onClick={register}>
+          {error && <Alert variant="danger">
+          {error}
+        </Alert>}
+          <br/>
+          <Button className="form-group-t" variant="primary" type="submit" onClick={register}>
             Submit
           </Button>
         </Form>

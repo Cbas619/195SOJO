@@ -9,20 +9,15 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 import {MainCategories} from '../components/Main/MainCategories'
-import Alert from 'react-bootstrap/Alert';
 
-export function EditMyAccount() {
+export function EditItem() {
   const location = useLocation();
-
-  const [showError, setShowError] = useState(false);
-  const [passwordError, setPasswordError] = useState("");
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const styles = {
     background: {
@@ -173,11 +168,8 @@ export function EditMyAccount() {
       </Form.Group> */}
           <Form.Group as={Row} className="mb-3">
             <Col sm={{ span: 5, offset: 15 }}>
-            {error && <Alert variant="danger">
-          {error}
-        </Alert>}
               <br/>
-              <Button className='form-group-t2' type="submit" onClick={edit}>
+              <Button className='form-group-t' type="submit" onClick={edit}>
                 Save
               </Button>
             </Col>

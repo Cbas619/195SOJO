@@ -1,21 +1,4 @@
-table {
-    font-family: arial, sans-serif;
-    font-size: 18px;
-    border-collapse: collapse;
-    width: 95%;
-  }
-  
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
-
-  .ordersBackground {
+.ordersBackground {
     border-radius: 10px 10px;
     padding-bottom: 60%;
     padding-right: 80%;
@@ -40,13 +23,13 @@ table {
   .ordersPageHeader {
     font-size: 50px;
     font-weight: 375;
+    text-align: center;
   }
 
   .orderLine-1 {
     
     margin-bottom: 15px;
     height: 2px;
-    width: 95%;
     background: black;
     opacity: 0.15;
   }
@@ -56,6 +39,12 @@ table {
     font-size: 30px;
   }
 
-  .orderCardsContainer {
-    
+  .loginPageContainer {
+    padding-top: 7%;
+    padding-left: 5%;
+  }
+
+  .signUpPageContainer {
+    padding-top: 4%;
+    padding-left: 5%;
   }
