@@ -14,8 +14,8 @@ export function SingleOrder() {
   const styles = {
     background: {
     backgroundColor: 'white',
-    width: '25%',
-    height: '50%',
+    width: '55%',
+    height: '700px',
     paddingTop: '30px',
     borderRadius: '10px'
     }
