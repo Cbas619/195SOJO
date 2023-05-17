@@ -24,6 +24,7 @@ import { SingleOrder } from './pages/SingleOrder';
 import { MyItems } from './pages/MyItems';
 import { MySingleItem } from './pages/MySingleItem';
 import { EditItem } from './pages/EditItem';
+import { AddressPage } from './pages/AddressPage';
 
 function App() {
   return (
@@ -89,6 +90,9 @@ function App() {
     </RequireAuth>}/>
     <Route path="/myitems" element={
     <RequireAuth loginPath='/login'><MyItems/>
+    </RequireAuth>}/>
+    <Route path="/address" element={
+    <RequireAuth loginPath='/login'><AddressPage/>
     </RequireAuth>}/>
     <Route path="/paymentconfirmation" element={
     <RequireAuth loginPath='/login'><PaymentConfirmation/>
