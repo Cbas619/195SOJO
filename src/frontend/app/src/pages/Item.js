@@ -19,12 +19,11 @@ export function Item() {
 
   const styles = {
     background: {
-    backgroundColor: 'white',
-    //width: '14.9vw',
-    height: '650px',
-    paddingLeft: '90px',
-    paddingTop: '30px',
-    borderRadius: '10px'
+      backgroundColor: 'white',
+      width: '25%',
+      height: '50%',
+      paddingTop: '30px',
+      borderRadius: '10px'
     }
   }
   const [data, setData] = useState("");

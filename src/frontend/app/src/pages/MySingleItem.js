@@ -17,9 +17,8 @@ export function MySingleItem() {
   const styles = {
     background: {
     backgroundColor: 'white',
-    //width: '14.9vw',
-    height: '100vh',
-    paddingLeft: '90px',
+    width: '50%',
+    height: '650px',
     paddingTop: '30px',
     borderRadius: '10px'
     }
@@ -76,7 +75,8 @@ export function MySingleItem() {
     <div>Description: {data.description}</div>
     <br/>
     </div>
-    <Link to={`/chat`}><button type="button" class="btn btn-info" onClick={productDelete}>Delete Item</button></Link>
+    <Link to={`/main`}><button type="button" class="btn btn-info" onClick={productDelete}>Delete Item</button></Link>
+    <Link to={`/edititem`}><button type="button" class="btn btn-info" >Edit Item</button></Link>
                 </Container>
                 {error && <Alert variant="danger">
           {error}

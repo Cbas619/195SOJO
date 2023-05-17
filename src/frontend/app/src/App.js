@@ -23,6 +23,7 @@ import SearchScreen from './pages/SearchScreen';
 import { SingleOrder } from './pages/SingleOrder';
 import { MyItems } from './pages/MyItems';
 import { MySingleItem } from './pages/MySingleItem';
+import { EditItem } from './pages/EditItem';
 
 function App() {
   return (
@@ -31,6 +32,9 @@ function App() {
     
     <Route path="/account" element={
     <RequireAuth loginPath='/login'><Account/>
+    </RequireAuth>}/>
+    <Route path="/edititem" element={
+    <RequireAuth loginPath='/login'><EditItem/>
     </RequireAuth>}/>
     <Route path="/edit" element={
     <RequireAuth loginPath='/login'><EditMyAccount/>

@@ -23,7 +23,7 @@ export function MyItemCard(props) {
       <Card.Body>
           <Card.Title>{product.productName}</Card.Title>
         <Card.Text>
-        Purchased: {new Date(parseInt(product._id.toString().substring(0, 8), 16) * 1000).toDateString()}
+        Purchased: {product.purchased ? "Yes" : "No"}
         </Card.Text>
       </Card.Body>
       

@@ -31,7 +31,6 @@ const reducer = (state, action) => {
                 };
         case 'FETCH_FAIL':
             return { ...state, loading: false, error: action.payload};
-        
         default:
             return state;
     }
@@ -69,6 +68,7 @@ export default function SearchScreen() {
         error: '',
     });
     const [school, setSchool] = useState("");
+    const [sellerId, setSellerId] = useState("");
 
 
     useEffect(() => {
@@ -76,6 +76,7 @@ export default function SearchScreen() {
           try {
             const {data} =  await getCurrentUser();
             setSchool(data.school);
+            setSellerId(data._id);
           } catch (error) {
             //console.log(error.respo);
           }
@@ -121,7 +122,7 @@ export default function SearchScreen() {
         const sortOrder = filter.order || order;
         return `/search?page=${filterPage}&query=${filterQuery}&category=${filterCategory}&price=${filterPrice}&order=${sortOrder}`
     }
-
+    console.log(sellerId)
     return (
         <>
         <MainNav/> 
@@ -201,7 +202,7 @@ export default function SearchScreen() {
                     </Row>
                     {products.length === 0 && <div>No Product Found</div>}
                     <Row>
-                        {products.map((product) => ( product.school === school && product.purchased === false &&
+                        {products.map((product) => ( product.school === school && product.purchased === false && product.sellerId !== sellerId &&
                             <Col sm={6} lg={4} className="mb-3" key={product._id}>
                                 <MainItemCards product={product}></MainItemCards>
                             </Col>

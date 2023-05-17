@@ -67,7 +67,7 @@ export function EditMyAccount() {
         })
         .then((response, err) => {
           console.log("Successfully updated account!");
-          navigate("/main");
+          navigate("/account");
         });
     } catch (error) {
       console.error(JSON.stringify(error));
@@ -157,6 +157,7 @@ export function EditMyAccount() {
               <Form.Control
                 type="password"
                 placeholder="Password"
+                value={password}
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}

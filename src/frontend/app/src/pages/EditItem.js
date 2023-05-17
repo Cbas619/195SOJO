@@ -9,16 +9,25 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 import {MainCategories} from '../components/Main/MainCategories'
+import Alert from 'react-bootstrap/Alert';
 
 export function EditItem() {
   const location = useLocation();
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const [productName, setProductName] = useState("");
+  const [image, setImage] = useState("");
+  const [description, setDescription] = useState("");
+  const [rating, setRating] = useState("");
+  const [price, setPrice] = useState("");
+  const [category, setCategory] = useState("");
+  const [school, setSchool] = useState("");
+  const [sellerId, setSellerId] = useState("");
+  const [paymentType, setPaymentType] = useState("");
   const styles = {
     background: {
     backgroundColor: 'white',
@@ -31,10 +40,14 @@ export function EditItem() {
   //connect to backend
   useEffect(() => {
     if (location.state) {
-      setFirstName(location.state.firstName);
-      setLastName(location.state.lastName);
-      setEmail(location.state.email);
-      setId(location.state.id);
+      setId(location.state._id)
+      setProductName(location.state.productName)
+      setDescription(location.state.description)
+      setRating(location.state.rating)
+      setPrice(location.state.price);
+      setCategory(location.state.category);
+      setPaymentType(location.state.paymentType);
+      setImage(location.state.image);
     }
   }, [location.state]);
 
@@ -51,10 +64,10 @@ export function EditItem() {
   const edit = async (e) => {
     e.preventDefault();
     try {
-      const body = { firstName, lastName, email, password };
+      const body = { productName, description, rating, price, category, paymentType, image };
       // if (password.trim() !== '') body.password = password;
       await axios
-        .put(`http://localhost:4000/api/user/change/${id}`, body, {
+        .put(`http://localhost:4000/api/product/edit/${id}`, body, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${Cookies.get("jwt")}`,
@@ -75,107 +88,131 @@ export function EditItem() {
       <div className="background-1">
       <div className="ordersPageContainer">
       <Container style={styles.background}>
-      <Container >
-  <div className="ordersPageHeader">Edit Your Account</div>
+      <div className="ordersPageHeader">Edit Item</div>
                 <div className="orderLine-1"></div>
-  </Container>
-      <Container className="edit_text">
-        <Form onSubmit={handleSubmit}>
-          <Form.Group
-            as={Row}
-            className="mb-3"
-            controlId="formHorizontalFirstName"
-          >
-            <Col>
-              <Form.Label>First Name:</Form.Label>
-              <Form.Control
-                type="firstName"
-                placeholder="First name"
-                value={firstName}
-                onChange={(e) => {
-                  setFirstName(e.target.value);
-                }}
-              />
-            </Col>
-          </Form.Group>
-          <Form.Group
-            as={Row}
-            className="mb-3"
-            controlId="formHorizontalLastName"
-          >
-            <Col>
-              <Form.Label>Last Name:</Form.Label>
-              <Form.Control
-                type="lastName"
-                placeholder="Last name"
-                value={lastName}
-                onChange={(e) => {
-                  setLastName(e.target.value);
-                }}
-              />
-            </Col>
+      <Row>
+      <Col>
+        <Form className="sellFormContainer">
+          <Form.Group className="mb-3" controlId="formItemName">
+            <Form.Label>Item Name:</Form.Label>
+            <Form.Control
+              type="ItemName"
+              value={productName}
+              placeholder="Enter Item Name"
+              onChange={(e) => {
+                setProductName(e.target.value);
+              }}
+            />
           </Form.Group>
 
-          <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
-            <Form.Label column sm={2}>
-              Email:
-            </Form.Label>
-            <Col sm={15}>
-              <Form.Control
-                type="email"
-                value={email}
-                placeholder="Email"
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-              />
-            </Col>
+          <Form.Group className="mb-3" controlId="formItemDescription">
+            <Form.Label>Description of Item:</Form.Label>
+            <Form.Control
+              type="ItemDescription"
+              value={description}
+              placeholder="Enter Item Description"
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
+            />
           </Form.Group>
 
-          {/* <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
-          <Form.Label column sm={5}>
-              Current Password (Does not work)
-          </Form.Label>
-          <Col sm={15}>
-          <Form.Control type="password" placeholder="Password" />
-          </Col>
-      </Form.Group> */}
-          <Form.Group
-            as={Row}
-            className="mb-3"
-            controlId="formHorizontalNewPassword"
-          >
-            <Form.Label column sm={5}>
-              New Password:
-            </Form.Label>
-            <Col sm={15}>
-              <Form.Control
-                type="password"
-                placeholder="Password"
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-              />
-            </Col>
+          {/* <Form.Group className="mb-3" controlId="formRating">
+            <Form.Label>Condition</Form.Label>
+            <Form.Control
+              type="ItemRating"
+              placeholder="Enter Rating"
+              onChange={(e) => {
+                setRating(e.target.value);
+              }}
+            />
+
+            </Form.Group> */}
+          <Form.Group className="mb-3" controlId="formRating">
+            <Form.Label>Rating:</Form.Label>
+            <Form.Select aria-label="Default select example" value={rating} onChange={(e) => {
+                setRating(e.target.value);
+              }}>
+            <option>Enter Rating:</option>
+            <option value="new">New</option>
+            <option value="used">Used</option>
+            </Form.Select>
           </Form.Group>
-          {/* <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
-          <Form.Label column sm={5}>
-              Confirm New Password (Does not work)
-          </Form.Label>
-          <Col sm={15}>
-          <Form.Control type="password" placeholder="Password" />
-          </Col>
-      </Form.Group> */}
-          <Form.Group as={Row} className="mb-3">
-            <Col sm={{ span: 5, offset: 15 }}>
-              <br/>
-              <Button className='form-group-t' type="submit" onClick={edit}>
-                Save
-              </Button>
-            </Col>
+
+
+          
+
+          <Form.Group className="mb-3" controlId="formPrice">
+            <Form.Label>Price:</Form.Label>
+            <Form.Control
+              type="ItemPrice"
+              value={price}
+              placeholder="Enter Price"
+              onChange={(e) => {
+                setPrice(e.target.value);
+              }}
+            />
           </Form.Group>
+
+          {/* <Form.Group className="mb-3" controlId="formCategory">
+            <Form.Label>Category</Form.Label>
+            <Form.Control
+              type="ItemCategory"
+              placeholder="Enter Category"
+              onChange={(e) => {
+                setCategory(e.target.value);
+              }}
+            />
+          </Form.Group> */}
+
+
+          <Form.Group className="mb-3" controlId="formCategory">
+            <Form.Label>Category:</Form.Label>
+            <Form.Select aria-label="Default select example" value={category} onChange={(e) => {
+                setCategory(e.target.value);
+              }}>
+            <option>Open this select menu</option>
+            <option value="books">Books</option>
+            <option value="supplies">Supplies</option>
+            <option value="electronics">Electronics</option>
+            <option value="clothing">Clothing</option>
+            <option value="entertainment">Entertainment</option>
+            <option value=" ">General</option>
+            </Form.Select>
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formPaymentType">
+            <Form.Label>Payment Type:</Form.Label>
+            <Form.Select aria-label="Default select example" value={paymentType} onChange={(e) => {
+                setPaymentType(e.target.value);
+              }}>
+            <option>Open this select menu</option>
+            <option value="in-person">In-person</option>
+            <option value="online">Online</option>
+            <option value="both">Both</option>
+            </Form.Select>
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formImage">
+            <Form.Label>Upload Image:</Form.Label>
+            <Form.Control
+              type="img"
+              onChange={(e) => {
+                // setImage(e.target.files[0]);
+                setImage(e.target.value);
+              }}
+            />
+          </Form.Group>
+          {error && <Alert variant="danger">
+          {error}
+        </Alert>}
+          <br/>
+          <Button className="form-group-t" variant="primary" type="submit" onClick={edit}>
+            Submit
+          </Button>
         </Form>
-      </Container>
+      </Col>
+    </Row>
       <br/>
       <br/>
       </Container>
