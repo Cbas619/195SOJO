@@ -77,7 +77,7 @@ export function MyItems() {
         
           products && products
             .filter(products => products.sellerId === id)
-            .slice(0, 5).map ((order) => (
+            .slice(0, 12).map ((order) => (
             // products.description === "asdf" &&
            
             <Col key={order._id}>

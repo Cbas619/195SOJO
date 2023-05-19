@@ -28,6 +28,7 @@ export function AddressPage() {
     }
   }
   const [idData, setIdData] = useState("");
+  const [pic, setPic] = useState("");
   const[userId, setUserId] = useState();
   useEffect(() => {
     (async () => {
@@ -47,6 +48,7 @@ export function AddressPage() {
           withCredentials: true,
         });
         setIdData(respo.data._id);
+        setPic(respo.data);
       } catch (error) {
         console.log(error.respo);
       }
@@ -67,7 +69,7 @@ export function AddressPage() {
   });
 
 
-
+console.log(pic)
 
   return (
     <>
@@ -78,7 +80,7 @@ export function AddressPage() {
                 <Container style={styles.background}>
                     <div className="ordersPageHeader">Buyer Details</div>
                 <div className="orderLine-1"></div>
-    <img src={idData.image} className="item-img"alt="No img provided" width="450" height="450"/> 
+    <img src={pic.image} className="item-img"alt="No img provided" width="450" height="450"/> 
     <div className="item-content">
     <div>Bought by: {!(userId) ? 'Loading...':userId.firstName} { !(userId) ? 'Loading...':userId.lastName}</div>
     <br/>
