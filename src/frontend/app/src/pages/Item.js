@@ -57,31 +57,27 @@ export function Item() {
     e.preventDefault();
     try {
       const existingChatResponse = await axios.get(
-        `http://localhost:4000/api/chat/find/${user._id}/${data.sellerId}`,
-        { params: { productId: data._id } }
+        `http://localhost:4000/api/chat/find/${user._id}/${data.sellerId}`
       );
   
-      if (existingChatResponse.data && existingChatResponse.data.productId === data._id) {
-        navigate('/chat');
+      if (existingChatResponse.data) {
+        navigate(`/chat/${existingChatResponse.data._id}`);
       } else {
-        axios
-          .post("http://localhost:4000/api/chat/start", {
+        const startChatResponse = await axios.post(
+          "http://localhost:4000/api/chat/start",
+          {
             senderId: user._id,
             receiverId: data.sellerId,
-            productId: data._id,
-            productName: data.productName,
-          })
-          .then((response) => {
-            console.log(response);
-            navigate('/chat');
-          });
+          }
+        );
+        navigate(`/chat/${startChatResponse.data._id}`);
       }
     } catch (error) {
       console.log(JSON.stringify(error));
     }
   };
 
-  console.log(data)
+  console.log("DAH DATA", data)
 
   return (
     <>
@@ -106,7 +102,7 @@ export function Item() {
     <br/>
     <div>Sold by: {data.firstName} {data.lastName}</div>
     <br></br>
-    <Link to={`/chat`}><button type="button" class="btn btn-info" onClick={messageSubmit}>Message Seller</button></Link>
+    <button type="button" className="btn btn-info" onClick={messageSubmit}>Message Seller</button>
     <br></br>
     <br/>
     {data.paymentType === "in-person" ? "" :

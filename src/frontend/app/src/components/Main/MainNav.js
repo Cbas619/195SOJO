@@ -83,7 +83,7 @@ export function MainNav() {
               </NavDropdown.Item>
               <NavDropdown.Item>
                 <Nav.Link>
-                <Link to="/chat">
+                <Link as={Link} to="/chat/all">
                 <div className="mainNavLinks">Messages</div>
               </Link>
             </Nav.Link>

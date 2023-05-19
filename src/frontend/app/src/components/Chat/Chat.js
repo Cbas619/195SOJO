@@ -13,7 +13,7 @@ import { userChats } from '../../api/ChatRequests';
 import ChatBox from './ChatBox';
 import axios from 'axios';
 import {MainCategories} from '../Main/MainCategories'
-
+import { useParams, useNavigate  } from "react-router-dom";
 import {io} from 'socket.io-client'
 import { useRef } from 'react';
 
@@ -26,12 +26,14 @@ export function Chat() {
     const[user, setUser] = useState({});
     const [currentUser, setCurrentUser] = useState({});
     const [chats, setChats] = useState([]);
-    const [currentChat, setCurrentChat] = useState(null);
+    //const [currentChat, setCurrentChat] = useState(null);
     const [onlineUsers, setOnlineUsers] = useState([]);
     const socket = useRef()
     const [sendMessage, setSendMessage] = useState(null)
     const [receivedMessage, setReceivedMessage] = useState(null);
-    
+    const { conversationId } = useParams();
+    const navigate = useNavigate();
+    const [currentChat, setCurrentChat] = useState(null);
     /*
      useEffect(() => {
       dispatch(getUser("642a25017b5368ffeac45c87"))
@@ -95,8 +97,28 @@ export function Chat() {
     }, [sendMessage]);
 
     
-
-
+    useEffect(() => {
+      const selectChatByConversationId = () => {
+        if (conversationId && chats.length > 0) {
+          const selectedChat = chats.find((chat) => chat._id === conversationId);
+          setCurrentChat(selectedChat);
+        }
+      };
+  
+      selectChatByConversationId();
+    }, [conversationId, chats]);
+  
+    useEffect(() => {
+      if (sendMessage !== null) {
+        socket.current.emit('send-message', sendMessage);
+      }
+    }, [sendMessage]);
+  
+    const selectChat = (chat) => {
+      setCurrentChat(chat);
+      navigate(`/chat/${chat._id}`);
+    };
+  
 /*
     //console.log(user);
 
@@ -119,7 +141,7 @@ export function Chat() {
                 <h2>Chats</h2>
                 <div className="Chat-list">
                     {chats.map((chat) => (
-                        <div onClick={() => setCurrentChat(chat)}>
+                        <div onClick={() => selectChat(chat)}>
                             <Conversation data={chat} currentUserId={user._id} />
                         </div>
                     ))}

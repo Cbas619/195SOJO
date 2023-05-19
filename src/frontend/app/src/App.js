@@ -79,7 +79,7 @@ function App() {
     <Route path="/sell" element={
     <RequireAuth loginPath='/login'><Sell/>
     </RequireAuth>}/>
-    <Route path="/chat" element={
+    <Route path="/chat/:conversationId" element={
     <RequireAuth loginPath='/login'><ChatPage/>
     </RequireAuth>}/>
     <Route path="/orders" element={
