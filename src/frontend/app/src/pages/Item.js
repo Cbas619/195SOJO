@@ -19,12 +19,11 @@ export function Item() {
 
   const styles = {
     background: {
-    backgroundColor: 'white',
-    //width: '14.9vw',
-    height: '100vh',
-    paddingLeft: '90px',
-    paddingTop: '30px',
-    borderRadius: '10px'
+      backgroundColor: 'white',
+      width: '55%',
+      height: '700px',
+      paddingTop: '30px',
+      borderRadius: '10px'
     }
   }
   const [data, setData] = useState("");
@@ -95,19 +94,23 @@ export function Item() {
                 <div className="orderLine-1"></div>
     <img src={data.image} className="item-img"alt="No img provided" width="450" height="450"/> 
     <div className="item-content">
-      <br/>
-    <h3>Description: {data.description}</h3>
+    <div>Price: ${data.price}</div>
     <br/>
-    <h3>Condition: {data.rating}</h3>
+    <div>Condition: {data.rating}</div>
     <br/>
-    <h3>Price: ${data.price}</h3>
+    <div>Category: {data.category}</div>
     <br/>
-    <h3>Category: {data.category}</h3>
+    <div>Description: {data.description}</div>
     <br/>
-    <Link to={`/payment/${data._id}`}><Button>Buy now</Button></Link>
-    <br></br>
+    <div>Payment Type: {data.paymentType}</div>
+    <br/>
+    <div>Sold by: {data.firstName} {data.lastName}</div>
     <br></br>
     <Link to={`/chat`}><button type="button" class="btn btn-info" onClick={messageSubmit}>Message Seller</button></Link>
+    <br></br>
+    <br/>
+    {data.paymentType === "in-person" ? "" :
+    <Link to={`/payment/${data._id}`}><Button>Buy now</Button></Link>}
     </div>
    
                 </Container>

@@ -9,6 +9,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 import {MainCategories} from '../components/Main/MainCategories'
+import Alert from 'react-bootstrap/Alert';
 
 export function EditMyAccount() {
   const location = useLocation();
@@ -21,12 +22,13 @@ export function EditMyAccount() {
   const [email, setEmail] = useState("");
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const styles = {
     background: {
     backgroundColor: 'white',
-    //width: '14.9vw',
-    height: '100vh',
+    width: '30%',
+    height: '50%',
     paddingTop: '30px',
     borderRadius: '10px'
     }
@@ -65,7 +67,7 @@ export function EditMyAccount() {
         })
         .then((response, err) => {
           console.log("Successfully updated account!");
-          navigate("/main");
+          navigate("/account");
         });
     } catch (error) {
       console.error(JSON.stringify(error));
@@ -90,7 +92,7 @@ export function EditMyAccount() {
             controlId="formHorizontalFirstName"
           >
             <Col>
-              <Form.Label>First Name</Form.Label>
+              <Form.Label>First Name:</Form.Label>
               <Form.Control
                 type="firstName"
                 placeholder="First name"
@@ -107,7 +109,7 @@ export function EditMyAccount() {
             controlId="formHorizontalLastName"
           >
             <Col>
-              <Form.Label>Last Name</Form.Label>
+              <Form.Label>Last Name:</Form.Label>
               <Form.Control
                 type="lastName"
                 placeholder="Last name"
@@ -121,7 +123,7 @@ export function EditMyAccount() {
 
           <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
             <Form.Label column sm={2}>
-              Email
+              Email:
             </Form.Label>
             <Col sm={15}>
               <Form.Control
@@ -149,12 +151,13 @@ export function EditMyAccount() {
             controlId="formHorizontalNewPassword"
           >
             <Form.Label column sm={5}>
-              New Password
+              New Password:
             </Form.Label>
             <Col sm={15}>
               <Form.Control
                 type="password"
                 placeholder="Password"
+                value={password}
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
@@ -171,13 +174,19 @@ export function EditMyAccount() {
       </Form.Group> */}
           <Form.Group as={Row} className="mb-3">
             <Col sm={{ span: 5, offset: 15 }}>
-              <Button type="submit" onClick={edit}>
-                Save & updates
+            {error && <Alert variant="danger">
+          {error}
+        </Alert>}
+              <br/>
+              <Button className='form-group-t2' type="submit" onClick={edit}>
+                Save
               </Button>
             </Col>
           </Form.Group>
         </Form>
       </Container>
+      <br/>
+      <br/>
       </Container>
       </div>
       </div>

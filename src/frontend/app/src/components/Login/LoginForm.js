@@ -9,10 +9,12 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSignIn } from "react-auth-kit";
 import { LoginAPI } from "../../api/AuthRequests";
+import Alert from 'react-bootstrap/Alert';
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch;
   const signIn = useSignIn();
@@ -41,6 +43,7 @@ export function LoginForm() {
       navigate("/main");
     } catch (error) {
       console.log(error);
+      setError("Failed to login")
     }
   };
 
@@ -49,7 +52,7 @@ export function LoginForm() {
       <Col>
         <Form className="container">
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
+            <Form.Label>Email address:</Form.Label>
             <Form.Control
               type="email"
               placeholder="Enter email"
@@ -60,7 +63,7 @@ export function LoginForm() {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
+            <Form.Label>Password:</Form.Label>
             <Form.Control
               type="password"
               placeholder="Password"
@@ -69,7 +72,11 @@ export function LoginForm() {
               }}
             />
           </Form.Group>
-          <Button variant="primary" type="submit" onClick={login}>
+          {error && <Alert variant="danger">
+          {error}
+        </Alert>}
+          <br/>
+          <Button className="form-group-t" variant="primary" type="submit" onClick={login}>
             Submit
           </Button>
         </Form>

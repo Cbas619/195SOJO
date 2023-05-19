@@ -6,8 +6,9 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import { getUsers } from "../../actions/userActions";
-import { useEffect } from "react";
+import { getUsers } from "../../actions/userActions"
+import { useEffect } from 'react';
+import Alert from 'react-bootstrap/Alert';
 
 export function SellForm() {
   const [productName, setProductName] = useState("");
@@ -23,6 +24,10 @@ export function SellForm() {
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
   };
+  const [lastName, setLastName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [paymentType, setPaymentType] = useState("");
+  const [error, setError] = useState(null);
 
   const productInsert = async (e) => {
     e.preventDefault();
@@ -70,12 +75,11 @@ export function SellForm() {
             "Content-Type": "multipart/form-data",
           },
         })
-        .then((response, err) => {
-          console.log(response);
+
           navigate("/main");
-        });
     } catch (error) {
-      console.log(error);
+      setError("Failed to create item")
+      console.log(JSON.stringify(error));
     }
   };
 
@@ -86,6 +90,8 @@ export function SellForm() {
           withCredentials: true,
         });
         setSchool(respo.data.school);
+        setFirstName(respo.data.firstName)
+        setLastName(respo.data.lastName)
       } catch (error) {
         console.log(error.respo);
       }
@@ -110,10 +116,10 @@ export function SellForm() {
       <Col>
         <form className="sellFormContainer" encType="multipart/form-data">
           <Form.Group className="mb-3" controlId="formItemName">
-            <Form.Label>Item Name</Form.Label>
+            <Form.Label>Item Name:</Form.Label>
             <Form.Control
               type="ItemName"
-              placeholder="Enter Title"
+              placeholder="Enter Item Name"
               onChange={(e) => {
                 setProductName(e.target.value);
               }}
@@ -121,7 +127,7 @@ export function SellForm() {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formItemDescription">
-            <Form.Label>Description of Item</Form.Label>
+            <Form.Label>Description of Item:</Form.Label>
             <Form.Control
               type="ItemDescription"
               placeholder="Enter Item Description"
@@ -131,33 +137,19 @@ export function SellForm() {
             />
           </Form.Group>
 
-          {/* <Form.Group className="mb-3" controlId="formRating">
-            <Form.Label>Condition</Form.Label>
-            <Form.Control
-              type="ItemRating"
-              placeholder="Enter Rating"
-              onChange={(e) => {
-                setRating(e.target.value);
-              }}
-            />
-
-            </Form.Group> */}
           <Form.Group className="mb-3" controlId="formRating">
-            <Form.Label>Rating</Form.Label>
-            <Form.Select
-              aria-label="Default select example"
-              onChange={(e) => {
+            <Form.Label>Rating:</Form.Label>
+            <Form.Select aria-label="Select Condition" onChange={(e) => {
                 setRating(e.target.value);
-              }}
-            >
-              <option>Enter Rating</option>
-              <option value="new">New</option>
-              <option value="used">Used</option>
+              }}>
+            <option>Select Condition:</option>
+            <option value="new">New</option>
+            <option value="used">Used</option>
             </Form.Select>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formPrice">
-            <Form.Label>Price</Form.Label>
+            <Form.Label>Price:</Form.Label>
             <Form.Control
               type="ItemPrice"
               placeholder="Enter Price"
@@ -167,16 +159,6 @@ export function SellForm() {
             />
           </Form.Group>
 
-          {/* <Form.Group className="mb-3" controlId="formCategory">
-            <Form.Label>Category</Form.Label>
-            <Form.Control
-              type="ItemCategory"
-              placeholder="Enter Category"
-              onChange={(e) => {
-                setCategory(e.target.value); event.target.files[0]
-              }}
-            />
-          </Form.Group> */}
 
           <Form.Group className="mb-3" controlId="formImage">
             <Form.Label>Image</Form.Label>
@@ -195,17 +177,41 @@ export function SellForm() {
               onChange={(e) => {
                 setCategory(e.target.value);
               }}
-            >
-              <option>Open this select menu</option>
-              <option value="books">Books</option>
-              <option value="supplies">Supplies</option>
-              <option value="electronics">Electronics</option>
-              <option value="clothing">Clothing</option>
-              <option value="entertainment">Entertainment</option>
-              <option value=" ">General</option>
+            />
+          </Form.Group>
+
+
+          <Form.Group className="mb-3" controlId="formCategory">
+            <Form.Label>Category:</Form.Label>
+            <Form.Select aria-label="Select Category" onChange={(e) => {
+                setCategory(e.target.value);
+              }}>
+            <option>Select Category</option>
+            <option value="books">Books</option>
+            <option value="supplies">Supplies</option>
+            <option value="electronics">Electronics</option>
+            <option value="clothing">Clothing</option>
+            <option value="entertainment">Entertainment</option>
+            <option value=" ">General</option>
             </Form.Select>
           </Form.Group>
-          <Button variant="primary" type="submit" onClick={productInsert}>
+
+          <Form.Group className="mb-3" controlId="formPaymentType">
+            <Form.Label>Payment Type:</Form.Label>
+            <Form.Select aria-label="Default select example" onChange={(e) => {
+                setPaymentType(e.target.value);
+              }}>
+            <option>Select Payment Type</option>
+            <option value="in-person">In-person</option>
+            <option value="online">Online</option>
+            <option value="both">Both</option>
+            </Form.Select>
+          </Form.Group>
+          {error && <Alert variant="danger">
+          {error}
+        </Alert>}
+          <br/>
+          <Button className="form-group-t" variant="primary" type="submit" onClick={productInsert}>
             Submit
           </Button>
         </form>

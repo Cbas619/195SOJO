@@ -21,7 +21,6 @@ const styles = {
     backgroundColor: 'white',
     //width: '14.9vw',
     height: '100vh',
-    paddingLeft: '90px',
     paddingTop: '30px',
     borderRadius: '10px'
     }
@@ -113,7 +112,7 @@ export function OrdersPage() {
                 <Container style={styles.background}>
                     <div className="ordersPageHeader">Order History</div>
                 <div className="orderLine-1"></div>
- 
+                <Row md={4}>
         {loading ? (
           <tr>
             <td colSpan={4}>Loading...</td>
@@ -121,13 +120,16 @@ export function OrdersPage() {
         ) : (
         
           orders.map((order) => (
-            <Row md={4}>
-            <Col key={order._id} sm={6} md={4} lg={2}>
+          
+            <Col key={order._id}>
               <OrderCard product={order}/>
+              <br/>
               </Col>
-              </Row>
+              
+              
           ))
         )}
+        </Row>
                 </Container>
             </div>
         </div>

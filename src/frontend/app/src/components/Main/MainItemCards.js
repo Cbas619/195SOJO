@@ -23,6 +23,11 @@ export function MainItemCards(props) {
         <Card.Text>
             ${product.price}
         </Card.Text>
+        <Card.Text>
+            Sold by: {product.firstName} {product.lastName}
+        </Card.Text>
+        <Card.Text>
+        </Card.Text>
       </Card.Body>
       
     </Card>

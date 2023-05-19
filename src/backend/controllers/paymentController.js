@@ -13,6 +13,7 @@ const addPayment = async (req, res) => {
         nameOnCard: req.body.nameOnCard,
         expireDate: req.body.expireDate,
         cvvNumber: req.body.cvvNumber,
+        productId: req.body.productId,
     });
     try {
         const savedPayment = await newPayment.save()
@@ -55,4 +56,14 @@ const deletePayment = async (req, res) => {
     }
 };
 
-module.exports = {addPayment, getPayment, editPayment, deletePayment};
+const getByItemOrder = async (req, res) => {
+    const {productId} = req.params
+    try {
+        const result = await Payment.find({productId});
+        res.status(200).json(result)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+  };
+
+module.exports = {addPayment, getPayment, editPayment, deletePayment, getByItemOrder};

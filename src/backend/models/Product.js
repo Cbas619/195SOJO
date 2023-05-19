@@ -11,7 +11,6 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
     min: 2,
-    max: 1024,
   },
   description: {
     type: String,
@@ -43,7 +42,25 @@ const productSchema = new mongoose.Schema({
   purchased: {
     type: Boolean,
     required: true
-  }
+  },
+  firstName: {
+    type: String,
+    required: true,
+    min: 2,
+    max: 255,
+  },
+  lastName: {
+    type: String,
+    required: true,
+    min: 2,
+    max: 255,
+  },
+  paymentType: {
+    type: String,
+    required: true,
+    min: 2,
+    max: 255,
+  },
 });
 
 module.exports = mongoose.model("Product", productSchema);

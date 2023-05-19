@@ -21,7 +21,10 @@ import { RequireAuth } from 'react-auth-kit';
 import { OrdersPage } from './pages/OrdersPage';
 import SearchScreen from './pages/SearchScreen';
 import { SingleOrder } from './pages/SingleOrder';
-
+import { MyItems } from './pages/MyItems';
+import { MySingleItem } from './pages/MySingleItem';
+import { EditItem } from './pages/EditItem';
+import { AddressPage } from './pages/AddressPage';
 
 function App() {
   return (
@@ -30,6 +33,9 @@ function App() {
     
     <Route path="/account" element={
     <RequireAuth loginPath='/login'><Account/>
+    </RequireAuth>}/>
+    <Route path="/edititem" element={
+    <RequireAuth loginPath='/login'><EditItem/>
     </RequireAuth>}/>
     <Route path="/edit" element={
     <RequireAuth loginPath='/login'><EditMyAccount/>
@@ -44,6 +50,9 @@ function App() {
     <Route path="/signup" element={<Signup/>}/>
     <Route path="/payment/:_id" element={
     <RequireAuth loginPath='/login'><Payment/>
+    </RequireAuth>}/>
+    <Route path="/singleitem/:_id" element={
+    <RequireAuth loginPath='/login'><MySingleItem/>
     </RequireAuth>}/>
     <Route path="/main" element={
     <RequireAuth loginPath='/login'><Main/>
@@ -78,6 +87,12 @@ function App() {
     </RequireAuth>}/>
     <Route path="/edit" element={
     <RequireAuth loginPath='/login'><EditMyAccount/>
+    </RequireAuth>}/>
+    <Route path="/myitems" element={
+    <RequireAuth loginPath='/login'><MyItems/>
+    </RequireAuth>}/>
+    <Route path="/address/:_id" element={
+    <RequireAuth loginPath='/login'><AddressPage/>
     </RequireAuth>}/>
     <Route path="/paymentconfirmation" element={
     <RequireAuth loginPath='/login'><PaymentConfirmation/>

@@ -19,8 +19,8 @@ export function Account() {
     background: {
     backgroundColor: 'white',
     //width: '14.9vw',
-    height: '100vh',
-    paddingLeft: '90px',
+    width: '550px',
+    height: '50%',
     paddingTop: '30px',
     borderRadius: '10px'
     }
@@ -65,7 +65,7 @@ export function Account() {
       <div className="background-1">
       <div className="ordersPageContainer">
       <Container style={styles.background}>
-      <div className="container-fill d-flex flex-column gap-5">
+
       <div className="ordersPageHeader">My Account</div>
                 <div className="orderLine-1"></div>
         <div className="d-flex gap-4 align-items-center">
@@ -86,14 +86,15 @@ export function Account() {
               Edit
             </button>
           </div>
-
+          <br/>
           <div className="d-flex flex-wrap gap-3 align-items-center">
             <p style={{ flex: "1 1 30ch" }}>First Name: {firstName}</p>
             <p style={{ flex: "1 1 30ch" }}>Last Name: {lastName}</p>
             <p style={{ flex: "1 1 30ch" }}>Email: {email}</p>
           </div>
         </div>
-        </div>
+        <br/>
+        <br/>
         </Container>
         </div>
       </div>

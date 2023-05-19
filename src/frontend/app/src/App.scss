@@ -4,7 +4,7 @@ $primary1: #fcc7ed;
 $secondary: #FFFFFF;
 $success: yellow;
 $warning: green;
-$danger: orange;
+$danger: red;
 $info: purple;
 $light: white;
 $dark: black;
@@ -88,9 +88,9 @@ body {
   }
 
   .background-1 {
-    //background: #fcc7ed;
+    // background: #fcc7ed;
     background: linear-gradient($primary1, $secondary);
-    height: 900px
+    height: 900px;
   }
 
   .mainCategoryNav {
@@ -294,7 +294,11 @@ body {
 
   
   .form-group-t {
-    margin-left: 50%;
+    margin-left: 41%;
+  }
+
+  .form-group-t2 {
+    margin-left: 220px;
   }
  .dept {
   padding-left: 20px;
@@ -315,7 +319,15 @@ body {
  .text-end{
   padding-top: 5px;
   margin: 5px;
-  
  }
+
+ .item-content {
+  // position: relative;
+  // left: 150px;
+  // background-color: red;
+  float: right;
+  margin-right: 200px;
+  font-size: large;
+}
 
 @import "~bootstrap/scss/bootstrap";

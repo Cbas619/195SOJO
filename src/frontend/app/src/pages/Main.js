@@ -16,37 +16,22 @@ import { getProducts } from "../actions/productActions";
 import { Col } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { getCurrentUser } from "../api/UserRequests";
-import { getOrders } from "../api/OrderRequests";
 import { userChats } from "../api/ChatRequests";
 
 export function Main() {
 
   const dispatch = useDispatch();
   const [school, setSchool] = useState("");
+  const [id, setId] = useState("");
   const {loading, products, error} = useSelector(state => state.products)
-  //const{orders} = useSelector(state => state.orders)
   const[user, setUser] = useState({});
-  const navigate = useNavigate();
-
-  const Logout = async (e) => {
-    e.preventDefault(); 
-    try {
-      await axios.post("http://localhost:4000/api/auth/logout")
-      .then((response, err) => {
-      console.log(response);
-      navigate('/');
-      
-    })} catch (error){
-      console.log(JSON.stringify(error));
-    }
-  };
-
 
   useEffect(() => {
     (async () => {
       try {
         const {data} =  await getCurrentUser();
         setSchool(data.school);
+        setId(data._id);
         setUser(data)
         console.log("SDSD", data)
       } catch (error) {
@@ -85,7 +70,7 @@ export function Main() {
     <MainNav/> 
     <MainCategories/>
     <div className="background-1">
-    {chats.length > 0 && (
+    {/* {chats.length > 0 && (
           <div className="mainMessagesSection">
             <Link to="/chat">
               <a id="mainMessagesHeader">Your messages</a>
@@ -106,8 +91,7 @@ export function Main() {
               })}
             </Row>
           </div>
-        )}
-     
+        )} */}
 
       <div className="mainFeaturedSection">
         <div id="mainPageHeader">Featured Items</div>
@@ -116,7 +100,7 @@ export function Main() {
           <MainHeaders categoryHeader="Books for the brain | " linkHeader="See all books" categoryLink="/books"/>
           <Row>
           {products && products
-            .filter(product => product.category === 'books' && product.purchased === false && product.school === school)
+            .filter(product => product.category === 'books' && product.purchased === false && product.school === school && product.sellerId !== id)
             .slice(0, 5)
             .map(product => (
               <Col key={product._id} sm={6} md={4} lg={2}>
@@ -132,7 +116,7 @@ export function Main() {
           <MainHeaders categoryHeader="Work with Supplies | " linkHeader="See all school supplies" categoryLink="/officesupplies" />
           <Row>
           {products && products
-            .filter(product => product.category === 'supplies' && product.purchased === false && product.school === school)
+            .filter(product => product.category === 'supplies' && product.purchased === false && product.school === school && product.sellerId !== id)
             .slice(0, 5)
             .map(product => (
               <Col key={product._id} sm={6} md={4} lg={2}>
@@ -149,7 +133,7 @@ export function Main() {
           <MainHeaders categoryHeader="Tinker with Electronics | " linkHeader="See all electronics" categoryLink="/electronics" />
           <Row>
           {products && products
-            .filter(product => product.category === 'electronics' && product.purchased === false && product.school === school)
+            .filter(product => product.category === 'electronics' && product.purchased === false && product.school === school && product.sellerId !== id)
             .slice(0, 5)
             .map(product => (
               <Col key={product._id} sm={6} md={4} lg={2}>

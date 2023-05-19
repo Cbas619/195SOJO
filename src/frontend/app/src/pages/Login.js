@@ -6,8 +6,8 @@ export function Login() {
   const styles = {
     background: {
     backgroundColor: 'white',
-    //width: '14.9vw',
-    height: '100vh',
+    width: '30%',
+    height: '50%',
     paddingTop: '30px',
     borderRadius: '10px'
     }
@@ -16,11 +16,13 @@ export function Login() {
     <>
     <HomeNav/> 
     <div className="background-1">
-            <div className="ordersPageContainer">
+            <div className="loginPageContainer">
                 <Container style={styles.background}>
                     <div className="ordersPageHeader">Login</div>
                 <div className="orderLine-1"></div>
                 <LoginForm/>
+                <br/>
+                <br/>
                 </Container>
 
             </div>
