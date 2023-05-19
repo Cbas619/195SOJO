@@ -5,7 +5,7 @@ import { getMessages } from '../../api/MessageRequests'
 import {format} from "timeago.js"
 import InputEmoji from 'react-input-emoji'
 import { addMessage } from '../../api/MessageRequests'
-
+import { io } from 'socket.io-client';
 
 
 const ChatBox = ({chat, currentUser, setSendMessage, receivedMessage}) => {
@@ -14,7 +14,18 @@ const ChatBox = ({chat, currentUser, setSendMessage, receivedMessage}) => {
     const [newMessage, setNewMessage] = useState("")
     const scroll = useRef()
     
-    
+    const socket = useRef(null);
+
+useEffect(() => {
+  // Establish a socket connection
+  socket.current = io('http://localhost:8800');
+
+  return () => {
+    if (socket.current) {
+      socket.current.disconnect();
+    }
+  };
+}, []);
 
     //fetching data for user header when a user has already been clicked
     useEffect(() => {
@@ -84,6 +95,10 @@ const ChatBox = ({chat, currentUser, setSendMessage, receivedMessage}) => {
     useEffect(() => {
         scroll.current?.scrollIntoView({ behavior: "smooth" })
     }, [messages])
+
+
+
+
 
     return (
         <>

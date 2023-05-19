@@ -86,15 +86,7 @@ export function Chat() {
       
     
 
-    //sends meesage to socket server
-    useEffect(() => {
 
-      if (sendMessage!==null) {
-        socket.current.emit("send-message", sendMessage);
-        console.log("MESSAGE SENTAH")
-      }
-
-    }, [sendMessage]);
 
     
     useEffect(() => {
