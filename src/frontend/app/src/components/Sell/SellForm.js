@@ -6,8 +6,8 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import { getUsers } from "../../actions/userActions"
-import { useEffect } from 'react';
+import { getUsers } from "../../actions/userActions";
+import { useEffect } from "react";
 import Alert from 'react-bootstrap/Alert';
 
 export function SellForm() {
@@ -19,15 +19,15 @@ export function SellForm() {
   const [category, setCategory] = useState("");
   const [school, setSchool] = useState("");
   const [sellerId, setSellerId] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [paymentType, setPaymentType] = useState("");
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
   };
-  const [lastName, setLastName] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [paymentType, setPaymentType] = useState("");
-  const [error, setError] = useState(null);
 
   const productInsert = async (e) => {
     e.preventDefault();
@@ -47,6 +47,9 @@ export function SellForm() {
     formData.append("price", price);
     formData.append("myImage", selectedFile);
     formData.append("productName", productName);
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("paymentType", paymentType);
 
     for (var pair of formData.entries()) {
       console.log(pair[0], pair[1]);
@@ -75,11 +78,12 @@ export function SellForm() {
             "Content-Type": "multipart/form-data",
           },
         })
-
+        .then((response, err) => {
+          console.log(response);
           navigate("/main");
+        });
     } catch (error) {
-      setError("Failed to create item")
-      console.log(JSON.stringify(error));
+      console.log(error);
     }
   };
 
@@ -119,7 +123,7 @@ export function SellForm() {
             <Form.Label>Item Name:</Form.Label>
             <Form.Control
               type="ItemName"
-              placeholder="Enter Item Name"
+              placeholder="Enter ItemName"
               onChange={(e) => {
                 setProductName(e.target.value);
               }}
@@ -137,14 +141,28 @@ export function SellForm() {
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formRating">
-            <Form.Label>Rating:</Form.Label>
-            <Form.Select aria-label="Select Condition" onChange={(e) => {
+          {/* <Form.Group className="mb-3" controlId="formRating">
+            <Form.Label>Condition</Form.Label>
+            <Form.Control
+              type="ItemRating"
+              placeholder="Enter Rating"
+              onChange={(e) => {
                 setRating(e.target.value);
-              }}>
-            <option>Select Condition:</option>
-            <option value="new">New</option>
-            <option value="used">Used</option>
+              }}
+            />
+
+            </Form.Group> */}
+          <Form.Group className="mb-3" controlId="formRating">
+            <Form.Label>Condition:</Form.Label>
+            <Form.Select
+              aria-label="Default select example"
+              onChange={(e) => {
+                setRating(e.target.value);
+              }}
+            >
+              <option>Enter Item Condition</option>
+              <option value="new">New</option>
+              <option value="used">Used</option>
             </Form.Select>
           </Form.Group>
 
@@ -159,6 +177,16 @@ export function SellForm() {
             />
           </Form.Group>
 
+          {/* <Form.Group className="mb-3" controlId="formCategory">
+            <Form.Label>Category</Form.Label>
+            <Form.Control
+              type="ItemCategory"
+              placeholder="Enter Category"
+              onChange={(e) => {
+                setCategory(e.target.value); event.target.files[0]
+              }}
+            />
+          </Form.Group> */}
 
           <Form.Group className="mb-3" controlId="formImage">
             <Form.Label>Image</Form.Label>
@@ -173,29 +201,20 @@ export function SellForm() {
           <Form.Group className="mb-3" controlId="formCategory">
             <Form.Label>Category</Form.Label>
             <Form.Select
-              aria-label="Default select example"
+              aria-label="Enter Category"
               onChange={(e) => {
                 setCategory(e.target.value);
               }}
-            />
-          </Form.Group>
-
-
-          <Form.Group className="mb-3" controlId="formCategory">
-            <Form.Label>Category:</Form.Label>
-            <Form.Select aria-label="Select Category" onChange={(e) => {
-                setCategory(e.target.value);
-              }}>
-            <option>Select Category</option>
-            <option value="books">Books</option>
-            <option value="supplies">Supplies</option>
-            <option value="electronics">Electronics</option>
-            <option value="clothing">Clothing</option>
-            <option value="entertainment">Entertainment</option>
-            <option value=" ">General</option>
+            >
+              <option>Open this select menu</option>
+              <option value="books">Books</option>
+              <option value="supplies">Supplies</option>
+              <option value="electronics">Electronics</option>
+              <option value="clothing">Clothing</option>
+              <option value="entertainment">Entertainment</option>
+              <option value=" ">General</option>
             </Form.Select>
           </Form.Group>
-
           <Form.Group className="mb-3" controlId="formPaymentType">
             <Form.Label>Payment Type:</Form.Label>
             <Form.Select aria-label="Default select example" onChange={(e) => {
