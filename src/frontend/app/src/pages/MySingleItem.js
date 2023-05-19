@@ -17,7 +17,7 @@ export function MySingleItem() {
   const styles = {
     background: {
     backgroundColor: 'white',
-    width: '55%',
+    width: '100%',
     height: '700px',
     paddingTop: '30px',
     borderRadius: '10px'
@@ -75,7 +75,8 @@ export function MySingleItem() {
     <div>Description: {data.description}</div>
     <br/>
     <br></br>
-    <Link to={`/chat`}><button type="button" class="btn btn-info">Message Buyer</button></Link>
+    {data.purchased === true ? <Link to={`/chat`}><button type="button" class="btn btn-info">Message Buyer</button></Link> :
+    "" }
     <br></br>
     <br/>
     {data.purchased === false ? <Link to={`/main`}><button type="button" class="btn btn-info" onClick={productDelete}>Delete Item</button></Link> :

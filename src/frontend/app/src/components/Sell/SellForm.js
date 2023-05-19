@@ -189,7 +189,7 @@ export function SellForm() {
           </Form.Group> */}
 
           <Form.Group className="mb-3" controlId="formImage">
-            <Form.Label>Image</Form.Label>
+            <Form.Label>Image:</Form.Label>
             <Form.Control
               type="file"
               placeholder="Enter Image"
@@ -199,7 +199,7 @@ export function SellForm() {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formCategory">
-            <Form.Label>Category</Form.Label>
+            <Form.Label>Category:</Form.Label>
             <Form.Select
               aria-label="Enter Category"
               onChange={(e) => {
