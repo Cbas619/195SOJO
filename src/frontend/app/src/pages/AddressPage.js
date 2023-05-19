@@ -21,19 +21,18 @@ export function AddressPage() {
     background: {
     backgroundColor: 'white',
     //width: '14.9vw',
-    height: '650px',
-    paddingLeft: '90px',
+    width: '55%',
+    height: '700px',
     paddingTop: '30px',
     borderRadius: '10px'
     }
   }
-  const [data, setData] = useState("");
-  const[user, setUser] = useState({});
+  const [idData, setIdData] = useState("");
+  const[userId, setUserId] = useState();
   useEffect(() => {
     (async () => {
       try {
         const {data} =  await getCurrentUser();
-        setUser(data)
         console.log("SDSD", data)
       } catch (error) {
         //console.log(error.respo);
@@ -47,42 +46,28 @@ export function AddressPage() {
         const respo = await axios.get(`http://localhost:4000/api/product/find/${_id}`, {
           withCredentials: true,
         });
-        setData(respo.data);
+        setIdData(respo.data._id);
       } catch (error) {
         console.log(error.respo);
       }
     })();
   },[]);
 
-  const messageSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const existingChatResponse = await axios.get(
-        `http://localhost:4000/api/chat/find/${user._id}/${data.sellerId}`,
-        { params: { productId: data._id } }
-      );
-  
-      if (existingChatResponse.data && existingChatResponse.data.productId === data._id) {
-        navigate('/chat');
-      } else {
-        axios
-          .post("http://localhost:4000/api/chat/start", {
-            senderId: user._id,
-            receiverId: data.sellerId,
-            productId: data._id,
-            productName: data.productName,
-          })
-          .then((response) => {
-            console.log(response);
-            navigate('/chat');
-          });
+  useEffect(() => {
+    (async () => {
+      try {
+        const respo = await axios.get(`http://localhost:4000/api/payment/findbyproduct/${idData}`, {
+          withCredentials: true,
+        });
+        setUserId(respo.data[0]);
+      } catch (error) {
+        console.log(error.respo);
       }
-    } catch (error) {
-      console.log(JSON.stringify(error));
-    }
-  };
+    })();
+  });
 
-  console.log(data)
+
+
 
   return (
     <>
@@ -91,23 +76,24 @@ export function AddressPage() {
     <div className="background-1">
     <div className="ordersPageContainer">
                 <Container style={styles.background}>
-                    <div className="ordersPageHeader">{data.productName}</div>
+                    <div className="ordersPageHeader">Buyer Details</div>
                 <div className="orderLine-1"></div>
-    <img src={data.image} className="item-img"alt="No img provided" width="450" height="450"/> 
+    <img src={idData.image} className="item-img"alt="No img provided" width="450" height="450"/> 
     <div className="item-content">
-    <div>Price: ${data.price}</div>
+    <div>Bought by: {!(userId) ? 'Loading...':userId.firstName} { !(userId) ? 'Loading...':userId.lastName}</div>
     <br/>
-    <div>Condition: {data.rating}</div>
+    <div>Email: { !(userId) ? 'Loading...': userId.email}</div>
     <br/>
-    <div>Category: {data.category}</div>
+    <div>Address: { !(userId) ? 'Loading...':userId.address}</div>
     <br/>
-    <div>Description: {data.description}</div>
+    <div>City: { !(userId) ? 'Loading...':userId.city}</div>
     <br/>
-    <div>Sold by:  {data.firstName} {data.lastName}</div>
-    <Link to={`/payment/${data._id}`}><Button>Buy now</Button></Link>
+    <div>State: { !(userId) ? 'Loading...':userId.state}</div>
+    <br></br>
+    <div>State: { !(userId) ? 'Loading...':userId.zip}</div>
     <br></br>
     <br></br>
-    <Link to={`/chat`}><button type="button" class="btn btn-info" onClick={messageSubmit}>Message Seller</button></Link>
+    <Link to={`/chat`}><button type="button" class="btn btn-info">Message Buyer</button></Link>
     </div>
    
                 </Container>

@@ -139,10 +139,10 @@ export function SellForm() {
 
           <Form.Group className="mb-3" controlId="formRating">
             <Form.Label>Rating:</Form.Label>
-            <Form.Select aria-label="Default select example" onChange={(e) => {
+            <Form.Select aria-label="Select Condition" onChange={(e) => {
                 setRating(e.target.value);
               }}>
-            <option>Enter Rating:</option>
+            <option>Select Condition:</option>
             <option value="new">New</option>
             <option value="used">Used</option>
             </Form.Select>
@@ -177,14 +177,22 @@ export function SellForm() {
               onChange={(e) => {
                 setCategory(e.target.value);
               }}
-            >
-              <option>Open this select menu</option>
-              <option value="books">Books</option>
-              <option value="supplies">Supplies</option>
-              <option value="electronics">Electronics</option>
-              <option value="clothing">Clothing</option>
-              <option value="entertainment">Entertainment</option>
-              <option value=" ">General</option>
+            />
+          </Form.Group>
+
+
+          <Form.Group className="mb-3" controlId="formCategory">
+            <Form.Label>Category:</Form.Label>
+            <Form.Select aria-label="Select Category" onChange={(e) => {
+                setCategory(e.target.value);
+              }}>
+            <option>Select Category</option>
+            <option value="books">Books</option>
+            <option value="supplies">Supplies</option>
+            <option value="electronics">Electronics</option>
+            <option value="clothing">Clothing</option>
+            <option value="entertainment">Entertainment</option>
+            <option value=" ">General</option>
             </Form.Select>
           </Form.Group>
 
@@ -193,7 +201,7 @@ export function SellForm() {
             <Form.Select aria-label="Default select example" onChange={(e) => {
                 setPaymentType(e.target.value);
               }}>
-            <option>Open this select menu</option>
+            <option>Select Payment Type</option>
             <option value="in-person">In-person</option>
             <option value="online">Online</option>
             <option value="both">Both</option>

@@ -63,6 +63,12 @@ const userSchema = new mongoose.Schema({
     required: true,
     min: 3,
   },
+  productId: {
+    type: String,
+    required: true,
+    min: 2,
+    max: 1024,
+  },
   
 });
 

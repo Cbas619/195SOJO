@@ -64,7 +64,7 @@ export function MySingleItem() {
                     <div className="ordersPageHeader">{data.productName}</div>
                 <div className="orderLine-1"></div>
                 <img src={data.image} className="item-img"alt="No img provided" width="450" height="450"/> 
-                <div className="item-content">
+    <div className="item-content">
     <br/>
     <div>Price: ${data.price}</div>
     <br/>
@@ -74,10 +74,13 @@ export function MySingleItem() {
     <br/>
     <div>Description: {data.description}</div>
     <br/>
+    <br></br>
+    <Link to={`/chat`}><button type="button" class="btn btn-info">Message Buyer</button></Link>
+    <br></br>
+    <br/>
+    {data.purchased === false ? <Link to={`/main`}><button type="button" class="btn btn-info" onClick={productDelete}>Delete Item</button></Link> :
+    <Link to={`/address/${data._id}`}><Button>View Buyer Details</Button></Link>}
     </div>
-    <Link to={`/main`}><button type="button" class="btn btn-info" onClick={productDelete}>Delete Item</button></Link>
-    llllll
-    <Link to={`/edititem`}><button type="button" class="btn btn-info" >Edit Item</button></Link>
                 </Container>
                 {error && <Alert variant="danger">
           {error}

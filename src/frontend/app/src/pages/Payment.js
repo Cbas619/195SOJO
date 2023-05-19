@@ -57,8 +57,8 @@ export function Payment() {
           cardNumber: cardNumber,
           expireDate: expireDate,
           cvvNumber: cvvNumber,
-          nameOnCard: nameOnCard
-
+          nameOnCard: nameOnCard,
+          productId: _id,
         }).then((response, err) => {
           axios
           .post("http://localhost:4000/api/orders/insert", {

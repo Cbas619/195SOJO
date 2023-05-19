@@ -57,6 +57,8 @@ export function SingleOrder() {
     <br/>
     <div>Description: {data.description}</div>
     <br/>
+    <br/>
+    <Link to={`/chat`}><button type="button" class="btn btn-info">Message Seller</button></Link>
     </div>
                 </Container>
 

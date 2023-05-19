@@ -69,4 +69,14 @@ const getOrder = async (req, res) => {
   }
 };
 
-module.exports = {addOrder, getOrder, getAllOrders, putOrder};
+const getByItemOrder = async (req, res) => {
+  const {productId} = req.params
+  try {
+      const result = await Order.find({productId});
+      res.status(200).json(result)
+  } catch (error) {
+      res.status(500).json(error)
+  }
+};
+
+module.exports = {addOrder, getOrder, getAllOrders, putOrder, getByItemOrder};

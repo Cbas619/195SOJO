@@ -91,7 +91,7 @@ function App() {
     <Route path="/myitems" element={
     <RequireAuth loginPath='/login'><MyItems/>
     </RequireAuth>}/>
-    <Route path="/address" element={
+    <Route path="/address/:_id" element={
     <RequireAuth loginPath='/login'><AddressPage/>
     </RequireAuth>}/>
     <Route path="/paymentconfirmation" element={

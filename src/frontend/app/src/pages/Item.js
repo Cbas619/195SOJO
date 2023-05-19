@@ -102,11 +102,15 @@ export function Item() {
     <br/>
     <div>Description: {data.description}</div>
     <br/>
-    <div>Sold by:  {data.firstName} {data.lastName}</div>
-    <Link to={`/payment/${data._id}`}><Button>Buy now</Button></Link>
-    <br></br>
+    <div>Payment Type: {data.paymentType}</div>
+    <br/>
+    <div>Sold by: {data.firstName} {data.lastName}</div>
     <br></br>
     <Link to={`/chat`}><button type="button" class="btn btn-info" onClick={messageSubmit}>Message Seller</button></Link>
+    <br></br>
+    <br/>
+    {data.paymentType === "in-person" ? "" :
+    <Link to={`/payment/${data._id}`}><Button>Buy now</Button></Link>}
     </div>
    
                 </Container>
